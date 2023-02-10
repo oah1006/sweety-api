@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Staff;
 
-use App\Http\Controllers\Controller;
+use App\Models\Staff;
 use Illuminate\Http\Request;
+use App\Actions\UploadFileAction;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Staff\CreateStaffRequest;
 
 class StaffController extends Controller
 {
@@ -33,9 +36,30 @@ class StaffController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateStaffRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $code = fake()->numerify('NV####');
+
+        $data['password'] = bcrypt($data['password']);
+        $data['code'] = $code;
+
+        $staff = Staff::create($data);
+        $token = $staff->createToken('apitoken');
+
+        if ($request->hasFile('avatar')) {
+            UploadFileAction::run($request->file('avatar'), $staff, 'avatars');
+        }
+
+        $staff = $staff->fresh();
+
+        return response()->json([
+            'staff' => $staff,
+            'token' => $token
+        ]);
+
+
     }
 
     /**

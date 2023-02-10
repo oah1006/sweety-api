@@ -18,12 +18,12 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('avatar')->nullable();
             $table->string('first_name')->index();
             $table->string('last_name')->index();
             $table->string('phone_number')->unique();
             $table->string('address')->index();
             $table->enum('position', ['employee', 'manager']);
+            $table->enum('status', ['active', 'disable']);
             $table->timestamps();
         });
     }

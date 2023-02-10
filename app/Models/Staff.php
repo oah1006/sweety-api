@@ -21,13 +21,17 @@ class Staff extends Model
     protected $fillable = [
         'code',
         'email',
-        'image',
         'password',
         'first_name',
         'last_name',
         'phone_number',
         'address',
-        'position'
+        'position',
+        'status',
+    ];
+
+    protected $with = [
+        'file',
     ];
 
     /**
@@ -48,4 +52,9 @@ class Staff extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function file() {
+        return $this->morphOne(File::class, 'relationship_table');
+    }
 }
+

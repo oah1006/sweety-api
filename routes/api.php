@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Staff\StaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
 
     Route::middleware('auth:sanctum')->group(function() {
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+        Route::apiResource('staffs', StaffController::class);
     });
     
 });

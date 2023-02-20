@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Staff;
+namespace App\Http\Requests\Staff;
 
 use App\Rules\PhoneNumber;
 use Illuminate\Foundation\Http\FormRequest;
@@ -25,7 +25,7 @@ class CreateStaffRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['email', 'required', 'string', 'unique:staffs,email'],
+            'email' => ['email', 'required', 'string', 'unique:staff,email'],
             'password' => ['string', 'min:6', 'required'],
             'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
             'first_name' => ['required', 'string'],

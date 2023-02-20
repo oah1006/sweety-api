@@ -11,7 +11,7 @@ class Staff extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public $table = "staffs";
+    public $table = "staff";
 
     /**
      * The attributes that are mass assignable.
@@ -30,9 +30,9 @@ class Staff extends Model
         'status',
     ];
 
-    protected $with = [
-        'file',
-    ];
+//    protected $with = [
+//        'attachmens',
+//    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -53,8 +53,5 @@ class Staff extends Model
         'email_verified_at' => 'datetime',
     ];
 
-    public function file() {
-        return $this->morphOne(File::class, 'relationship_table');
-    }
 }
 

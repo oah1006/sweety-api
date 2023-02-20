@@ -2,8 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\Auth\LoginController;
-use App\Http\Controllers\Admin\Staff\StaffController;
+use App\Http\Controllers\Auth\AuthenticationController;
+use App\Http\Controllers\Staff\StaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,17 +20,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('admin')->name('admin.')->group(function() {
+Route::prefix('private')->name('private.')->group(function() {
 
     // Auth in admin system
     Route::prefix('auth')->name('auth.')->group(function() {
-        Route::post('/login', [LoginController::class, 'login'])->name('login');
-        
+        Route::post('/login', [AuthenticationController::class, 'login'])->name('login');
+        Route::post('/logout', [AuthenticationController::class, 'logout'])
+            ->name('logout')->middleware('auth:sanctum');
     });
 
     Route::middleware('auth:sanctum')->group(function() {
-        Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
         Route::apiResource('staffs', StaffController::class);
     });
-    
+
 });

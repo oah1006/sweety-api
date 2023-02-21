@@ -2,27 +2,28 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\Staff;
+use App\Http\Requests\Auth\LoginUserRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\Auth\LoginRequest;
+
 
 class AuthenticationController extends Controller
 {
-    public function login(LoginRequest $request)
+    public function login(LoginUserRequest $request)
     {
         $credentials = $request->validated();
 
-        /** @var Staff $staff */
-        $staff = Staff::where('email', $credentials['email'])->first();
+        /** @var User $user */
+        $user = User::where('email', $credentials['email'])->first();
 
-        if ($staff && Hash::check($credentials['password'], $staff->password)) {
-            $token = $staff->createToken('apitoken');
+        if ($user && Hash::check($credentials['password'], $user->password)) {
+            $token = $user->createToken('api-token');
 
             return response()->json([
                 'data' => [
-                    'access_token' => $token->plainTextToken,
+                    'token' => $token,
                     'expires_at' => $token->accessToken->expires_at,
                 ]
             ], 200);

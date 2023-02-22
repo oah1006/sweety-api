@@ -15,6 +15,10 @@ class Staff extends Model
         'is_admin',
     ];
 
+    protected $with = [
+        'attachment'
+    ];
+
     public function user() {
         return $this->morphOne(User::class, 'profile');
     }
@@ -28,8 +32,12 @@ class Staff extends Model
 
         static::deleted(function (Staff $staff) {
             $staff->user()->delete();
+            $staff->attachment()->delete();
         });
+    }
 
+    public function attachment() {
+        return $this->morphOne(Attachment::class, 'attachmentable');
     }
 
 

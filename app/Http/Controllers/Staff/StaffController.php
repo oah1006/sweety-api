@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Staff;
 
+use App\Actions\UploadAttachmentAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\CreateStaffRequest;
 use App\Http\Requests\Staff\UpdateStaffRequest;
@@ -59,6 +60,12 @@ class StaffController extends Controller
         $staff = Staff::create($data);
 
         $staff->user()->create($data);
+
+        if ($request->hasFile('avatar')) {
+            UploadAttachmentAction::run($request->file('avatar'), $staff, 'avatar');
+        }
+
+        $staff = $staff->fresh();
 
         return response()->json([
             'data' => $staff

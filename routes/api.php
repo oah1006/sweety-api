@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Customer\CustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticationController;
@@ -30,8 +31,8 @@ Route::prefix('private')->name('private.')->group(function() {
     });
 
     Route::middleware('auth:sanctum')->group(function() {
-
-        Route::apiResource('staffs', StaffController::class);
+        Route::apiResource('customers', CustomerController::class);
+        Route::apiResource('staff', StaffController::class);
     });
 
 });

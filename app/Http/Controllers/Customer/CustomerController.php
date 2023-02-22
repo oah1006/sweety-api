@@ -30,6 +30,8 @@ class CustomerController extends Controller
                  ->orWhereHas('user', fn (Builder $query)
                     => $query->whereFullText(['address', 'phone_number'], $keyword));
 
+
+
         $customer = $customer->paginate(4);
 
         return response()->json([
@@ -60,6 +62,8 @@ class CustomerController extends Controller
         do {
             $data['code'] = 'KH' . fake()->randomNumber(5, false);
         } while (Customer::where('code', $data['code'])->exists());
+
+        $data['password'] = bcrypt($data['password']);
 
         $customer = Customer::create($data);
 

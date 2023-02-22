@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->string('full_name');
-            $table->boolean('is_active');
-            $table->boolean('is_admin');
+            $table->boolean('is_active')->default(true);
+            $table->boolean('is_admin')->default(true);
+            $table->fullText('full_name');
             $table->timestamps();
         });
     }

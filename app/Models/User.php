@@ -51,4 +51,10 @@ class User extends Authenticatable
         'profile'
     ];
 
+    protected static function booted() {
+        static::creating(function (User $user) {
+            $user->password = bcrypt($user->password);
+        });
+    }
+
 }

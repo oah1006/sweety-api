@@ -10,7 +10,6 @@ class Staff extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code',
         'full_name',
         'is_active',
         'is_admin',
@@ -19,4 +18,19 @@ class Staff extends Model
     public function user() {
         return $this->morphOne(User::class, 'profile');
     }
+
+    protected static function booted() {
+        static::creating(function (Staff $staff) {
+            do {
+                $staff->code = 'NV' . fake()->randomNumber(5, false);
+            } while(Staff::where('code', $staff->code)->exists());
+        });
+
+        static::deleted(function (Staff $staff) {
+            $staff->user()->delete();
+        });
+
+    }
+
+
 }

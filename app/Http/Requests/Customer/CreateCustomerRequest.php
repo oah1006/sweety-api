@@ -29,7 +29,7 @@ class CreateCustomerRequest extends FormRequest
             'password' => ['required', 'string', 'min:6'],
             'full_name' => ['string', 'required'],
             'address' => ['string', 'required'],
-            'phone_number' => ['string', new PhoneNumber]
+            'phone_number' => ['string', new PhoneNumber, 'unique:users,phone_number', 'required'],
         ];
     }
 }

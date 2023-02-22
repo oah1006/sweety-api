@@ -30,7 +30,7 @@ class UpdateStaffRequest extends FormRequest
             'password' => ['required', 'string', 'min:6'],
             'full_name' => ['string', 'required'],
             'address' => ['string', 'required'],
-            'phone_number' => ['string', new PhoneNumber],
+            'phone_number' => ['string', 'required', new PhoneNumber, Rule::unique('users')->ignore($this->staff->user->getKey())],
             'is_active' => ['nullable', 'boolean'],
             'is_admin' => ['nullable', 'boolean']
         ];

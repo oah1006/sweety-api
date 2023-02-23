@@ -21,5 +21,9 @@ class Customer extends Model
         static::deleted(function (Customer $customer) {
             $customer->user()->delete();
         });
+
+        static::creating(function (Customer $customer) {
+            $customer->password = bcrypt($customer->password);
+        });
     }
 }

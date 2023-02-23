@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Attachment\AttachmentController;
+use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Customer\CustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,11 +30,17 @@ Route::prefix('private')->name('private.')->group(function() {
         Route::post('/login', [AuthenticationController::class, 'login'])->name('login');
         Route::post('/logout', [AuthenticationController::class, 'logout'])
             ->name('logout')->middleware('auth:sanctum');
+        Route::get('profile', [ProfileController::class, 'showProfile'])
+            ->name('show-profile')->middleware('auth:sanctum');
+        Route::put('profile', [ProfileController::class, 'update'])
+            ->name('update-profile')->middleware('auth:sanctum');
     });
 
     Route::middleware('auth:sanctum')->group(function() {
         Route::apiResource('customers', CustomerController::class);
         Route::apiResource('staff', StaffController::class);
+        Route::post('/attachments', [AttachmentController::class, 'store'])->name('store');
+        Route::delete('/attachments/{attachment}', [AttachmentController::class, 'detach'])->name('detach');
     });
 
 });

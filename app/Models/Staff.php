@@ -30,6 +30,10 @@ class Staff extends Model
             } while(Staff::where('code', $staff->code)->exists());
         });
 
+        static::creating(function (Staff $staff) {
+            $staff->password = bcrypt($staff->password);
+        });
+
         static::deleted(function (Staff $staff) {
             $staff->user()->delete();
             $staff->attachment()->delete();

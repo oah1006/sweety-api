@@ -33,6 +33,8 @@ class ProfileController extends Controller
             (new User)->getFillable()
         ));
 
+        $user = $user->fresh();
+
         return response()->json([
             'user' => $user
         ]);

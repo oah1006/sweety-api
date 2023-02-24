@@ -103,8 +103,6 @@ class StaffController extends Controller
      */
     public function update(UpdateStaffRequest $request, Staff $staff)
     {
-        $data = $request->validated();
-
         $staff->update($request->safe()->only(
             (new Staff)->getFillable()
         ));
@@ -112,6 +110,8 @@ class StaffController extends Controller
         $staff->user()->update($request->safe()->only(
             (new User)->getFillable()
         ));
+
+        $staff = $staff->fresh();
 
         return response()->json([
             'data' => $staff

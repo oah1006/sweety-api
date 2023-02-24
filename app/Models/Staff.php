@@ -27,11 +27,7 @@ class Staff extends Model
         static::creating(function (Staff $staff) {
             do {
                 $staff->code = 'NV' . fake()->randomNumber(5, false);
-            } while(Staff::where('code', $staff->code)->exists());
-        });
-
-        static::creating(function (Staff $staff) {
-            $staff->password = bcrypt($staff->password);
+            } while($staff->where('code', $staff->code)->exists());
         });
 
         static::deleted(function (Staff $staff) {

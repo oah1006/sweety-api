@@ -23,7 +23,9 @@ class Customer extends Model
         });
 
         static::creating(function (Customer $customer) {
-            $customer->password = bcrypt($customer->password);
+            do {
+                $data['code'] = 'KH' . fake()->randomNumber(5, false);
+            } while ($customer->where('code', $data['code'])->exists());
         });
     }
 }

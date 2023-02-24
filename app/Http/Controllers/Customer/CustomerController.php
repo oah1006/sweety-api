@@ -59,9 +59,7 @@ class CustomerController extends Controller
     {
         $data = $request->validated();
 
-        do {
-            $data['code'] = 'KH' . fake()->randomNumber(5, false);
-        } while (Customer::where('code', $data['code'])->exists());
+        
 
         $data['password'] = bcrypt($data['password']);
 
@@ -105,8 +103,6 @@ class CustomerController extends Controller
      */
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
-        $data = $request->validated();
-
         $customer->update($request->safe()->only(
             (new Customer)->getFillable()
         ));
@@ -114,6 +110,8 @@ class CustomerController extends Controller
         $customer->user()->update($request->safe()->only(
             (new User)->getFillable()
         ));
+
+        $customer = $customer->fresh();
 
         return response()->json([
             'data' => $customer

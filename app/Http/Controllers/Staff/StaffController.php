@@ -20,15 +20,15 @@ class StaffController extends Controller
      */
     public function index(Request $request)
     {
-        $staff = Staff::query();
+        $staff = Staff::query()->with('user');
 
         $keyword = $request->keyword;
 
         $staff->when($keyword, fn (Builder $query)
-                    => $query->whereFullText('full_name', $keyword))
-              ->orWhere('code', $keyword)
-              ->orWhereHas('user', fn (Builder $query)
-                    => $query->whereFullText(['address', 'phone_number'], $keyword));
+                    => $query->whereFullText('full_name', $keyword)
+                ->orWhere('code', $keyword)
+                ->orWhereHas('user', fn (Builder $query)
+                    => $query->whereFullText(['address', 'phone_number'], $keyword)));
 
         $staff = $staff->paginate(4);
 

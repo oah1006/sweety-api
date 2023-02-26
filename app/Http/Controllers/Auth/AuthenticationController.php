@@ -23,7 +23,7 @@ class AuthenticationController extends Controller
 
             return response()->json([
                 'data' => [
-                    'token' => $token,
+                    'token' => $token->plainTextToken,
                     'expires_at' => $token->accessToken->expires_at,
                 ]
             ], 200);

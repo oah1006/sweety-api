@@ -59,10 +59,6 @@ class CustomerController extends Controller
     {
         $data = $request->validated();
 
-        
-
-        $data['password'] = bcrypt($data['password']);
-
         $customer = Customer::create($data);
 
         $customer->user()->create($data);

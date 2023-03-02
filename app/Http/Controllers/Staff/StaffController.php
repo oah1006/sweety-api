@@ -52,7 +52,7 @@ class StaffController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(CreateStaffRequest $request)
     {
@@ -63,13 +63,23 @@ class StaffController extends Controller
         $staff->user()->create($data);
 
         if ($request->hasFile('avatar')) {
-            UploadAttachmentAction::run($request->file('avatar'), $staff, AttachmentTypes::AVATAR);
+            UploadAttachmentAction::run([$request->file('avatar')], $staff, AttachmentTypes::AVATARS);
         }
 
         $staff = $staff->fresh();
 
         return response()->json([
-            'data' => $staff
+            'data' => [
+                'id' => $staff->id,
+                'code' => $staff->code,
+                'full_name' => $staff->full_name,
+                'active' => $staff->is_active,
+                'admin' => $staff->is_admin,
+                'user' => [
+                    'email' => $staff->user->email
+                ],
+                'attachments' => $staff->attachment
+            ],
         ], 201);
     }
 

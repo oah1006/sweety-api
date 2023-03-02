@@ -26,11 +26,11 @@ class UpdateStaffRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'email:rfc,dns', 'string', Rule::unique('users')->ignore($this->staff->user->getKey())],
-            'password' => ['required', 'string', 'min:6'],
-            'full_name' => ['string', 'required'],
-            'address' => ['string', 'required'],
-            'phone_number' => ['string', 'required', new PhoneNumber, Rule::unique('users')->ignore($this->staff->user->getKey())],
+            'email' => ['nullable', 'email:rfc,dns', 'string', Rule::unique('users')->ignore($this->staff->user->getKey())],
+            'password' => ['nullable', 'string', 'min:6'],
+            'full_name' => ['string', 'nullable'],
+            'address' => ['string', 'nullable'],
+            'phone_number' => ['string', 'nullable', new PhoneNumber, Rule::unique('users')->ignore($this->staff->user->getKey())],
             'is_active' => ['nullable', 'boolean'],
             'is_admin' => ['nullable', 'boolean']
         ];

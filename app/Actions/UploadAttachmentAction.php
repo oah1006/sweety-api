@@ -2,23 +2,30 @@
 
 namespace App\Actions;
 
-use Illuminate\Http\UploadedFile;
+use App\Enums\AttachmentTypes;
 
 class UploadAttachmentAction {
-    public static function run (UploadedFile $file, $attachmentable, $directory, $disk = 'public') {
-        $filename = $file->hashName();
 
-        $pathFile = $file->storeAs(
-            $directory,
-            $filename,
-            $disk
-        );
+    public static function run (array $files, $attachmentable, AttachmentTypes $type, $disk = 'public') {
+        $attachments = [];
 
-        return $attachmentable->attachment()->create([
+        foreach ($files as $file) {
+            $filename = $file->hashName();
+
+            $pathFile = $file->storeAs(
+                $type->value,
+                $filename,
+                $disk
+            );
+        }
+
+        $attachments[] = $attachmentable->attachment()->create([
             'path' => $pathFile,
             'mime_type' => $file->getMimeType(),
             'size' => $file->getSize(),
             'user_id' => auth()->user()->id
         ]);
+
+        return $attachments;
     }
 }

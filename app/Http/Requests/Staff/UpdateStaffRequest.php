@@ -27,7 +27,6 @@ class UpdateStaffRequest extends FormRequest
     {
         return [
             'email' => ['nullable', 'email:rfc,dns', 'string', Rule::unique('users')->ignore($this->staff->user->getKey())],
-            'password' => ['nullable', 'string', 'min:6'],
             'full_name' => ['string', 'nullable'],
             'address' => ['string', 'nullable'],
             'phone_number' => ['string', 'nullable', new PhoneNumber, Rule::unique('users')->ignore($this->staff->user->getKey())],

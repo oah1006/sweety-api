@@ -55,10 +55,6 @@ class User extends Authenticatable
         static::creating(function (User $user) {
             $user->password = bcrypt($user->password);
         });
-
-        static::updating(function (User $user) {
-            $user->password = bcrypt($user->password);
-        });
     }
 
 }

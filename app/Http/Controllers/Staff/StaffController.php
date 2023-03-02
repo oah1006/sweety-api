@@ -10,6 +10,7 @@ use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use App\Enums\AttachmentTypes;
 
 class StaffController extends Controller
 {
@@ -62,7 +63,7 @@ class StaffController extends Controller
         $staff->user()->create($data);
 
         if ($request->hasFile('avatar')) {
-            UploadAttachmentAction::run($request->file('avatar'), $staff, 'avatar');
+            UploadAttachmentAction::run($request->file('avatar'), $staff, AttachmentTypes::AVATAR);
         }
 
         $staff = $staff->fresh();

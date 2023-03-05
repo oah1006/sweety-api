@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Attachment extends Model
 {
     use HasFactory;
+
+    protected $appends = ['url'];
 
     protected $fillable = [
         'path',
@@ -20,5 +23,10 @@ class Attachment extends Model
 
     public function attachmentable() {
         return $this->morphTo();
+    }
+
+    public function getUrlAttribute()
+    {
+        return Storage::url($this->attributes['path']);
     }
 }

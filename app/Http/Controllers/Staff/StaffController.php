@@ -89,9 +89,13 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Staff $staff)
     {
-        //
+        $staff->load('user');
+
+        $staff->load('attachment');
+
+        return response()->json($staff);
     }
 
     /**

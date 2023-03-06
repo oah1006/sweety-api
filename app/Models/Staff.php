@@ -39,6 +39,4 @@ class Staff extends Model
     public function attachment() {
         return $this->morphOne(Attachment::class, 'attachmentable');
     }
-
-
 }

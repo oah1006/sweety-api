@@ -45,7 +45,6 @@ class StaffController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -80,7 +79,7 @@ class StaffController extends Controller
                 ],
                 'attachments' => $staff->attachment
             ],
-        ], 201);
+        ]);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Attachment;
 
 use App\Actions\DetachAttachmentAction;
 use App\Actions\UploadAttachmentAction;
+use App\Enums\AttachmentTypes;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Attachment\CreateAttachmentRequest;
 use App\Models\Attachment;
@@ -12,13 +13,13 @@ use Illuminate\Http\Request;
 
 class AttachmentController extends Controller
 {
-    public function store(CreateAttachmentRequest $request) {
+    public function store(CreateAttachmentRequest $request, string $attachmentableName, int $attachmentableId) {
         $data = $request->validated();
 
-        $attachmentableClass = Relation::getMorphedModel($data['attachmentable_type']);
-        $attachmentable = $attachmentableClass::findOrFail($data['attachmentable_id']);
+        $attachmentableClass = Relation::getMorphedModel($attachmentableName);
+        $attachmentable = $attachmentableClass::findOrFail($attachmentableId);
 
-        $attachment = UploadAttachmentAction::run($request->file('file'), $attachmentable, $data['directory']);
+        $attachment = UploadAttachmentAction::run([$request->file('file')], $attachmentable, AttachmentTypes::tryFrom($data['type']));
 
         return response()->json([
             'data' => $attachment
@@ -29,5 +30,22 @@ class AttachmentController extends Controller
         DetachAttachmentAction::run($attachment);
 
         return response()->noContent();
+    }
+
+    public function sync(CreateAttachmentRequest $request, string $attachmentableName, int $attachmentableId) {
+        $data = $request->validated();
+
+        $attachmentableClass = Relation::getMorphedModel($attachmentableName);
+        $attachmentable = $attachmentableClass::findOrFail($attachmentableId);
+
+        if ($attachmentable->attachment->exists()) {
+            DetachAttachmentAction::run($attachmentable->attachment);
+        }
+
+        $attachment = UploadAttachmentAction::run([$request->file('file')], $attachmentable, AttachmentTypes::tryFrom($data['type']));
+
+        return response()->json([
+            $attachment
+        ]);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Attachment;
 
+use App\Enums\AttachmentTypes;
+use Illuminate\Validation\Rules\Enum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateAttachmentRequest extends FormRequest
@@ -25,9 +27,7 @@ class CreateAttachmentRequest extends FormRequest
     {
         return [
             'file' => ['nullable', 'mimes:jpg,jpeg,png'],
-            'attachmentable_type' => ['required', 'string'],
-            'attachmentable_id' => ['required', 'string'],
-            'directory' => ['required', 'string']
+            'type' => ['required', 'string', new Enum(AttachmentTypes::class)]
         ];
     }
 }

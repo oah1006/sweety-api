@@ -17,14 +17,14 @@ class UploadAttachmentAction {
                 $filename,
                 $disk
             );
-        }
 
-        $attachments[] = $attachmentable->attachment()->create([
-            'path' => $pathFile,
-            'mime_type' => $file->getMimeType(),
-            'size' => $file->getSize(),
-            'user_id' => auth()->user()->id
-        ]);
+            $attachments[] = $attachmentable->attachment()->create([
+                'path' => $pathFile,
+                'mime_type' => $file->getMimeType(),
+                'size' => $file->getSize(),
+                'user_id' => auth()->user()->id
+            ]);
+        }
 
         return $attachments;
     }

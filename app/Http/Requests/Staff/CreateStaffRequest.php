@@ -32,7 +32,7 @@ class CreateStaffRequest extends FormRequest
             'phone_number' => ['string', new PhoneNumber, 'unique:users,phone_number', 'required'],
             'is_active' => ['nullable', 'boolean'],
             'is_admin' => ['nullable', 'boolean'],
-            'avatar' => ['nullable', 'mimes:jpg,jpeg,png']
+            'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png']
         ];
     }
 }

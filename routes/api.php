@@ -39,8 +39,9 @@ Route::prefix('private')->name('private.')->group(function() {
     Route::middleware('auth:sanctum')->group(function() {
         Route::apiResource('customers', CustomerController::class);
         Route::apiResource('staff', StaffController::class);
-        Route::post('/attachments', [AttachmentController::class, 'store'])->name('store');
+        Route::post('/attachments/{attachmentable}/{attachmentableId}', [AttachmentController::class, 'store'])->name('store');
         Route::delete('/attachments/{attachment}', [AttachmentController::class, 'detach'])->name('detach');
+        Route::post('/attachments/{attachmentable}/{attachmentableId}', [AttachmentController::class, 'sync'])->name('sync');
     });
 
 });

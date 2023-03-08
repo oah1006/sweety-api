@@ -31,7 +31,7 @@ class StaffController extends Controller
                 ->orWhereHas('user', fn (Builder $query)
                     => $query->whereFullText(['address', 'phone_number'], $keyword)));
 
-        $staff = $staff->paginate(8);
+        $staff = $staff->paginate(4);
 
         return response()->json([
             'data' => $staff
@@ -125,6 +125,7 @@ class StaffController extends Controller
             (new User)->getFillable()
         ));
 
+
         $staff = $staff->fresh();
 
         return response()->json([
@@ -132,8 +133,8 @@ class StaffController extends Controller
                 'id' => $staff->id,
                 'code' => $staff->code,
                 'full_name' => $staff->full_name,
-                'active' => $staff->is_active,
-                'admin' => $staff->is_admin,
+                'is_active' => $staff->is_active,
+                'is_admin' => $staff->is_admin,
                 'user' => [
                     'email' => $staff->user->email
                 ],

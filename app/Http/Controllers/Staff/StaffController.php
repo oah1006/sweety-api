@@ -31,7 +31,7 @@ class StaffController extends Controller
                 ->orWhereHas('user', fn (Builder $query)
                     => $query->whereFullText(['address', 'phone_number'], $keyword)));
 
-        $staff = $staff->paginate(4);
+        $staff = $staff->paginate(2);
 
         return response()->json([
             'data' => $staff

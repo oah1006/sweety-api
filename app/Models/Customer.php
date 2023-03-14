@@ -24,8 +24,8 @@ class Customer extends Model
 
         static::creating(function (Customer $customer) {
             do {
-                $data['code'] = 'KH' . fake()->randomNumber(5, false);
-            } while ($customer->where('code', $data['code'])->exists());
+                $customer->code = 'KH' . fake()->randomNumber(5, false);
+            } while ($customer->where('code', $customer->code)->exists());
         });
     }
 }

@@ -25,6 +25,7 @@ class CreateCustomerRequest extends FormRequest
     public function rules()
     {
         return [
+            'code' => ['nullable'],
             'email' => ['required', 'email:rfc,dns', 'string', 'unique:users,email'],
             'password' => ['required', 'string', 'min:6'],
             'full_name' => ['string', 'required'],

@@ -20,17 +20,15 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-        $customer = Customer::query();
+        $customer = Customer::query()->with('user');
 
         $keyword = $request->keyword;
 
         $customer->when($keyword, fn (Builder $query)
-                    => $query->whereFullText('full_name', $keyword))
+                    => $query->whereFullText('full_name', $keyword)
                  ->orWhere('code', $keyword)
                  ->orWhereHas('user', fn (Builder $query)
-                    => $query->whereFullText(['address', 'phone_number'], $keyword));
-
-
+                    => $query->whereFullText(['address', 'phone_number'], $keyword)));
 
         $customer = $customer->paginate(4);
 

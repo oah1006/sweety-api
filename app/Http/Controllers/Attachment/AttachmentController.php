@@ -38,7 +38,8 @@ class AttachmentController extends Controller
         $attachmentableClass = Relation::getMorphedModel($attachmentableName);
         $attachmentable = $attachmentableClass::findOrFail($attachmentableId);
 
-        if ($attachmentable->attachment->exists()) {
+
+        if ($attachmentable->attachment()->exists()) {
             DetachAttachmentAction::run($attachmentable->attachment);
         }
 

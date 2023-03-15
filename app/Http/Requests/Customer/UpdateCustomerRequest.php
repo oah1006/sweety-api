@@ -27,10 +27,9 @@ class UpdateCustomerRequest extends FormRequest
     {
         return [
             'email' => ['required', 'email:rfc,dns', 'string', Rule::unique('users')->ignore($this->customer->user->getKey())],
-            'password' => ['required', 'string', 'min:6'],
             'full_name' => ['string', 'required'],
             'address' => ['string', 'required'],
-            'phone_number' => ['string', 'required', new PhoneNumber, Rule::unique('users')->ignore($this->staff->user->getKey())],
+            'phone_number' => ['string', 'required', new PhoneNumber, Rule::unique('users')->ignore($this->customer->user->getKey())],
         ];
     }
 }

@@ -21,7 +21,7 @@ class StaffController extends Controller
      */
     public function index(Request $request)
     {
-        $staff = Staff::query()->with('user');
+        $staff = Staff::with('user');
 
         $keyword = $request->keyword;
 
@@ -31,7 +31,21 @@ class StaffController extends Controller
                 ->orWhereHas('user', fn (Builder $query)
                     => $query->whereFullText(['address', 'phone_number'], $keyword)));
 
-        $staff = $staff->paginate(2);
+        logger($request->filled('is_admin'));
+
+        if ($request->filled('role')) {
+            $role = $request->role;
+
+            $staff->where('is_admin', $role);
+        }
+
+        if ($request->filled('status')) {
+            $status = $request->status;
+
+            $staff->where('is_active', $status);
+        }
+
+        $staff = $staff->paginate(5);
 
         return response()->json([
             'data' => $staff

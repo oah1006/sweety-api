@@ -29,7 +29,7 @@ class StaffController extends Controller
                     => $query->whereFullText('full_name', $keyword)
                 ->orWhere('code', $keyword)
                 ->orWhereHas('user', fn (Builder $query)
-                    => $query->whereFullText(['address', 'phone_number'], $keyword)));
+                    => $query->whereFullText(['address', 'phone_number', 'email'], $keyword)));
 
         logger($request->filled('is_admin'));
 

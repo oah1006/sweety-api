@@ -24,7 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('private')->name('private.')->group(function() {
-
     // Auth in admin system
     Route::prefix('auth')->name('auth.')->group(function() {
         Route::post('/login', [AuthenticationController::class, 'login'])->name('login');

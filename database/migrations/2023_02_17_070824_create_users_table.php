@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone_number')->unique();
             $table->string('address');
-            $table->fullText(['phone_number', 'address']);
+            $table->fullText(['phone_number', 'address', 'email']);
             $table->nullableMorphs('profile');
             $table->rememberToken();
             $table->timestamps();

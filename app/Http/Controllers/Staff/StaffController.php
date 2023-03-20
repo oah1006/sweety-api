@@ -31,8 +31,6 @@ class StaffController extends Controller
                 ->orWhereHas('user', fn (Builder $query)
                     => $query->whereFullText(['address', 'phone_number', 'email'], $keyword)));
 
-        logger($request->filled('is_admin'));
-
         if ($request->filled('role')) {
             $role = $request->role;
 

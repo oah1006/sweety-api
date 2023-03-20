@@ -3,6 +3,7 @@
 use App\Http\Controllers\Attachment\AttachmentController;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Customer\CustomerController;
+use App\Http\Controllers\Store\StoreController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticationController;
@@ -38,9 +39,11 @@ Route::prefix('private')->name('private.')->group(function() {
     Route::middleware('auth:sanctum')->group(function() {
         Route::apiResource('customers', CustomerController::class);
         Route::apiResource('staff', StaffController::class);
+        Route::apiResource('stores', StoreController::class);
         Route::post('/attachments/{attachmentable}/{attachmentableId}', [AttachmentController::class, 'store'])->name('store');
         Route::delete('/attachments/{attachment}', [AttachmentController::class, 'detach'])->name('detach');
         Route::post('/attachments/{attachmentable}/{attachmentableId}', [AttachmentController::class, 'sync'])->name('sync');
+
     });
 
 });

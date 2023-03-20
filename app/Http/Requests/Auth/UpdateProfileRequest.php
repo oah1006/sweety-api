@@ -27,15 +27,15 @@ class UpdateProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'email:rfc,dns', 'string', Rule::unique('users')
+            'email' => ['nullable', 'email:rfc,dns', 'string', Rule::unique('users')
                 ->ignore(auth()->user()->id)],
-            'password' => ['required', 'string', 'min:6'],
-            'full_name' => ['string', 'required'],
-            'address' => ['string', 'required'],
-            'phone_number' => ['string', 'required', new PhoneNumber, Rule::unique('users')
+            'password' => ['nullable', 'string', 'min:6'],
+            'full_name' => ['string', 'nullable'],
+            'address' => ['string', 'nullable'],
+            'phone_number' => ['string', 'nullable', new PhoneNumber, Rule::unique('users')
                 ->ignore(auth()->user()->id)],
             'is_active' => ['nullable', 'boolean'],
-            'is_admin' => ['nullable', 'boolean']
+            'is_admin' => ['nullable ', 'boolean']
         ];
     }
 }

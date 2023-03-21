@@ -22,7 +22,7 @@ class CustomerController extends Controller
     {
         $customer = Customer::query()->with('user');
 
-        $keyword = $request->keyword;
+        $keyword = $request->keywords;
 
         $customer->when($keyword, fn (Builder $query)
                     => $query->whereFullText('full_name', $keyword)
@@ -113,7 +113,7 @@ class CustomerController extends Controller
 
         return response()->json([
             'data' => $customer
-        ]);
+        ], 201);
     }
 
     /**

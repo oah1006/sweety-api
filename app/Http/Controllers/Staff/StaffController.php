@@ -91,7 +91,7 @@ class StaffController extends Controller
                 ],
                 'attachments' => $staff->attachment
             ],
-        ]);
+        ], 201);
     }
 
     /**
@@ -152,7 +152,7 @@ class StaffController extends Controller
                 ],
                 'attachments' => $staff->attachment
             ],
-        ], 200);
+        ], 201);
     }
 
     /**

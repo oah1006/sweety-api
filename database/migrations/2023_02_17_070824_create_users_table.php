@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('address');
             $table->fullText(['phone_number', 'address', 'email']);
             $table->nullableMorphs('profile');
-            $table->foreignId('store_id')->nullable()->constrained()->nullOnDelete();
             $table->rememberToken();
             $table->timestamps();
         });

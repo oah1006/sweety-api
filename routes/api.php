@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Attachment\AttachmentController;
+use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\Otp\SendOtpController;
 use App\Http\Controllers\Auth\Otp\VerifyOtpController;
@@ -33,13 +34,16 @@ Route::prefix('private')->name('private.')->group(function() {
         Route::post('/login', [AuthenticationController::class, 'login'])->name('login');
         Route::post('/send-otp', [SendOtpController::class, 'requestOtp'])->name('send-otp');
         Route::post('/verify-otp', [VerifyOtpController::class, 'verifyOtp'])->name('verify-otp');
-        Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPassword'])->name('forgot-password');
+        Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPassword'])
+            ->name('forgot-password')->middleware('ensureTokenIsValid');
         Route::post('/logout', [AuthenticationController::class, 'logout'])
             ->name('logout')->middleware('auth:sanctum');
         Route::get('profile', [ProfileController::class, 'showProfile'])
             ->name('show-profile')->middleware('auth:sanctum');
         Route::put('profile', [ProfileController::class, 'update'])
             ->name('update-profile')->middleware('auth:sanctum');
+        Route::put('change-password', [ChangePasswordController::class, 'changePassword'])
+            ->name('change-password')->middleware('auth:sanctum');
     });
 
     Route::middleware('auth:sanctum')->group(function() {
@@ -49,7 +53,6 @@ Route::prefix('private')->name('private.')->group(function() {
         Route::post('/attachments/{attachmentable}/{attachmentableId}', [AttachmentController::class, 'store'])->name('store');
         Route::delete('/attachments/{attachment}', [AttachmentController::class, 'detach'])->name('detach');
         Route::post('/attachments/{attachmentable}/{attachmentableId}', [AttachmentController::class, 'sync'])->name('sync');
-
     });
 
 });

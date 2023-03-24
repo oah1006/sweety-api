@@ -20,7 +20,7 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-        $customer = Customer::query()->with('user');
+        $customer = Customer::with('user');
 
         $keyword = $request->keywords;
 

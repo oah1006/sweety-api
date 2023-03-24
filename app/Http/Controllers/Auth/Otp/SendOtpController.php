@@ -18,6 +18,8 @@ class SendOtpController extends Controller
 
         $email = $request->get('email');
 
+        Otp::where('email', $email)->delete();
+
         $insertOtp = Otp::insert([
             'email' => $email,
             'token' => Hash::make($otp),

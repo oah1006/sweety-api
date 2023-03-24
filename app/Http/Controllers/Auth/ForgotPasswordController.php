@@ -17,13 +17,11 @@ class ForgotPasswordController extends Controller
             'password' => Hash::make($request->new_password)
         ]);
 
-        if ($request->otp) {
-            $request->otp->delete();
-        }
+        $request->otp->delete();
 
         return response()->json([
             'user' => $user,
-            'message' => 'thanh cong'
+            'message' => 'Thay đổi mật khẩu thành công'
         ], 201);
     }
 }

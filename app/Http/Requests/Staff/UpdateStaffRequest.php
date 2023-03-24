@@ -31,7 +31,7 @@ class UpdateStaffRequest extends FormRequest
             'address' => ['string', 'nullable'],
             'phone_number' => ['string', 'nullable', new PhoneNumber, Rule::unique('users')->ignore($this->staff->user->getKey())],
             'is_active' => ['nullable', 'boolean'],
-            'is_admin' => ['nullable', 'boolean']
+            'role' => ['nullable']
         ];
     }
 }

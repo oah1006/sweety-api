@@ -35,7 +35,7 @@ class UpdateProfileRequest extends FormRequest
             'phone_number' => ['string', 'nullable', new PhoneNumber, Rule::unique('users')
                 ->ignore(auth()->user()->id)],
             'is_active' => ['nullable', 'boolean'],
-            'is_admin' => ['nullable ', 'boolean']
+            'role' => ['nullable ']
         ];
     }
 }

@@ -22,7 +22,6 @@ class User extends Authenticatable
         'password',
         'phone_number',
         'address',
-        'store_id'
     ];
 
     /**
@@ -57,9 +56,4 @@ class User extends Authenticatable
             $user->password = bcrypt($user->password);
         });
     }
-
-    public function store() {
-        return $this->belongsTo(Store::class);
-    }
-
 }

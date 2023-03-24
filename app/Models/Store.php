@@ -16,7 +16,7 @@ class Store extends Model
         'close_store'
     ];
 
-    public function user() {
+    public function staff() {
         return $this->hasMany(User::class);
     }
 

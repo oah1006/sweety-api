@@ -12,7 +12,8 @@ class Staff extends Model
     protected $fillable = [
         'full_name',
         'is_active',
-        'is_admin',
+        'role',
+        'store_id'
     ];
 
     protected $with = [
@@ -38,5 +39,9 @@ class Staff extends Model
 
     public function attachment() {
         return $this->morphOne(Attachment::class, 'attachmentable');
+    }
+
+    public function store() {
+        return $this->belongsTo(Store::class);
     }
 }

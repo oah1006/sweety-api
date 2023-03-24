@@ -23,7 +23,7 @@ class StaffController extends Controller
     {
         $staff = Staff::with('user');
 
-        $keyword = $request->keyword;
+        $keyword = $request->keywords;
 
         $staff->when($keyword, fn (Builder $query)
                     => $query->whereFullText('full_name', $keyword)
@@ -34,7 +34,7 @@ class StaffController extends Controller
         if ($request->filled('role')) {
             $role = $request->role;
 
-            $staff->where('is_admin', $role);
+            $staff->where('role', $role);
         }
 
         if ($request->filled('status')) {
@@ -85,7 +85,7 @@ class StaffController extends Controller
                 'code' => $staff->code,
                 'full_name' => $staff->full_name,
                 'active' => $staff->is_active,
-                'admin' => $staff->is_admin,
+                'role' => $staff->role,
                 'user' => [
                     'email' => $staff->user->email
                 ],
@@ -105,6 +105,8 @@ class StaffController extends Controller
         $staff->load('user');
 
         $staff->load('attachment');
+
+        $staff->load('store');
 
         return response()->json($staff);
     }
@@ -146,7 +148,7 @@ class StaffController extends Controller
                 'code' => $staff->code,
                 'full_name' => $staff->full_name,
                 'is_active' => $staff->is_active,
-                'is_admin' => $staff->is_admin,
+                'role' => $staff->role,
                 'user' => [
                     'email' => $staff->user->email
                 ],

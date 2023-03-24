@@ -17,7 +17,7 @@ class Store extends Model
     ];
 
     public function staff() {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Staff::class);
     }
 
 }

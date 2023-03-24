@@ -20,6 +20,10 @@ class Staff extends Model
         'attachment'
     ];
 
+    public function store() {
+        return $this->belongsTo(Store::class);
+    }
+
     public function user() {
         return $this->morphOne(User::class, 'profile');
     }
@@ -41,7 +45,4 @@ class Staff extends Model
         return $this->morphOne(Attachment::class, 'attachmentable');
     }
 
-    public function store() {
-        return $this->belongsTo(Store::class);
-    }
 }

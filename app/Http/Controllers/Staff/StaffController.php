@@ -21,7 +21,7 @@ class StaffController extends Controller
      */
     public function index(Request $request)
     {
-        $staff = Staff::with('user');
+        $staff = Staff::with('user', 'store');
 
         $keyword = $request->keywords;
 

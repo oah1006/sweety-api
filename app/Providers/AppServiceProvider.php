@@ -28,7 +28,8 @@ class AppServiceProvider extends ServiceProvider
             'staff' => 'App\Models\Staff',
             'user' => 'App\Models\User',
             'customer' => 'App\Models\Customer',
-            'attachment' => 'App\Models\Attachment'
+            'attachment' => 'App\Models\Attachment',
+            'product' => 'App\Models\Product'
         ]);
     }
 }

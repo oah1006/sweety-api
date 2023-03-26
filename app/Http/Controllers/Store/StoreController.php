@@ -20,10 +20,10 @@ class StoreController extends Controller
     {
         $stores = Store::query();
 
-        $keyword = $request->keywords;
+        $keywords = $request->keywords;
 
-        $stores->when($keyword, fn (Builder $query)
-            => $query->whereFullText(['name', 'address'], $keyword));
+        $stores->when($keywords, fn (Builder $query)
+            => $query->whereFullText(['name', 'address'], $keywords));
 
         $stores = $stores->paginate(4);
 

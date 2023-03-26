@@ -33,6 +33,13 @@ class ProductController extends Controller
             $products->where('category_id', $categoryId);
         }
 
+        if ($request->filled('published')) {
+            $published = $request->published;
+
+            $products->where('published', $published);
+
+        }
+
         $products = $products->paginate(4);
 
         return response()->json([

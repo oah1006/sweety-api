@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('mime_type')->nullable();
             $table->unsignedBigInteger('size')->nullable();
             $table->nullableMorphs('attachmentable');
+            $table->string('type');
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });

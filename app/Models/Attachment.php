@@ -18,7 +18,8 @@ class Attachment extends Model
         'size',
         'attachmentable_type',
         'attachmentable_id',
-        'user_id'
+        'user_id',
+        'type'
     ];
 
     public function attachmentable() {

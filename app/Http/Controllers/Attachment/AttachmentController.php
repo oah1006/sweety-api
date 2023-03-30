@@ -19,7 +19,7 @@ class AttachmentController extends Controller
         $attachmentableClass = Relation::getMorphedModel($attachmentableName);
         $attachmentable = $attachmentableClass::findOrFail($attachmentableId);
 
-        $attachment = UploadAttachmentAction::run([$request->file('file')], $attachmentable, AttachmentTypes::tryFrom($data['type']));
+        $attachment = UploadAttachmentAction::run($request->file('file'), $attachmentable, AttachmentTypes::tryFrom($data['type']));
 
         return response()->json([
             'data' => $attachment
@@ -30,23 +30,5 @@ class AttachmentController extends Controller
         DetachAttachmentAction::run($attachment);
 
         return response()->noContent();
-    }
-
-    public function sync(CreateAttachmentRequest $request, string $attachmentableName, int $attachmentableId) {
-        $data = $request->validated();
-
-        $attachmentableClass = Relation::getMorphedModel($attachmentableName);
-        $attachmentable = $attachmentableClass::findOrFail($attachmentableId);
-
-
-        if ($attachmentable->attachment()->exists()) {
-            DetachAttachmentAction::run($attachmentable->attachment);
-        }
-
-        $attachment = UploadAttachmentAction::run([$request->file('file')], $attachmentable, AttachmentTypes::tryFrom($data['type']));
-
-        return response()->json([
-            $attachment
-        ]);
     }
 }

@@ -31,6 +31,8 @@ class StoreProductRequest extends FormRequest
             'category_id' => ['required', 'exists:categories,id'],
             'published' => ['required', 'boolean'],
             'thumbnail' => ['nullable', 'file', 'mimes:jpg,jpeg,png'],
+            'detail_products' => ['nullable', 'array'],
+            'detail_products.*' => ['file', 'mimes:jpg,jpeg,png']
         ];
     }
 }

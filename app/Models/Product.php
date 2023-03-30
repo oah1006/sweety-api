@@ -28,6 +28,6 @@ class Product extends Model
     }
 
     public function attachment() {
-        return $this->morphOne(Attachment::class, 'attachmentable');
+        return $this->morphMany(Attachment::class, 'attachmentable');
     }
 }

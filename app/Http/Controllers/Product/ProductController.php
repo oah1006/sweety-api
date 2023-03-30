@@ -73,6 +73,12 @@ class ProductController extends Controller
             UploadAttachmentAction::run([$request->file('thumbnail')], $product, AttachmentTypes::THUMBNAILS);
         }
 
+        dump($request->hasFile('detail_products'));
+
+        if ($request->hasFile('detail_products')) {
+            UploadAttachmentAction::run($request->file('detail_products'), $product, AttachmentTypes::DETAILPRODUCTS);
+        }
+
         $product = $product->fresh();
 
         return response()->json([
@@ -90,6 +96,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $product->load('attachment');
+
+        $product->load('category');
 
         return response()->json([
             'data' => $product

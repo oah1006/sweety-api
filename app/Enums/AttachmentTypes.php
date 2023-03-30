@@ -8,6 +8,8 @@ enum AttachmentTypes : string
     case AVATARS = 'avatars';
 
     case THUMBNAILS = 'thumbnails';
+
+    case DETAILPRODUCTS = 'detail_products';
 }
 
 ?>

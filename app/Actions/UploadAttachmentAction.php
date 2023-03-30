@@ -22,7 +22,8 @@ class UploadAttachmentAction {
                 'path' => $pathFile,
                 'mime_type' => $file->getMimeType(),
                 'size' => $file->getSize(),
-                'user_id' => auth()->user()->id
+                'user_id' => auth()->user()->id,
+                'type' => $type
             ]);
         }
 

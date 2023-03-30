@@ -26,7 +26,8 @@ class CreateAttachmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => ['nullable', 'mimes:jpg,jpeg,png'],
+            'file' => ['nullable', 'array'],
+            'file.*' => ['file', 'mimes:jpg,jpeg,png'],
             'type' => ['required', 'string', new Enum(AttachmentTypes::class)]
         ];
     }

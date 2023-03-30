@@ -56,7 +56,6 @@ Route::prefix('private')->name('private.')->group(function() {
         Route::apiResource('products', ProductController::class);
         Route::post('/attachments/{attachmentable}/{attachmentableId}', [AttachmentController::class, 'store'])->name('store');
         Route::delete('/attachments/{attachment}', [AttachmentController::class, 'detach'])->name('detach');
-        Route::post('/attachments/{attachmentable}/{attachmentableId}', [AttachmentController::class, 'sync'])->name('sync');
     });
 
 });

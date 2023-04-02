@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\Otp\SendOtpController;
 use App\Http\Controllers\Auth\Otp\VerifyOtpController;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\Coupon\CouponController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Store\StoreController;
@@ -54,6 +55,7 @@ Route::prefix('private')->name('private.')->group(function() {
         Route::apiResource('stores', StoreController::class);
         Route::apiResource('categories', CategoryController::class);
         Route::apiResource('products', ProductController::class);
+        Route::apiResource('coupons', CouponController::class);
         Route::post('/attachments/{attachmentable}/{attachmentableId}', [AttachmentController::class, 'store'])->name('store');
         Route::delete('/attachments/{attachment}', [AttachmentController::class, 'detach'])->name('detach');
     });

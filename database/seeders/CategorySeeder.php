@@ -17,28 +17,22 @@ class CategorySeeder extends Seeder
     {
         Category::create([
             'name' => 'Trà trái cây',
-            'description' => 'Đây là nơi có nhiều loại trà trái cây với các vị khác nhau phù hợp với
-            mọi độ tuổi. Bạn có thể thử từng món và cảm nhận, nó sẽ rất ngon nếu kết hợp với các
-            loại topping!'
+            'description' => 'Đây là nơi có nhiều loại trà trái cây với các vị khác nhau phù hợp với mọi độ tuổi. Bạn có thể thử từng món và cảm nhận, nó sẽ rất ngon nếu kết hợp với các loại topping!'
         ]);
 
         Category::create([
             'name' => 'Trà sữa',
-            'description' => 'Đây là nơi có nhiều loại trà sữa với các vị khác nhau phù hợp với
-            mọi độ tuổi. Bạn có thể thử từng món và cảm nhận, nó sẽ rất ngon nếu kết hợp với các
-            loại topping!'
+            'description' => 'Đây là nơi có nhiều loại trà sữa với các vị khác nhau phù hợp với mọi độ tuổi. Bạn có thể thử từng món và cảm nhận, nó sẽ rất ngon nếu kết hợp với các loại topping!'
         ]);
 
         Category::create([
             'name' => 'Topping',
-            'description' => 'Đa dạng các loại topping bao gồm trân châu đen, trân châu trắng, machiato
-            , thạch ... giúp bạn có thể tận hưởng ly nước của mình ngon nhất có thể'
+            'description' => 'Đa dạng các loại topping bao gồm trân châu đen, trân châu trắng, machiato, thạch ... giúp bạn có thể tận hưởng ly nước của mình ngon nhất có thể'
         ]);
 
         Category::create([
             'name' => 'Bánh',
-            'description' => 'Ngoài các loại nước ngon thì Sweety còn có các loại bánh ngon phù hợp với tất
-            cả mọi người!'
+            'description' => 'Ngoài các loại nước ngon thì Sweety còn có các loại bánh ngon phù hợp với tất cả mọi người!'
         ]);
     }
 }

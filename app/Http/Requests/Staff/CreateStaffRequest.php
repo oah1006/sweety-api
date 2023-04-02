@@ -31,7 +31,7 @@ class CreateStaffRequest extends FormRequest
             'address' => ['string', 'required'],
             'phone_number' => ['string', new PhoneNumber, 'unique:users,phone_number', 'required'],
             'is_active' => ['nullable', 'boolean'],
-            'role' => ['nullable'],
+            'role' => ['required', 'in:administrator,manager,employee,shipper'],
             'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png'],
             'store_id' => ['required', 'exists:stores,id']
         ];

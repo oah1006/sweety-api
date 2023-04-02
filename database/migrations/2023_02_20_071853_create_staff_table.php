@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('full_name');
             $table->boolean('is_active')->default(true);
-            $table->enum('role', ['administrator', 'manager', 'employee'])->default('employee');
+            $table->enum('role', ['administrator', 'manager', 'employee', 'shipper'])->default('employee');
             $table->foreignId('store_id')->nullable()->constrained()->nullOnDelete();
             $table->fullText('full_name');
             $table->timestamps();

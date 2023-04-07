@@ -17,7 +17,7 @@ class StaffController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
@@ -67,6 +67,8 @@ class StaffController extends Controller
      */
     public function store(CreateStaffRequest $request)
     {
+        $this->authorize('create', Staff::class);
+
         $data = $request->validated();
 
         $staff = Staff::create($data);
@@ -98,7 +100,7 @@ class StaffController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Staff $staff)
     {
@@ -131,6 +133,8 @@ class StaffController extends Controller
      */
     public function update(UpdateStaffRequest $request, Staff $staff)
     {
+        $this->authorize('update', $staff);
+
         $staff->update($request->safe()->only(
             (new Staff)->getFillable()
         ));
@@ -165,6 +169,8 @@ class StaffController extends Controller
      */
     public function destroy(Staff $staff)
     {
+        $this->authorize('delete', $staff);
+
         $staff->delete();
 
         return response()->noContent();

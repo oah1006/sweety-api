@@ -14,7 +14,7 @@ class CouponController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
@@ -52,10 +52,12 @@ class CouponController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreCouponRequest $request)
     {
+        $this->authorize('create', Coupon::class);
+
         $data = $request->validated();
 
         $coupon = Coupon::create($data);
@@ -69,7 +71,7 @@ class CouponController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Coupon $coupon)
     {
@@ -94,10 +96,12 @@ class CouponController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateCouponRequest $request, Coupon $coupon)
     {
+        $this->authorize('update', $coupon);
+
         $data = $request->validated();
 
         $coupon->update($data);
@@ -115,6 +119,8 @@ class CouponController extends Controller
      */
     public function destroy(Coupon $coupon)
     {
+        $this->authorize('delete', $coupon);
+
         $coupon->delete();
 
         return response()->noContent();

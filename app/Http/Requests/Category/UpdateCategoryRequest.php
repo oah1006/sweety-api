@@ -26,7 +26,8 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             "name" => ['nullable', 'string', Rule::unique('categories')->ignore($this->category)],
-            "description" => ['nullable', 'string']
+            "description" => ['nullable', 'string'],
+            "is_deleted" => ['required', 'boolean']
         ];
     }
 }

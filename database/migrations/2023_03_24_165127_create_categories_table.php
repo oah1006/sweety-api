@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('description')->nullable();
             $table->fullText(['name', 'description']);
+            $table->boolean('is_deleted')->default(0);
             $table->timestamps();
         });
     }

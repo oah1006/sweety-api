@@ -14,7 +14,7 @@ class StoreController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
@@ -46,10 +46,12 @@ class StoreController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(CreateStoreRequest $request)
     {
+        $this->authorize('create', Store::class);
+
         $data = $request->validated();
 
         $store = Store::create($data);
@@ -63,7 +65,7 @@ class StoreController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Store $store)
     {
@@ -88,10 +90,12 @@ class StoreController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateStoreRequest $request, Store $store)
     {
+        $this->authorize('update', $store);
+
         $data = $request->validated();
 
         $store->update($data);
@@ -109,6 +113,8 @@ class StoreController extends Controller
      */
     public function destroy(Store $store)
     {
+        $this->authorize('delete', $store);
+
         $store->delete();
 
         return response()->noContent();

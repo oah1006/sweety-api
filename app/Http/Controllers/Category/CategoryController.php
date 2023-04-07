@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Category;
 
+use App\Events\CategoryDeleted;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\StoreCategoryRequest;
 use App\Http\Requests\Category\UpdateCategoryRequest;
@@ -18,7 +19,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $category = Category::query();
+        $category = Category::where('is_deleted', 0);
 
         $keywords = $request->keywords;
 
@@ -47,10 +48,12 @@ class CategoryController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreCategoryRequest $request)
     {
+        $this->authorize('create', Category::class);
+
         $data = $request->validated();
 
         $category = Category::create($data);
@@ -64,7 +67,7 @@ class CategoryController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Category $category)
     {
@@ -89,10 +92,12 @@ class CategoryController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
+        $this->authorize('update', $category);
+
         $data = $request->validated();
 
         $category->update($data);
@@ -110,7 +115,13 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete();
+        $this->authorize('delete', $category);
+
+        $category->is_deleted = 1;
+
+        $category->save();
+
+        event(new CategoryDeleted($category));
 
         return response()->noContent();
     }

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
+            $table->string('code')->unique()->nullable();
             $table->string('full_name');
             $table->boolean('is_active')->default(true);
             $table->enum('role', ['administrator', 'manager', 'employee', 'shipper'])->default('employee');

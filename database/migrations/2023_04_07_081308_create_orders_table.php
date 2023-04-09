@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
+            $table->string('code')->unique()->nullable();
             $table->foreignId('coupon_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('delivery_address_id')->nullable()->constrained()->nullOnDelete();
             $table->unsignedBigInteger('total')->default(0)->index();

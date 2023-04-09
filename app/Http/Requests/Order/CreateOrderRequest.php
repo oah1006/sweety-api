@@ -25,7 +25,7 @@ class CreateOrderRequest extends FormRequest
     {
         return [
             'code' => ['nullable'],
-            'coupon_id' => ['nullable', Rule],
+            'coupon_id' => ['nullable', 'exists:coupons,id'],
             'delivery_address_id' => ['nullable', 'exists:delivery_addresses,id'],
             'total' => ['required', 'numeric'],
             'sub_total' => ['required', 'numeric'],

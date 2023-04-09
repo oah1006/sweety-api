@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Order;
+namespace App\Http\Controllers\DeliveryAddress;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Order\CreateOrderRequest;
-use App\Http\Requests\Order\UpdateOrderRequest;
-use App\Models\Order;
+use App\Http\Requests\DeliveryAddress\CreateDeliveryAddressRequest;
+use App\Models\DeliveryAddress;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class DeliveryAddressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,14 +35,14 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(CreateOrderRequest $request)
+    public function store(CreateDeliveryAddressRequest $request)
     {
         $data = $request->validated();
 
-        $order = Order::create($data);
+        $delivery_address = DeliveryAddress::create($data);
 
         return response()->json([
-            'data' => $order
+            'data' => $delivery_address
         ]);
     }
 
@@ -51,13 +50,11 @@ class OrderController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show($id)
     {
-        return response()->json([
-            'data' => $order
-        ]);
+        //
     }
 
     /**
@@ -76,17 +73,11 @@ class OrderController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOrderRequest $request, Order $order)
+    public function update(Request $request, $id)
     {
-        $data = $request->validated();
-
-        $order->update($data);
-
-        return response()->json([
-            'data' => $order
-        ]);
+        //
     }
 
     /**
@@ -95,10 +86,8 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy($id)
     {
-        $order->delete();
-
-        return response()->noContent();
+        //
     }
 }

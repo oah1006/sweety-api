@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\CreateOrderRequest;
 use App\Http\Requests\Order\UpdateOrderRequest;
 use App\Models\Order;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -15,9 +16,23 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $orders = Order::query();
+
+        $keywords = $request->keywords;
+
+        $orders->when($keywords, fn (Builder $query)
+                    => $query->whereFullText(['code'], $keywords)
+                ->orWhereHas('addresses', fn (Builder $query)
+                    => $query->whereFullText(['name', 'address'], $keywords)));
+
+
+        $orders = $orders->paginate(5);
+
+        return response()->json([
+            'data' => $orders
+        ]);
     }
 
     /**
@@ -41,6 +56,10 @@ class OrderController extends Controller
         $data = $request->validated();
 
         $order = Order::create($data);
+
+        $order->items()->create($data);
+
+        $order = $order->fresh();
 
         return response()->json([
             'data' => $order

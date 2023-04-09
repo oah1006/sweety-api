@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('phone_number');
             $table->boolean('is_default')->default(1);
             $table->foreignId('customer_id')->nullable()->constrained()->nullOnDelete();
+            $table->fullText(['address', 'name']);
             $table->timestamps();
         });
     }

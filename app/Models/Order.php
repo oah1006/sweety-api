@@ -17,4 +17,12 @@ class Order extends Model
         'sub_total',
         'status'
     ];
+
+    public function items() {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function addresses() {
+        return $this->belongsTo(DeliveryAddress::class);
+    }
 }

@@ -28,4 +28,8 @@ class Customer extends Model
             } while ($customer->where('code', $customer->code)->exists());
         });
     }
+
+    public function deliveryAddresses() {
+        return $this->hasMany(DeliveryAddress::class, 'customer_id');
+    }
 }

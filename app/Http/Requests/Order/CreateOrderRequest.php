@@ -29,7 +29,10 @@ class CreateOrderRequest extends FormRequest
             'delivery_address_id' => ['nullable', 'exists:delivery_addresses,id'],
             'total' => ['required', 'numeric'],
             'sub_total' => ['required', 'numeric'],
-            'status' => ['required', 'in:pending,succeed,delivering,canceled,failed']
+            'status' => ['required', 'in:pending,succeed,delivering,canceled,failed'],
+            'order_id' => ['nullable', 'exists:orders,id'],
+            'product_id' => ['nullable', 'exists:products,id'],
+            'quantity' => ['required', 'integer']
         ];
     }
 }

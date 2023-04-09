@@ -16,4 +16,12 @@ class DeliveryAddress extends Model
         'is_default',
         'customer_id'
     ];
+
+    public function customer() {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function order() {
+        return $this->hasMany(Order::class);
+    }
 }

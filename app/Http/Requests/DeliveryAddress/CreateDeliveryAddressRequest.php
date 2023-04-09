@@ -28,7 +28,7 @@ class CreateDeliveryAddressRequest extends FormRequest
             'address' => ['required', 'string'],
             'phone_number' => ['required', 'string'],
             'is_default' => ['required', 'boolean'],
-            'customer_id' => ['required', 'exists:customers,id']
+            'customer_id' => ['nullable', 'exists:customers,id']
         ];
     }
 }

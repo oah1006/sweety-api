@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Coupon\CouponController;
 use App\Http\Controllers\Customer\CustomerController;
+use App\Http\Controllers\DeliveryAddress\CustomerDeliveryAddressController;
 use App\Http\Controllers\DeliveryAddress\DeliveryAddressController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Product\ProductController;
@@ -59,7 +60,7 @@ Route::prefix('private')->name('private.')->group(function() {
         Route::apiResource('products', ProductController::class);
         Route::apiResource('coupons', CouponController::class);
         Route::apiResource('orders', OrderController::class);
-        Route::apiResource('delivery_addresses', DeliveryAddressController::class);
+        Route::resource('customers.delivery_addresses', CustomerDeliveryAddressController::class);
         Route::post('/attachments/{attachmentable}/{attachmentableId}', [AttachmentController::class, 'store'])->name('store');
         Route::delete('/attachments/{attachment}', [AttachmentController::class, 'detach'])->name('detach');
     });

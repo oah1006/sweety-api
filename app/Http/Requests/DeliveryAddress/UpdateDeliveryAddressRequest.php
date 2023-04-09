@@ -13,7 +13,7 @@ class UpdateDeliveryAddressRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class UpdateDeliveryAddressRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'string'],
+            'address' => ['required', 'string'],
+            'phone_number' => ['required', 'string'],
+            'is_default' => ['required', 'boolean'],
+            'customer_id' => ['nullable', 'exists:customers,id']
         ];
     }
 }

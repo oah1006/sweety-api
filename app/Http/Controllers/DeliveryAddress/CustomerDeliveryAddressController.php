@@ -4,10 +4,12 @@ namespace App\Http\Controllers\DeliveryAddress;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DeliveryAddress\CreateDeliveryAddressRequest;
+use App\Http\Requests\DeliveryAddress\UpdateDeliveryAddressRequest;
+use App\Models\Customer;
 use App\Models\DeliveryAddress;
 use Illuminate\Http\Request;
 
-class DeliveryAddressController extends Controller
+class CustomerDeliveryAddressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,11 +37,11 @@ class DeliveryAddressController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(CreateDeliveryAddressRequest $request)
+    public function store(CreateDeliveryAddressRequest $request, Customer $customer)
     {
         $data = $request->validated();
 
-        $delivery_address = DeliveryAddress::create($data);
+        $delivery_address = $customer->deliveryAddresses()->create($data);
 
         return response()->json([
             'data' => $delivery_address
@@ -75,9 +77,15 @@ class DeliveryAddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateDeliveryAddressRequest $request, Customer $customer, $id)
     {
-        //
+        $data = $request->validated();
+
+        $delivery_address = $customer->deliveryAddresses()->findOrFail($id);
+
+        $delivery_address->update($data);
+
+        return response()->noContent();
     }
 
     /**

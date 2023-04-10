@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\CreateOrderRequest;
 use App\Http\Requests\Order\UpdateOrderRequest;
 use App\Models\Order;
+use App\Models\OrderItem;
+use Database\Seeders\ProductSeeder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
@@ -18,7 +20,7 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $orders = Order::query();
+        $orders = Order::with(['deliveryAddress', 'items', 'customer', 'staff']);
 
         $keywords = $request->keywords;
 
@@ -57,12 +59,15 @@ class OrderController extends Controller
 
         $order = Order::create($data);
 
-        $order->items()->create($data);
+        foreach($data['products'] as $item) {
+            $order->items()->create($item);
+        }
 
         $order = $order->fresh();
 
         return response()->json([
-            'data' => $order
+            'data' => $order,
+            'order_items' => $order->items
         ]);
     }
 
@@ -103,8 +108,21 @@ class OrderController extends Controller
 
         $order->update($data);
 
+        foreach($data['products'] as $item) {
+            $existsOrder = OrderItem::where('id', $item['id'])->first();
+
+            if ($existsOrder) {
+                $existsOrder->update($item);
+            } else {
+                $order->items()->create($item);
+            }
+        }
+
+        $order = $order->fresh();
+
         return response()->json([
-            'data' => $order
+            'data' => $order,
+            'order_items' => $order->items
         ]);
     }
 

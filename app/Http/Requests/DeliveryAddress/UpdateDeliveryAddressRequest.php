@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\DeliveryAddress;
 
+use App\Rules\PhoneNumber;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateDeliveryAddressRequest extends FormRequest
@@ -24,10 +25,10 @@ class UpdateDeliveryAddressRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string'],
-            'address' => ['required', 'string'],
-            'phone_number' => ['required', 'string'],
-            'is_default' => ['required', 'boolean'],
+            'name' => ['nullable', 'string'],
+            'address' => ['nullable', 'string'],
+            'phone_number' => ['nullable', 'string', new PhoneNumber],
+            'is_default' => ['nullable', 'boolean'],
             'customer_id' => ['nullable', 'exists:customers,id']
         ];
     }

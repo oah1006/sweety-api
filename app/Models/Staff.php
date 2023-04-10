@@ -28,6 +28,10 @@ class Staff extends Model
         return $this->morphOne(User::class, 'profile');
     }
 
+    public function order() {
+        return $this->hasMany(Order::class);
+    }
+
     protected static function booted() {
         static::creating(function (Staff $staff) {
             do {

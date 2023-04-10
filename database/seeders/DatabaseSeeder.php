@@ -27,7 +27,10 @@ class DatabaseSeeder extends Seeder
             StaffSeeder::class,
             CustomerSeeder::class,
             CategorySeeder::class,
-            ProductSeeder::class
+            ProductSeeder::class,
+            CouponSeeder::class,
+            DeliveryAddressSeeder::class,
+            OrderSeeder::class
         ]);
     }
 }

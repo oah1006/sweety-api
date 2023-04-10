@@ -22,7 +22,23 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    public function addresses() {
+    public function deliveryAddress() {
         return $this->belongsTo(DeliveryAddress::class);
+    }
+
+    public function customer() {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function staff() {
+        return $this->belongsTo(Staff::class);
+    }
+
+    protected static function booted() {
+        static::creating(function (Order $order) {
+            do {
+                $order->code = 'OD' . fake()->randomNumber(5, false);
+            } while ($order->where('code', $order->code)->exists());
+        });
     }
 }

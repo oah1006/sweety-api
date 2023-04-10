@@ -26,11 +26,14 @@ class UpdateOrderRequest extends FormRequest
     {
         return [
             'code' => ['nullable'],
-            'coupon_id' => ['nullable', Rule::unique('coupons')->ignore($this->coupon)],
-            'delivery_address_id' => ['nullable', Rule::unique('delivery_addresses')->ignore($this->delivery_address)],
+            'coupon_id' => ['nullable', 'exists:coupons,id'],
+            'delivery_address_id' => ['nullable', 'exists:delivery_addresses,id'],
             'total' => ['nullable', 'numeric'],
             'sub_total' => ['nullable', 'numeric'],
-            'status' => ['nullable', 'in:pending,succeed,delivering,canceled,failed']
+            'status' => ['nullable', 'in:pending,succeed,delivering,canceled,failed'],
+            'products' => ['nullable', 'array'],
+            'product.*' => ['array:product_id,quantity'],
+            'product.*.id' => ['required', 'exists:order_items,id']
         ];
     }
 }

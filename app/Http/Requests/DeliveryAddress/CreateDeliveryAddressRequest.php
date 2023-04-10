@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\DeliveryAddress;
 
+use App\Rules\PhoneNumber;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateDeliveryAddressRequest extends FormRequest
@@ -26,9 +27,9 @@ class CreateDeliveryAddressRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'address' => ['required', 'string'],
-            'phone_number' => ['required', 'string'],
+            'phone_number' => ['required', 'string', new PhoneNumber],
             'is_default' => ['required', 'boolean'],
-            'customer_id' => ['nullable', 'exists:customers,id']
+            'customer_id' => ['required', 'exists:customers,id']
         ];
     }
 }

@@ -24,15 +24,14 @@ class CreateOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => ['nullable'],
-            'coupon_id' => ['nullable', 'exists:coupons,id'],
-            'delivery_address_id' => ['nullable', 'exists:delivery_addresses,id'],
+            'code' => ['required'],
+            'coupon_id' => ['required', 'exists:coupons,id'],
+            'delivery_address_id' => ['required', 'exists:delivery_addresses,id'],
             'total' => ['required', 'numeric'],
             'sub_total' => ['required', 'numeric'],
             'status' => ['required', 'in:pending,succeed,delivering,canceled,failed'],
-            'order_id' => ['nullable', 'exists:orders,id'],
-            'product_id' => ['nullable', 'exists:products,id'],
-            'quantity' => ['required', 'integer']
+            'products' => [ 'required', 'array'],
+            'product.*' => ['array:product_id,quantity']
         ];
     }
 }

@@ -17,6 +17,11 @@ class Customer extends Model
         return $this->morphOne(User::class, 'profile');
     }
 
+    public function order() {
+        return $this->hasMany(Order::class);
+    }
+
+
     protected static function booted() {
         static::deleted(function (Customer $customer) {
             $customer->user()->delete();

@@ -23,6 +23,10 @@ class Product extends Model
         'attachment'
     ];
 
+    public function items() {
+        return $this->hasMany(OrderItem::class, 'product_id');
+    }
+
     public function category() {
         return $this->belongsTo(Category::class);
     }

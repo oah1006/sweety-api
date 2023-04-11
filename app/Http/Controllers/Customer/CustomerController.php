@@ -78,6 +78,8 @@ class CustomerController extends Controller
     {
         $customer->load('user');
 
+        $customer->load('deliveryAddresses');
+
         return response()->json([
             'data' => $customer
         ]);

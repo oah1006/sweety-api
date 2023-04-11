@@ -25,7 +25,7 @@ class OrderSeeder extends Seeder
             "status" => "pending",
         ]);
 
-        $data = [
+        $dataOne = [
             [
                 "product_id" => 2,
                 "quantity" => 15,
@@ -36,7 +36,32 @@ class OrderSeeder extends Seeder
             ]
         ];
 
-        foreach ($data as $item) {
+        foreach ($dataOne as $item) {
+            $order->items()->create($item);
+        }
+
+        $order->create([
+            "coupon_id" => 1,
+            "delivery_address_id" => 1,
+            "customer_id" => 2,
+            "staff_id" => 2,
+            "total" => 200000,
+            "sub_total" => 250000,
+            "status" => "succeed",
+        ]);
+
+        $dataTwo = [
+            [
+                "product_id" => 3,
+                "quantity" => 25,
+            ],
+            [
+                "product_id" => 1,
+                "quantity" => 30,
+            ]
+        ];
+
+        foreach ($dataTwo as $item) {
             $order->items()->create($item);
         }
     }

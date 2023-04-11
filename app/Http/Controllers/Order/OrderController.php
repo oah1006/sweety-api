@@ -79,6 +79,15 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        $order->load('deliveryAddress');
+
+        $order->load('customer');
+
+        $order->load('staff');
+
+        $order->load('items');
+
+
         return response()->json([
             'data' => $order
         ]);

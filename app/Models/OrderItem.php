@@ -15,7 +15,15 @@ class OrderItem extends Model
         'quantity'
     ];
 
+    protected $with = [
+        'product'
+    ];
+
     public function order() {
         return $this->belongsTo(Order::class);
+    }
+
+    public function product() {
+        return $this->belongsTo(Product::class);
     }
 }

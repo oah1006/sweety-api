@@ -26,12 +26,12 @@ class CreateOrderRequest extends FormRequest
         return [
             'code' => ['required'],
             'coupon_id' => ['required', 'exists:coupons,id'],
-            'delivery_address_id' => ['required', 'exists:delivery_addresses,id'],
+            'address_id' => ['required', 'exists:addresses,id'],
             'total' => ['required', 'numeric'],
             'sub_total' => ['required', 'numeric'],
             'status' => ['required', 'in:pending,succeed,delivering,canceled,failed'],
             'products' => [ 'required', 'array'],
-            'product.*' => ['array:product_id,quantity']
+            'product.*' => ['array:product_id,quantity,unit_price']
         ];
     }
 }

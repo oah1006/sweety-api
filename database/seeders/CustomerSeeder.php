@@ -22,8 +22,15 @@ class CustomerSeeder extends Seeder
         $customer->user()->create([
             'email' => 'thienquynh106@gmail.com',
             'password' => '123456',
-            'phone_number' => '0908640010',
-            'address' => 'Bình Thạnh, TPHCM'
+        ]);
+
+        $customer->address()->create([
+            'house_number' => '156',
+            'street' => 'Phan Văn Trị',
+            'ward' => 'Phường 11',
+            'district' => 'Quận Bình Thạnh',
+            'city' => 'Thành phố Hồ Chí Minh',
+            'phone_number' => '0931395315'
         ]);
 
         $customer = Customer::create([
@@ -33,8 +40,15 @@ class CustomerSeeder extends Seeder
         $customer->user()->create([
             'email' => 'ngoclinh196@gmail.com',
             'password' => '123456',
-            'phone_number' => '0908640110',
-            'address' => 'Thủ Đức, TPHCM'
+        ]);
+
+        $customer->address()->create([
+            'house_number' => '156',
+            'street' => 'Hồ Tùng Mậu',
+            'ward' => 'Phường Bến Nghé',
+            'district' => 'Quận 1',
+            'city' => 'Thành phố Hồ Chí Minh',
+            'phone_number' => '0931396325'
         ]);
 
         $customer = Customer::create([
@@ -44,8 +58,15 @@ class CustomerSeeder extends Seeder
         $customer->user()->create([
             'email' => 'nhatan106@gmail.com',
             'password' => '123456',
-            'phone_number' => '0908641110',
-            'address' => 'Thủ Đức, TPHCM'
+        ]);
+
+        $customer->address()->create([
+            'house_number' => '156',
+            'street' => 'Hồ Tùng Mậu',
+            'ward' => 'Phường Bến Nghé',
+            'district' => 'Quận 1',
+            'city' => 'Thành phố Hồ Chí Minh',
+            'phone_number' => '0931395325'
         ]);
 
         $customer = Customer::create([
@@ -55,8 +76,15 @@ class CustomerSeeder extends Seeder
         $customer->user()->create([
             'email' => 'phuongtu106@gmail.com',
             'password' => '123456',
-            'phone_number' => '0908611110',
-            'address' => 'Quận 9, TPHCM'
+        ]);
+
+        $customer->address()->create([
+            'house_number' => '257',
+            'street' => 'Đồng Khởi',
+            'ward' => 'Phường Tân Hiệp',
+            'district' => 'Biên Hòa',
+            'city' => 'Đồng Nai',
+            'phone_number' => '0931395335'
         ]);
     }
 }

@@ -75,6 +75,8 @@ class StaffController extends Controller
 
         $staff->user()->create($data);
 
+        $staff->address()->create($data);
+
         if ($request->hasFile('avatar')) {
             UploadAttachmentAction::run([$request->file('avatar')], $staff, AttachmentTypes::AVATARS);
         }

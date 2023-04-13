@@ -17,11 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique()->nullable();
             $table->foreignId('coupon_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('delivery_address_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('address_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('customer_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('staff_id')->nullable()->constrained()->nullOnDelete();
             $table->unsignedBigInteger('total')->default(0)->index();
             $table->unsignedBigInteger('sub_total')->default(0)->index();
+            $table->unsignedBigInteger('shipping_fee')->default(20000)->index();
             $table->enum('status', ['pending', 'succeed', 'delivering', 'canceled', 'failed']);
             $table->timestamps();
         });

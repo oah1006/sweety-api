@@ -18,7 +18,8 @@ class Coupon extends Model
         'min_order_total',
         'status',
         'started_at',
-        'expired_at'
+        'expired_at',
+        'is_deleted'
     ];
 
     protected $casts = [
@@ -27,6 +28,10 @@ class Coupon extends Model
         'started_at' => 'datetime:d-m-Y',
         'expired_at' => 'datetime:d-m-Y',
     ];
+
+    public function order() {
+        return $this->hasMany(Order::class);
+    }
 
     protected static function booted() {
         static::creating(function (Coupon $coupon) {

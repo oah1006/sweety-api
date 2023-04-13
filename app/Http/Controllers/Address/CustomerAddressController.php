@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\DeliveryAddress;
+namespace App\Http\Controllers\Address;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DeliveryAddress\CreateDeliveryAddressRequest;
-use App\Http\Requests\DeliveryAddress\UpdateDeliveryAddressRequest;
+use App\Http\Requests\DeliveryAddress\CreateAddressRequest;
+use App\Http\Requests\DeliveryAddress\UpdateAddressRequest;
 use App\Models\Customer;
-use App\Models\DeliveryAddress;
+use App\Models\Address;
 use Illuminate\Http\Request;
 
-class CustomerDeliveryAddressController extends Controller
+class CustomerAddressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,14 +37,14 @@ class CustomerDeliveryAddressController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(CreateDeliveryAddressRequest $request, Customer $customer)
+    public function store(CreateAddressRequest $request, Customer $customer)
     {
         $data = $request->validated();
 
-        $delivery_address = $customer->deliveryAddresses()->create($data);
+        $address = $customer->address()->create($data);
 
         return response()->json([
-            'data' => $delivery_address
+            'data' => $address
         ]);
     }
 
@@ -77,13 +77,13 @@ class CustomerDeliveryAddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDeliveryAddressRequest $request, Customer $customer, $id)
+    public function update(UpdateAddressRequest $request, Customer $customer, $id)
     {
         $data = $request->validated();
 
-        $delivery_address = $customer->deliveryAddresses()->findOrFail($id);
+        $address = $customer->address()->findOrFail($id);
 
-        $delivery_address->update($data);
+        $address->update($data);
 
         return response()->noContent();
     }

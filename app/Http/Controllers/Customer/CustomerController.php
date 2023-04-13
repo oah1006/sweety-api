@@ -63,6 +63,8 @@ class CustomerController extends Controller
 
         $customer->user()->create($data);
 
+        $customer->address()->create($data);
+
         return response()->json([
             'data' => $customer
         ], 201);
@@ -78,7 +80,7 @@ class CustomerController extends Controller
     {
         $customer->load('user');
 
-        $customer->load('deliveryAddresses');
+        $customer->load('address');
 
         return response()->json([
             'data' => $customer

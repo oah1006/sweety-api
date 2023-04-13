@@ -34,7 +34,7 @@ class Customer extends Model
         });
     }
 
-    public function deliveryAddresses() {
-        return $this->hasMany(DeliveryAddress::class, 'customer_id');
+    public function address() {
+        return $this->hasMany(Address::class, 'customer_id');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Store;
 
+use App\Rules\PhoneNumber;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateStoreRequest extends FormRequest
@@ -24,10 +25,15 @@ class CreateStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'unique:stores,name'],
-            'address' => ['required', 'string', 'unique:stores,address'],
+            'store_name' => ['required', 'string', 'unique:stores,name'],
             'open_store' => ['required', 'date_format:H:i'],
-            'close_store' => ['required', 'date_format:H:i']
+            'close_store' => ['required', 'date_format:H:i'],
+            'house_number' => ['required', 'string'],
+            'street' => ['required', 'string'],
+            'ward' => ['required', 'string'],
+            'district' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'phone_number' => ['string', new PhoneNumber, 'unique:addresses,phone_number', 'required'],
         ];
     }
 }

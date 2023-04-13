@@ -28,8 +28,6 @@ class UpdateStaffRequest extends FormRequest
         return [
             'email' => ['nullable', 'email:rfc,dns', 'string', Rule::unique('users')->ignore($this->staff->user->getKey())],
             'full_name' => ['string', 'nullable'],
-            'address' => ['string', 'nullable'],
-            'phone_number' => ['string', 'nullable', new PhoneNumber, Rule::unique('users')->ignore($this->staff->user->getKey())],
             'is_active' => ['nullable', 'boolean'],
             'role' => ['nullable'],
             'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png'],

@@ -12,12 +12,21 @@ class OrderItem extends Model
     protected $fillable = [
         'order_id',
         'product_id',
-        'quantity'
+        'quantity',
+        'unit_price'
     ];
 
     protected $with = [
         'product'
     ];
+
+    protected static function booted() {
+        static::saving(function (OrderItem $orderItem) {
+            $product = Product::where('id', $orderItem->product_id)->first();
+
+            $orderItem->unit_price = $product->price;
+        });
+    }
 
     public function order() {
         return $this->belongsTo(Order::class);

@@ -16,7 +16,8 @@ class Product extends Model
         'price',
         'category_id',
         'user_id',
-        'published'
+        'published',
+        'is_deleted'
     ];
 
     protected $with = [

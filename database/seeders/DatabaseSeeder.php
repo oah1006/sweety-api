@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             ProductSeeder::class,
             CouponSeeder::class,
-            DeliveryAddressSeeder::class,
+            AddressSeeder::class,
             OrderSeeder::class
         ]);
     }

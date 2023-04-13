@@ -32,6 +32,14 @@ class Staff extends Model
         return $this->hasMany(Order::class);
     }
 
+    public function attachment() {
+        return $this->morphOne(Attachment::class, 'attachmentable');
+    }
+
+    public function address() {
+        return $this->hasOne(Address::class);
+    }
+
     protected static function booted() {
         static::creating(function (Staff $staff) {
             do {
@@ -45,8 +53,6 @@ class Staff extends Model
         });
     }
 
-    public function attachment() {
-        return $this->morphOne(Attachment::class, 'attachmentable');
-    }
+
 
 }

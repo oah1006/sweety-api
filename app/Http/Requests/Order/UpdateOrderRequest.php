@@ -27,7 +27,7 @@ class UpdateOrderRequest extends FormRequest
         return [
             'code' => ['nullable'],
             'coupon_id' => ['nullable', 'exists:coupons,id'],
-            'delivery_address_id' => ['nullable', 'exists:delivery_addresses,id'],
+            'address_id' => ['nullable', 'exists:addresses,id'],
             'total' => ['nullable', 'numeric'],
             'sub_total' => ['nullable', 'numeric'],
             'status' => ['nullable', 'in:pending,succeed,delivering,canceled,failed'],

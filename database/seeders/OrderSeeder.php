@@ -17,21 +17,19 @@ class OrderSeeder extends Seeder
     {
         $order = Order::create([
             "coupon_id" => 1,
-            "delivery_address_id" => 1,
+            "address_id" => 1,
             "customer_id" => 1,
             "staff_id" => 1,
-            "total" => 400000,
-            "sub_total" => 350000,
             "status" => "pending",
         ]);
 
         $dataOne = [
             [
-                "product_id" => 2,
+                "product_id" => 1,
                 "quantity" => 15,
             ],
             [
-                "product_id" => 1,
+                "product_id" => 2,
                 "quantity" => 30,
             ]
         ];
@@ -40,23 +38,28 @@ class OrderSeeder extends Seeder
             $order->items()->create($item);
         }
 
-        $order->create([
+        $order = $order->fresh();
+
+        $order->calculateSubTotal();
+        $order->calculateTotal();
+
+        $order->save();
+
+        $order = $order->create([
             "coupon_id" => 1,
-            "delivery_address_id" => 1,
+            "address_id" => 1,
             "customer_id" => 2,
             "staff_id" => 2,
-            "total" => 200000,
-            "sub_total" => 250000,
             "status" => "succeed",
         ]);
 
         $dataTwo = [
             [
-                "product_id" => 3,
+                "product_id" => 1,
                 "quantity" => 25,
             ],
             [
-                "product_id" => 1,
+                "product_id" => 2,
                 "quantity" => 30,
             ]
         ];
@@ -64,5 +67,12 @@ class OrderSeeder extends Seeder
         foreach ($dataTwo as $item) {
             $order->items()->create($item);
         }
+
+        $order = $order->fresh();
+
+        $order->calculateSubTotal();
+        $order->calculateTotal();
+
+        $order->save();
     }
 }

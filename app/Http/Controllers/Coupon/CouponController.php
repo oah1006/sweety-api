@@ -18,7 +18,7 @@ class CouponController extends Controller
      */
     public function index(Request $request)
     {
-        $coupons = Coupon::query();
+        $coupons = Coupon::where('is_deleted', 0);
 
         $keywords = $request->keywords;
 
@@ -121,7 +121,9 @@ class CouponController extends Controller
     {
         $this->authorize('delete', $coupon);
 
-        $coupon->delete();
+        $coupon->is_deleted = 1;
+
+        $coupon->save();
 
         return response()->noContent();
     }

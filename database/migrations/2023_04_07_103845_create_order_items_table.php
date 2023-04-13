@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('order_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('product_id')->nullable()->constrained()->nullOnDelete();
             $table->unsignedBigInteger('quantity');
+            $table->unsignedBigInteger('unit_price');
             $table->timestamps();
         });
     }

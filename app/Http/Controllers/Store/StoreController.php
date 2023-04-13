@@ -56,6 +56,8 @@ class StoreController extends Controller
 
         $store = Store::create($data);
 
+        $store->address()->create($data);
+
         return response()->json([
             'data' => $store
         ]);

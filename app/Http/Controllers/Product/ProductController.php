@@ -20,7 +20,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-       $products = Product::with('category');
+       $products = Product::where('is_deleted', 0)->with('category');
 
        $keywords = $request->keywords;
 
@@ -147,7 +147,9 @@ class ProductController extends Controller
     {
         $this->authorize('delete', $product);
 
-        $product->delete();
+        $product->is_deleted = 1;
+
+        $product->save();
 
         return response()->noContent();
     }

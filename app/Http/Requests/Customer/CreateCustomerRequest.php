@@ -28,8 +28,12 @@ class CreateCustomerRequest extends FormRequest
             'email' => ['required', 'email:rfc,dns', 'string', 'unique:users,email'],
             'password' => ['required', 'string', 'min:6'],
             'full_name' => ['string', 'required'],
-            'address' => ['string', 'required'],
-            'phone_number' => ['string', new PhoneNumber, 'unique:users,phone_number', 'required'],
+            'house_number' => ['required', 'string'],
+            'street' => ['required', 'string'],
+            'ward' => ['required', 'string'],
+            'district' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'phone_number' => ['string', new PhoneNumber, 'unique:addresses,phone_number', 'required'],
         ];
     }
 }

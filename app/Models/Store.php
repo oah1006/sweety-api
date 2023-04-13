@@ -11,13 +11,16 @@ class Store extends Model
 
     protected $fillable = [
         'name',
-        'address',
         'open_store',
         'close_store'
     ];
 
     public function staff() {
         return $this->hasMany(Staff::class);
+    }
+
+    public function address() {
+        return $this->hasOne(Address::class);
     }
 
 }

@@ -25,8 +25,15 @@ class StaffSeeder extends Seeder
         $staff->user()->create([
             'email' => 'bnhao10062001@gmail.com',
             'password' => '123456',
-            'phone_number' => '0931395361',
-            'address' => 'Quận 9, TPHCM',
+        ]);
+
+        $staff->address()->create([
+            'house_number' => '78/17A',
+            'street' => 'Hồ Bá Phấn',
+            'ward' => 'Phước Long A',
+            'district' => 'Quận 9',
+            'city' => 'Thành phố Hồ Chí Minh',
+            'phone_number' => '0931395361'
         ]);
 
         $staff = Staff::create([
@@ -39,12 +46,19 @@ class StaffSeeder extends Seeder
         $staff->user()->create([
             'email' => 'lechihuy1062001@gmail.com',
             'password' => '123456',
-            'address' => 'Quận Bình Thạnh, TPHCM',
-            'phone_number' => '0931395362',
+        ]);
+
+        $staff->address()->create([
+            'house_number' => '201',
+            'street' => 'Nơ Trang Long',
+            'ward' => 'Phường 7',
+            'district' => 'Quận Bình Thạnh',
+            'city' => 'Thành phố Hồ Chí Minh',
+            'phone_number' => '0931395362'
         ]);
 
         $staff = Staff::create([
-            'full_name' => 'Bùi Nhật Hào',
+            'full_name' => 'Ánh Hằng',
             'is_active' => '1',
             'role' => 'employee',
             'store_id' => '3'
@@ -53,8 +67,15 @@ class StaffSeeder extends Seeder
         $staff->user()->create([
             'email' => 'anhhang2108@gmail.com',
             'password' => '123456',
-            'address' => 'Dĩ An, Bình Dương',
-            'phone_number' => '0931395363',
+        ]);
+
+        $staff->address()->create([
+            'house_number' => '201',
+            'street' => 'Đường 15',
+            'ward' => 'Phường Bình An',
+            'district' => 'Thị xã Dĩ An',
+            'city' => 'Bình Dương',
+            'phone_number' => '0931395363'
         ]);
 
         $staff = Staff::create([
@@ -67,8 +88,15 @@ class StaffSeeder extends Seeder
         $staff->user()->create([
             'email' => 'nguyenhoangtan0101@gmail.com',
             'password' => '123456',
-            'address' => 'Tân Phú, TPHCM',
-            'phone_number' => '0931395364',
+        ]);
+
+        $staff->address()->create([
+            'house_number' => '102',
+            'street' => 'Tân Kỳ Tân Quý',
+            'ward' => 'Phường Bình Hưng Hòa',
+            'district' => 'Tân Phú',
+            'city' => 'Thành phố Hồ Chí Minh',
+            'phone_number' => '0931395364'
         ]);
     }
 }

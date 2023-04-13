@@ -12,10 +12,16 @@ class Order extends Model
     protected $fillable = [
         'code',
         'coupon_id',
-        'delivery_address_id',
+        'address_id',
         'total',
         'sub_total',
-        'status'
+        'status',
+        'shipping_fee'
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime:d-m-Y',
+        'updated_at' => 'datetime:d-m-Y',
     ];
 
     public function items() {
@@ -23,7 +29,7 @@ class Order extends Model
     }
 
     public function deliveryAddress() {
-        return $this->belongsTo(DeliveryAddress::class);
+        return $this->belongsTo(Address::class);
     }
 
     public function customer() {
@@ -34,6 +40,25 @@ class Order extends Model
         return $this->belongsTo(Staff::class);
     }
 
+    public function coupon() {
+        return $this->belongsTo(Coupon::class);
+    }
+
+    public function calculateSubTotal() {
+        $this->sub_total = $this->items->sum(function ($items) {
+            return $items['unit_price'] * $items['quantity'];
+        });
+    }
+
+    public function calculateTotal() {
+        if ($this->coupon_id) {
+            $coupon = Coupon::where('id', $this->coupon_id)->first();
+            $this->total = ($this->sub_total - ($coupon->is_percent_value / 100 * $this->sub_total)) + $this->shipping_fee;
+        } else {
+            $this->total = $this->sub_total + $this->shipping_fee;
+        }
+    }
+
     protected static function booted() {
         static::creating(function (Order $order) {
             do {
@@ -41,4 +66,5 @@ class Order extends Model
             } while ($order->where('code', $order->code)->exists());
         });
     }
+
 }

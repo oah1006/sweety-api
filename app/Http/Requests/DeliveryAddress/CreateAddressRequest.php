@@ -5,7 +5,7 @@ namespace App\Http\Requests\DeliveryAddress;
 use App\Rules\PhoneNumber;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateDeliveryAddressRequest extends FormRequest
+class CreateAddressRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +26,14 @@ class UpdateDeliveryAddressRequest extends FormRequest
     {
         return [
             'name' => ['nullable', 'string'],
-            'address' => ['nullable', 'string'],
-            'phone_number' => ['nullable', 'string', new PhoneNumber],
-            'is_default' => ['nullable', 'boolean'],
-            'customer_id' => ['nullable', 'exists:customers,id']
+            'house_number' => ['required', 'string'],
+            'street' => ['required', 'string'],
+            'ward' => ['required', 'string'],
+            'district' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'phone_number' => ['string', new PhoneNumber, 'unique:addresses,phone_number', 'required'],
+            'is_default' => ['required', 'boolean'],
+            'customer_id' => ['required', 'exists:customers,id']
         ];
     }
 }

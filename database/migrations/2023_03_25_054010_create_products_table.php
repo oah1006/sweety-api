@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('price')->default(0)->index();
             $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
             $table->boolean('published')->default(false)->index();
+            $table->boolean('is_deleted')->default(0);
             $table->fullText(['name', 'description']);
             $table->timestamps();
         });

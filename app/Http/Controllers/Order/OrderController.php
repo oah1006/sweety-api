@@ -26,7 +26,7 @@ class OrderController extends Controller
 
         $orders->when($keywords, fn (Builder $query)
                     => $query->whereFullText(['code'], $keywords)
-                ->orWhereHas('addresses', fn (Builder $query)
+                ->orWhereHas('address', fn (Builder $query)
                     => $query->whereFullText(['name', 'address'], $keywords)));
 
 
@@ -65,6 +65,11 @@ class OrderController extends Controller
 
         $order = $order->fresh();
 
+        $order->calculateSubTotal();
+        $order->calculateTotal();
+
+        $order->save();
+
         return response()->json([
             'data' => $order,
             'order_items' => $order->items
@@ -87,6 +92,7 @@ class OrderController extends Controller
 
         $order->load('items');
 
+        $order->load('coupon');
 
         return response()->json([
             'data' => $order

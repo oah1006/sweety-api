@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('district');
             $table->string('city');
             $table->string('name')->nullable();
-            $table->string('phone_number');
+            $table->string('phone_number')->nullable();
             $table->boolean('is_default')->default(1);
             $table->foreignId('customer_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('staff_id')->nullable()->constrained()->nullOnDelete();

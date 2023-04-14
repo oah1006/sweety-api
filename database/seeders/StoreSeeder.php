@@ -16,7 +16,7 @@ class StoreSeeder extends Seeder
     public function run()
     {
         $store = Store::create([
-            'name' => 'Cửa hàng Sweety chi nhánh 1',
+            'store_name' => 'Cửa hàng Sweety chi nhánh 1',
             'open_store' => '09:00',
             'close_store' => '21:00'
         ]);
@@ -31,7 +31,7 @@ class StoreSeeder extends Seeder
         ]);
 
         $store = Store::create([
-            'name' => 'Cửa hàng Sweety chi nhánh 2',
+            'store_name' => 'Cửa hàng Sweety chi nhánh 2',
             'open_store' => '09:00',
             'close_store' => '21:00'
         ]);
@@ -47,7 +47,7 @@ class StoreSeeder extends Seeder
 
 
         $store = Store::create([
-            'name' => 'Cửa hàng Sweety chi nhánh 3',
+            'store_name' => 'Cửa hàng Sweety chi nhánh 3',
             'open_store' => '09:00',
             'close_store' => '21:00'
         ]);
@@ -62,7 +62,7 @@ class StoreSeeder extends Seeder
         ]);
 
         $store = Store::create([
-            'name' => 'Cửa hàng Sweety chi nhánh 4',
+            'store_name' => 'Cửa hàng Sweety chi nhánh 4',
             'open_store' => '09:00',
             'close_store' => '21:00'
         ]);

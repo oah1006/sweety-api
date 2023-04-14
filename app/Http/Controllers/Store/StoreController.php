@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Store;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Store\CreateStoreRequest;
 use App\Http\Requests\Store\UpdateStoreRequest;
+use App\Models\Address;
 use App\Models\Store;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -18,12 +19,12 @@ class StoreController extends Controller
      */
     public function index(Request $request)
     {
-        $stores = Store::query();
+        $stores = Store::with('address');
 
         $keywords = $request->keywords;
 
         $stores->when($keywords, fn (Builder $query)
-            => $query->whereFullText(['name', 'address'], $keywords));
+            => $query->whereFullText(['store_name', 'address'], $keywords));
 
         $stores = $stores->paginate(4);
 
@@ -71,6 +72,8 @@ class StoreController extends Controller
      */
     public function show(Store $store)
     {
+        $store = $store->load('address');
+
         return response()->json([
             'data' => $store
         ]);
@@ -100,7 +103,13 @@ class StoreController extends Controller
 
         $data = $request->validated();
 
-        $store->update($data);
+        $store->update($request->safe()->only(
+            (new Store)->getFillable()
+        ));
+
+        $store->address()->update($request->safe()->only(
+            (new Address)->getFillable()
+        ));
 
         return response()->json([
             'data' => $store

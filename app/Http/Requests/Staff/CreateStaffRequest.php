@@ -32,7 +32,6 @@ class CreateStaffRequest extends FormRequest
             'role' => ['required', 'in:administrator,manager,employee,shipper'],
             'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png'],
             'store_id' => ['required', 'exists:stores,id'],
-            'name' => ['required', 'string'],
             'house_number' => ['required', 'string'],
             'street' => ['required', 'string'],
             'ward' => ['required', 'string'],

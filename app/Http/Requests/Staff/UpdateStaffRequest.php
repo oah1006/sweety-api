@@ -27,11 +27,17 @@ class UpdateStaffRequest extends FormRequest
     {
         return [
             'email' => ['nullable', 'email:rfc,dns', 'string', Rule::unique('users')->ignore($this->staff->user->getKey())],
-            'full_name' => ['string', 'nullable'],
+            'full_name' => ['nullable', 'string'],
             'is_active' => ['nullable', 'boolean'],
             'role' => ['nullable'],
             'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png'],
-            'store_id' => ['nullable', 'exists:stores,id']
+            'store_id' => ['nullable', 'exists:stores,id'],
+            'house_number' => ['nullable', 'string'],
+            'street' => ['nullable', 'string'],
+            'ward' => ['nullable', 'string'],
+            'district' => ['nullable', 'string'],
+            'city' => ['nullable', 'string'],
+            'phone_number' => ['nullable', new PhoneNumber, Rule::unique('addresses', 'phone_number')->ignore($this->staff->address->getKey())],
         ];
     }
 }

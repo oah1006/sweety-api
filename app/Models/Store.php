@@ -10,7 +10,7 @@ class Store extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'store_name',
         'open_store',
         'close_store'
     ];

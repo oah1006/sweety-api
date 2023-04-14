@@ -6,6 +6,7 @@ use App\Actions\UploadAttachmentAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\CreateStaffRequest;
 use App\Http\Requests\Staff\UpdateStaffRequest;
+use App\Models\Address;
 use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -112,6 +113,8 @@ class StaffController extends Controller
 
         $staff->load('store');
 
+        $staff->load('address');
+
         return response()->json($staff);
     }
 
@@ -143,6 +146,10 @@ class StaffController extends Controller
 
         $staff->user()->update($request->safe()->only(
             (new User)->getFillable()
+        ));
+
+        $staff->address()->update($request->safe()->only(
+            (new Address)->getFillable()
         ));
 
 

@@ -20,7 +20,7 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $orders = Order::with(['deliveryAddress', 'items', 'customer', 'staff']);
+        $orders = Order::with(['address', 'items', 'customer', 'staff']);
 
         $keywords = $request->keywords;
 
@@ -84,7 +84,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        $order->load('deliveryAddress');
+        $order->load('address');
 
         $order->load('customer');
 

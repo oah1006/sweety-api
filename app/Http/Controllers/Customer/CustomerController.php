@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Customer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Customer\CreateCustomerRequest;
 use App\Http\Requests\Customer\UpdateCustomerRequest;
+use App\Models\Address;
 use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -20,7 +21,7 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-        $customer = Customer::with('user');
+        $customer = Customer::with(['user', 'address']);
 
         $keyword = $request->keywords;
 
@@ -115,6 +116,10 @@ class CustomerController extends Controller
 
         $customer->user()->update($request->safe()->only(
             (new User)->getFillable()
+        ));
+
+        $customer->address()->update($request->safe()->only(
+            (new Address)->getFillable()
         ));
 
         $customer = $customer->fresh();

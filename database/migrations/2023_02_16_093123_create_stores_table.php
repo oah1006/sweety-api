@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('store_name')->unique();
             $table->time('open_store');
             $table->time('close_store');
-            $table->fullText(['name']);
+            $table->fullText(['store_name']);
             $table->timestamps();
         });
     }

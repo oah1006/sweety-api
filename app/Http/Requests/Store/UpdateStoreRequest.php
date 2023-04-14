@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Store;
 
+use App\Rules\PhoneNumber;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -25,10 +26,15 @@ class UpdateStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['nullable', 'string', Rule::unique('stores')->ignore($this->store)],
-            'address' => ['nullable', 'string', Rule::unique('stores')->ignore($this->store)],
+            'store_name' => ['nullable', 'string', Rule::unique('stores')->ignore($this->store)],
             'open_store' => ['nullable', 'date_format:H:i'],
-            'close_store' => ['nullable', 'date_format:H:i']
+            'close_store' => ['nullable', 'date_format:H:i'],
+            'house_number' => ['nullable', 'string'],
+            'street' => ['nullable', 'string'],
+            'ward' => ['nullable', 'string'],
+            'district' => ['nullable', 'string'],
+            'city' => ['nullable', 'string'],
+            'phone_number' => ['nullable', 'string', new PhoneNumber, 'unique:addresses,phone_number'],
         ];
     }
 }

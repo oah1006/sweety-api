@@ -25,7 +25,7 @@ class CreateStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'store_name' => ['required', 'string', 'unique:stores,name'],
+            'store_name' => ['required', 'string', 'unique:stores,store_name'],
             'open_store' => ['required', 'date_format:H:i'],
             'close_store' => ['required', 'date_format:H:i'],
             'house_number' => ['required', 'string'],
@@ -33,7 +33,7 @@ class CreateStoreRequest extends FormRequest
             'ward' => ['required', 'string'],
             'district' => ['required', 'string'],
             'city' => ['required', 'string'],
-            'phone_number' => ['string', new PhoneNumber, 'unique:addresses,phone_number', 'required'],
+            'phone_number' => ['nullable', 'string', new PhoneNumber, 'unique:addresses,phone_number'],
         ];
     }
 }

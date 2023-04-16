@@ -28,8 +28,10 @@ class CreateOrderRequest extends FormRequest
             'coupon_id' => ['required', 'exists:coupons,id'],
             'address_id' => ['required', 'exists:addresses,id'],
             'total' => ['required', 'numeric'],
+            'sale_staff_id' => ['nullable', 'exists:staff,id'],
+            'delivery_staff_id' => ['nullable', 'exists:staff,id'],
             'sub_total' => ['required', 'numeric'],
-            'status' => ['required', 'in:pending,succeed,delivering,canceled,failed'],
+            'status' => ['required', 'in:pending,canceled,accepted,preparing,prepared,delivering,succeed,failed'],
             'products' => [ 'required', 'array'],
             'product.*' => ['array:product_id,quantity,unit_price']
         ];

@@ -22,7 +22,9 @@ class AttachmentController extends Controller
         $attachment = UploadAttachmentAction::run($request->file('file'), $attachmentable, AttachmentTypes::tryFrom($data['type']));
 
         return response()->json([
-            'data' => $attachment
+            'id' => $attachmentableId,
+            'data' => $attachment,
+            'hello'
         ]);
     }
 

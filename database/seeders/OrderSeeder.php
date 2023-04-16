@@ -19,7 +19,6 @@ class OrderSeeder extends Seeder
             "coupon_id" => 1,
             "address_id" => 1,
             "customer_id" => 1,
-            "staff_id" => 1,
             "status" => "pending",
         ]);
 
@@ -49,7 +48,6 @@ class OrderSeeder extends Seeder
             "coupon_id" => 1,
             "address_id" => 1,
             "customer_id" => 2,
-            "staff_id" => 2,
             "status" => "succeed",
         ]);
 

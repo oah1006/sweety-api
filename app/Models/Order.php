@@ -16,7 +16,9 @@ class Order extends Model
         'total',
         'sub_total',
         'status',
-        'shipping_fee'
+        'shipping_fee',
+        'delivery_staff_id',
+        'sale_staff_id'
     ];
 
     protected $casts = [
@@ -36,8 +38,12 @@ class Order extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function staff() {
-        return $this->belongsTo(Staff::class);
+    public function saleStaff() {
+        return $this->belongsTo(Staff::class, 'sale_staff_id');
+    }
+
+    public function deliveryStaff() {
+        return $this->belongsTo(Staff::class, 'delivery_staff_id');
     }
 
     public function coupon() {

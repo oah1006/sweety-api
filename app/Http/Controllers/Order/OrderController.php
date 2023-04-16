@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Order;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\CreateOrderRequest;
 use App\Http\Requests\Order\UpdateOrderRequest;
+use App\Http\Requests\Order\UpdateStatusOrderRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Database\Seeders\ProductSeeder;
@@ -20,7 +21,7 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $orders = Order::with(['address', 'items', 'customer', 'staff']);
+        $orders = Order::with(['address', 'items', 'customer', 'saleStaff', 'deliveryStaff']);
 
         $keywords = $request->keywords;
 
@@ -88,7 +89,9 @@ class OrderController extends Controller
 
         $order->load('customer');
 
-        $order->load('staff');
+        $order->load('saleStaff');
+
+        $order->load('deliveryStaff');
 
         $order->load('items');
 
@@ -152,5 +155,82 @@ class OrderController extends Controller
         $order->delete();
 
         return response()->noContent();
+    }
+
+    public function updateStatusAccepted(Request $request, Order $order) {
+        if ($order->status === 'pending') {
+            $order->status = 'accepted';
+
+            $order->sale_staff_id = auth()->user()->id;
+
+            $order->save();
+
+            return response()->json([
+                'data' => $order->status
+            ]);
+        }
+    }
+
+    public function updateStatusPreparing(Request $request, Order $order) {
+        if ($order->status === 'accepted') {
+            $order->status = 'preparing';
+
+            $order->save();
+
+            return response()->json([
+                'data' => $order->status
+            ]);
+        }
+    }
+
+    public function updateStatusPrepared(Request $request, Order $order) {
+        if ($order->status === 'preparing') {
+            $order->status = 'prepared';
+
+            $order->save();
+
+            return response()->json([
+                'data' => $order->status
+            ]);
+        }
+    }
+
+    public function updateStatusDelivering(Request $request, Order $order) {
+        if ($order->status === 'prepared') {
+            $order->status = 'delivering';
+
+            $order->delivery_staff_id = auth()->user()->id;
+
+            $order->save();
+
+            return response()->json([
+                'data' => $order->status,
+                'id' => $order->delivery_staff_id
+            ]);
+        }
+    }
+
+    public function updateStatusSucceed(Request $request, Order $order) {
+        if ($order->status === 'delivering') {
+            $order->status = 'succeed';
+
+            $order->save();
+
+            return response()->json([
+                'data' => $order->status
+            ]);
+        }
+    }
+
+    public function updateStatusFailed(Request $request, Order $order) {
+        if ($order->status === 'delivering') {
+            $order->status = 'failed';
+
+            $order->save();
+
+            return response()->json([
+                'data' => $order->status
+            ]);
+        }
     }
 }

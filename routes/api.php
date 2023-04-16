@@ -61,6 +61,14 @@ Route::prefix('private')->name('private.')->group(function() {
         Route::apiResource('coupons', CouponController::class);
         Route::apiResource('orders', OrderController::class);
         Route::resource('customers.addresses', CustomerAddressController::class);
+
+        Route::put('/orders/update-status-accepted/{order}', [OrderController::class, 'updateStatusAccepted'])->name('update-accepted-status');
+        Route::put('/orders/update-status-preparing/{order}', [OrderController::class, 'updateStatusPreparing'])->name('update-preparing-status');
+        Route::put('/orders/update-status-prepared/{order}', [OrderController::class, 'updateStatusPrepared'])->name('update-prepared-status');
+        Route::put('/orders/update-status-delivering/{order}', [OrderController::class, 'updateStatusDelivering'])->name('update-delivering-status');
+        Route::put('/orders/update-status-succeed/{order}', [OrderController::class, 'updateStatusSucceed'])->name('update-succeed-status');
+        Route::put('/orders/update-status-failed/{order}', [OrderController::class, 'updateStatusFailed'])->name('update-failed-status');
+
         Route::post('/attachments/{attachmentable}/{attachmentableId}', [AttachmentController::class, 'store'])->name('store');
         Route::delete('/attachments/{attachment}', [AttachmentController::class, 'detach'])->name('detach');
     });

@@ -28,10 +28,6 @@ class Staff extends Model
         return $this->morphOne(User::class, 'profile');
     }
 
-    public function order() {
-        return $this->hasMany(Order::class);
-    }
-
     public function attachment() {
         return $this->morphOne(Attachment::class, 'attachmentable');
     }

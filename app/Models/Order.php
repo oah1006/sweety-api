@@ -13,12 +13,14 @@ class Order extends Model
         'code',
         'coupon_id',
         'address_id',
+        'store_id',
+        'delivery_staff_id',
+        'sale_staff_id',
+        'customer_id',
         'total',
         'sub_total',
         'status',
         'shipping_fee',
-        'delivery_staff_id',
-        'sale_staff_id'
     ];
 
     protected $casts = [
@@ -36,6 +38,10 @@ class Order extends Model
 
     public function customer() {
         return $this->belongsTo(Customer::class);
+    }
+
+    public function store() {
+        return $this->belongsTo(Store::class);
     }
 
     public function saleStaff() {
@@ -63,6 +69,12 @@ class Order extends Model
         } else {
             $this->total = $this->sub_total + $this->shipping_fee;
         }
+    }
+
+    public function calculateShippingFee() {
+        $store = Store::where('id', $this->store_id)->first();
+
+
     }
 
     protected static function booted() {

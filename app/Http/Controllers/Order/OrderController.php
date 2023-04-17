@@ -5,7 +5,13 @@ namespace App\Http\Controllers\Order;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\CreateOrderRequest;
 use App\Http\Requests\Order\UpdateOrderRequest;
+use App\Http\Requests\Order\UpdateStatusAcceptedOrderRequest;
+use App\Http\Requests\Order\UpdateStatusDeliveringOrderRequest;
+use App\Http\Requests\Order\UpdateStatusFailedOrderRequest;
 use App\Http\Requests\Order\UpdateStatusOrderRequest;
+use App\Http\Requests\Order\UpdateStatusPreparedOrderRequest;
+use App\Http\Requests\Order\UpdateStatusPreparingOrderRequest;
+use App\Http\Requests\Order\UpdateStatusSucceedOrderRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Database\Seeders\ProductSeeder;
@@ -157,8 +163,12 @@ class OrderController extends Controller
         return response()->noContent();
     }
 
-    public function updateStatusAccepted(Request $request, Order $order) {
-        if ($order->status === 'pending') {
+    public function updateStatusAccepted(UpdateStatusAcceptedOrderRequest $request, Order $order) {
+        if ($order->status === 'pending'
+            && auth()->user()->profile->role === 'administrator'
+            && auth()->user()->profile->role === 'employee'
+            && auth()->user()->profile->role === 'manager') {
+
             $order->status = 'accepted';
 
             $order->sale_staff_id = auth()->user()->id;
@@ -171,8 +181,11 @@ class OrderController extends Controller
         }
     }
 
-    public function updateStatusPreparing(Request $request, Order $order) {
-        if ($order->status === 'accepted') {
+    public function updateStatusPreparing(UpdateStatusPreparingOrderRequest $request, Order $order) {
+        if ($order->status === 'accepted'
+            && auth()->user()->profile->role === 'administrator'
+            && auth()->user()->profile->role === 'employee'
+            && auth()->user()->profile->role === 'manager') {
             $order->status = 'preparing';
 
             $order->save();
@@ -183,8 +196,12 @@ class OrderController extends Controller
         }
     }
 
-    public function updateStatusPrepared(Request $request, Order $order) {
-        if ($order->status === 'preparing') {
+    public function updateStatusPrepared(UpdateStatusPreparedOrderRequest $request, Order $order) {
+        if ($order->status === 'preparing'
+            && auth()->user()->profile->role === 'administrator'
+            && auth()->user()->profile->role === 'employee'
+            && auth()->user()->profile->role === 'manager') {
+
             $order->status = 'prepared';
 
             $order->save();
@@ -195,8 +212,8 @@ class OrderController extends Controller
         }
     }
 
-    public function updateStatusDelivering(Request $request, Order $order) {
-        if ($order->status === 'prepared') {
+    public function updateStatusDelivering(UpdateStatusDeliveringOrderRequest $request, Order $order) {
+        if ($order->status === 'prepared' && auth()->user()->profile->role === 'shipper') {
             $order->status = 'delivering';
 
             $order->delivery_staff_id = auth()->user()->id;
@@ -210,8 +227,8 @@ class OrderController extends Controller
         }
     }
 
-    public function updateStatusSucceed(Request $request, Order $order) {
-        if ($order->status === 'delivering') {
+    public function updateStatusSucceed(UpdateStatusSucceedOrderRequest $request, Order $order) {
+        if ($order->status === 'delivering' && auth()->user()->profile->role === 'shipper') {
             $order->status = 'succeed';
 
             $order->save();
@@ -222,8 +239,8 @@ class OrderController extends Controller
         }
     }
 
-    public function updateStatusFailed(Request $request, Order $order) {
-        if ($order->status === 'delivering') {
+    public function updateStatusFailed(UpdateStatusFailedOrderRequest $request, Order $order) {
+        if ($order->status === 'delivering' && auth()->user()->profile->role === 'shipper') {
             $order->status = 'failed';
 
             $order->save();

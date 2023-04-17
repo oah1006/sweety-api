@@ -7,9 +7,11 @@ use App\Http\Requests\DeliveryAddress\CreateAddressRequest;
 use App\Http\Requests\DeliveryAddress\UpdateAddressRequest;
 use App\Models\Customer;
 use App\Models\Address;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
-class CustomerAddressController extends Controller
+class AddressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -97,5 +99,28 @@ class CustomerAddressController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function calculationRoute(Request $request) {
+        $latBegin = $request->query('latBegin');
+        $longBegin = $request->query('longBegin');
+
+        $latEnd = $request->query('latEnd');
+        $longEnd = $request->query('longEnd');
+
+        $response = Http::get("https://api.tomtom.com/routing/1/calculateRoute/{$latBegin},{$longBegin}:{$latEnd},{$longEnd}/json?instructionsType=text&language=en-US&vehicleHeading=90&sectionType=traffic&report=effectiveSettings&routeType=eco&traffic=true&avoid=unpavedRoads&travelMode=car&vehicleMaxSpeed=120&vehicleCommercial=false&vehicleEngineType=combustion&key=8G20bE5y7PQbBlAbMlAU6q6IEuKUhI33");
+
+        return response()->json($response->json());
+    }
+
+    public function getCoordinates(Request $request) {
+        $streetNumber = $request->query('streetNumber');
+        $street = $request->query('street');
+        $district = $request->query('district');
+        $province = $request->query('province');
+
+        $response = Http::get("https://api.tomtom.com/search/2/structuredGeocode.json?key=8G20bE5y7PQbBlAbMlAU6q6IEuKUhI33&streetNumber={$streetNumber}&streetName={$street}&municipalitySubdivision={$district}&countrySubdivision={$province}&countryCode=VN");
+
+        return response()->json($response->json());
     }
 }

@@ -9,10 +9,13 @@ use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Coupon\CouponController;
 use App\Http\Controllers\Customer\CustomerController;
-use App\Http\Controllers\Address\CustomerAddressController;
+use App\Http\Controllers\Address\AddressController;
 use App\Http\Controllers\Address\DeliveryAddressController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Province\DistrictController;
+use App\Http\Controllers\Province\ProvinceController;
+use App\Http\Controllers\Province\WardController;
 use App\Http\Controllers\Store\StoreController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -60,7 +63,7 @@ Route::prefix('private')->name('private.')->group(function() {
         Route::apiResource('products', ProductController::class);
         Route::apiResource('coupons', CouponController::class);
         Route::apiResource('orders', OrderController::class);
-        Route::resource('customers.addresses', CustomerAddressController::class);
+        Route::apiResource('addresses', AddressController::class);
 
         Route::put('/orders/update-status-accepted/{order}', [OrderController::class, 'updateStatusAccepted'])->name('update-accepted-status');
         Route::put('/orders/update-status-preparing/{order}', [OrderController::class, 'updateStatusPreparing'])->name('update-preparing-status');
@@ -68,6 +71,13 @@ Route::prefix('private')->name('private.')->group(function() {
         Route::put('/orders/update-status-delivering/{order}', [OrderController::class, 'updateStatusDelivering'])->name('update-delivering-status');
         Route::put('/orders/update-status-succeed/{order}', [OrderController::class, 'updateStatusSucceed'])->name('update-succeed-status');
         Route::put('/orders/update-status-failed/{order}', [OrderController::class, 'updateStatusFailed'])->name('update-failed-status');
+
+        Route::get('/provinces', [ProvinceController::class, 'index'])->name('index');
+        Route::get('/districts/{provinceCode}', [DistrictController::class, 'index'])->name('index');
+        Route::get('/wards/{districtCode}', [WardController::class, 'index'])->name('index');
+
+        Route::get('/get-coordinates/', [AddressController::class, 'getCoordinates'])->name('get-coordinates');
+        Route::get('/calculation-routes', [AddressController::class, 'calculationRoute'])->name('calculation-routes');
 
         Route::post('/attachments/{attachmentable}/{attachmentableId}', [AttachmentController::class, 'store'])->name('store');
         Route::delete('/attachments/{attachment}', [AttachmentController::class, 'detach'])->name('detach');

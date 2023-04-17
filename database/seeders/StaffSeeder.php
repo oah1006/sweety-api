@@ -19,7 +19,7 @@ class StaffSeeder extends Seeder
             'full_name' => 'Bùi Nhật Hào',
             'is_active' => '1',
             'role' => 'administrator',
-            'store_id' => '1'
+            'store_id' => '3'
         ]);
 
         $staff->user()->create([
@@ -33,14 +33,16 @@ class StaffSeeder extends Seeder
             'ward' => 'Phước Long A',
             'district' => 'Quận 9',
             'city' => 'Thành phố Hồ Chí Minh',
-            'phone_number' => '0931395361'
+            'phone_number' => '0931395361',
+            'long' => '132',
+            'lat' => '213'
         ]);
 
         $staff = Staff::create([
             'full_name' => 'Lê Chí Huy',
             'is_active' => '1',
             'role' => 'Manager',
-            'store_id' => '2'
+            'store_id' => '4'
         ]);
 
         $staff->user()->create([
@@ -54,14 +56,16 @@ class StaffSeeder extends Seeder
             'ward' => 'Phường 7',
             'district' => 'Quận Bình Thạnh',
             'city' => 'Thành phố Hồ Chí Minh',
-            'phone_number' => '0931395362'
+            'phone_number' => '0931395362',
+            'long' => '132',
+            'lat' => '213'
         ]);
 
         $staff = Staff::create([
             'full_name' => 'Ánh Hằng',
             'is_active' => '1',
             'role' => 'employee',
-            'store_id' => '3'
+            'store_id' => '5'
         ]);
 
         $staff->user()->create([
@@ -75,14 +79,16 @@ class StaffSeeder extends Seeder
             'ward' => 'Phường Bình An',
             'district' => 'Thị xã Dĩ An',
             'city' => 'Bình Dương',
-            'phone_number' => '0931395363'
+            'phone_number' => '0931395363',
+            'long' => '132',
+            'lat' => '213'
         ]);
 
         $staff = Staff::create([
             'full_name' => 'Nguyễn Hoàng Tấn',
             'is_active' => '0',
             'role' => 'administrator',
-            'store_id' => '4'
+            'store_id' => '6'
         ]);
 
         $staff->user()->create([
@@ -96,7 +102,9 @@ class StaffSeeder extends Seeder
             'ward' => 'Phường Bình Hưng Hòa',
             'district' => 'Tân Phú',
             'city' => 'Thành phố Hồ Chí Minh',
-            'phone_number' => '0931395364'
+            'phone_number' => '0931395364',
+            'long' => '132',
+            'lat' => '213'
         ]);
     }
 }

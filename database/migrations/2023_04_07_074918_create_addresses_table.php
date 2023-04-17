@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('ward');
             $table->string('district');
             $table->string('city');
+            $table->string('long');
+            $table->string('lat');
             $table->string('name')->nullable();
             $table->string('phone_number')->nullable();
             $table->boolean('is_default')->default(1);

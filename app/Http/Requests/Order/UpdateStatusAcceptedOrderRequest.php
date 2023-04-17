@@ -4,7 +4,7 @@ namespace App\Http\Requests\Order;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateStatusOrderRequest extends FormRequest
+class UpdateStatusAcceptedOrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,9 @@ class UpdateStatusOrderRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return auth()->user()->profile->role === 'administrator'
+            && auth()->user()->profile->role === 'employee'
+            && auth()->user()->profile->role === 'manager';
     }
 
     /**
@@ -24,7 +26,7 @@ class UpdateStatusOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'status' => ['nullable', 'in:pending'],
+            'status' => ['nullable', 'in:accepted'],
         ];
     }
 }

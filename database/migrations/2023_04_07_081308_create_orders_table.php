@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('coupon_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('address_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('customer_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('store_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('sale_staff_id')->nullable()->constrained('staff')->nullOnDelete();
             $table->foreignId('delivery_staff_id')->nullable()->constrained('staff')->nullOnDelete();
             $table->unsignedBigInteger('total')->default(0)->index();

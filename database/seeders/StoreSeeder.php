@@ -27,7 +27,9 @@ class StoreSeeder extends Seeder
             'ward' => 'Phường Tân Phú',
             'district' => 'Quận 7',
             'city' => 'Thành phố Hồ Chí Minh',
-            'phone_number' => '0931395365'
+            'phone_number' => '0931395365',
+            'long' => '132',
+            'lat' => '213'
         ]);
 
         $store = Store::create([
@@ -42,7 +44,9 @@ class StoreSeeder extends Seeder
             'ward' => 'Tân Phong',
             'district' => 'Quận 7',
             'city' => 'Thành phố Hồ Chí Minh',
-            'phone_number' => '0931395366'
+            'phone_number' => '0931395366',
+            'long' => '132',
+            'lat' => '213'
         ]);
 
 
@@ -58,7 +62,9 @@ class StoreSeeder extends Seeder
             'ward' => 'Phường Bình Hưng Hòa',
             'district' => 'Quận Tân Bình',
             'city' => 'Thành phố Hồ Chí Minh',
-            'phone_number' => '0931395367'
+            'phone_number' => '0931395367',
+            'long' => '132',
+            'lat' => '213'
         ]);
 
         $store = Store::create([
@@ -73,7 +79,9 @@ class StoreSeeder extends Seeder
             'ward' => 'Phường 15',
             'district' => 'Quận 11',
             'city' => 'Thành phố Hồ Chí Minh',
-            'phone_number' => '0931395369'
+            'phone_number' => '0931395369',
+            'long' => '132',
+            'lat' => '213'
         ]);
     }
 }

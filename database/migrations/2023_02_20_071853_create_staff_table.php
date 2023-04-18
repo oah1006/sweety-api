@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique()->nullable();
             $table->string('full_name');
+            $table->string('address');
+            $table->string('phone_number');
             $table->boolean('is_active')->default(true);
             $table->enum('role', ['administrator', 'manager', 'employee', 'shipper'])->default('employee');
             $table->foreignId('store_id')->nullable()->constrained()->nullOnDelete();

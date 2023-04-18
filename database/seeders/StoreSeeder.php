@@ -22,11 +22,11 @@ class StoreSeeder extends Seeder
         ]);
 
         $store->address()->create([
-            'house_number' => '101',
+            'street_number' => '101',
             'street' => 'Tôn Dật Tiên',
-            'ward' => 'Phường Tân Phú',
-            'district' => 'Quận 7',
-            'city' => 'Thành phố Hồ Chí Minh',
+            'ward_code' => 26851,
+            'district_code' => 769,
+            'province_code' => 79,
             'phone_number' => '0931395365',
             'long' => '132',
             'lat' => '213'
@@ -39,11 +39,11 @@ class StoreSeeder extends Seeder
         ]);
 
         $store->address()->create([
-            'house_number' => '159',
+            'street_number' => '159',
             'street' => 'Nguyễn Đức Cảnh',
-            'ward' => 'Tân Phong',
-            'district' => 'Quận 7',
-            'city' => 'Thành phố Hồ Chí Minh',
+            'ward_code' => 26848,
+            'district_code' => 769,
+            'province_code' => 79,
             'phone_number' => '0931395366',
             'long' => '132',
             'lat' => '213'
@@ -57,11 +57,11 @@ class StoreSeeder extends Seeder
         ]);
 
         $store->address()->create([
-            'house_number' => '17',
+            'street_number' => '17',
             'street' => 'Út tịch',
-            'ward' => 'Phường Bình Hưng Hòa',
-            'district' => 'Quận Tân Bình',
-            'city' => 'Thành phố Hồ Chí Minh',
+            'ward_code' => 26845,
+            'district_code' => 769,
+            'province_code' => 79,
             'phone_number' => '0931395367',
             'long' => '132',
             'lat' => '213'
@@ -74,11 +74,11 @@ class StoreSeeder extends Seeder
         ]);
 
         $store->address()->create([
-            'house_number' => '64A',
-            'street' => 'Lữ Gia',
-            'ward' => 'Phường 15',
-            'district' => 'Quận 11',
-            'city' => 'Thành phố Hồ Chí Minh',
+            'street_number' => '102',
+            'street' => 'Hồ Bá Phấn',
+            'ward_code' => 26851,
+            'district_code' => 769,
+            'province_code' => 79,
             'phone_number' => '0931395369',
             'long' => '132',
             'lat' => '213'

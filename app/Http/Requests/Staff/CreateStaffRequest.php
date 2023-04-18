@@ -27,17 +27,13 @@ class CreateStaffRequest extends FormRequest
         return [
             'email' => ['required', 'email:rfc,dns', 'string', 'unique:users,email'],
             'password' => ['required', 'string', 'min:6'],
-            'full_name' => ['string', 'required'],
+            'full_name' => ['required', 'string'],
+            'address' => ['required', 'string'],
+            'phone_number' => ['required', 'string', new PhoneNumber, 'unique:staff,phone_number'],
             'is_active' => ['nullable', 'boolean'],
             'role' => ['required', 'in:administrator,manager,employee,shipper'],
             'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png'],
             'store_id' => ['required', 'exists:stores,id'],
-            'house_number' => ['required', 'string'],
-            'street' => ['required', 'string'],
-            'ward' => ['required', 'string'],
-            'district' => ['required', 'string'],
-            'city' => ['required', 'string'],
-            'phone_number' => ['string', new PhoneNumber, 'unique:addresses,phone_number', 'required'],
         ];
     }
 }

@@ -23,6 +23,10 @@ class Address extends Model
         'lat'
     ];
 
+    protected $with = [
+        'province'
+    ];
+
     public function customer() {
         return $this->belongsTo(Customer::class);
     }
@@ -37,5 +41,9 @@ class Address extends Model
 
     public function order() {
         return $this->hasMany(Order::class, 'address_id');
+    }
+
+    public function province() {
+        return $this->belongsTo(Province::class);
     }
 }

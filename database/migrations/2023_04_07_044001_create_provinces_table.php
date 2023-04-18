@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('districts', function (Blueprint $table) {
-            $table->string('code')->unique();
+        Schema::create('provinces', function (Blueprint $table) {
+            $table->unsignedBigInteger('code')->unique();
             $table->string('name');
             $table->string('name_en')->nullable();
-            $table->string('full_name')->nullable();
+            $table->string('full_name');
             $table->string('full_name_en')->nullable();
             $table->string('code_name')->nullable();
-            $table->string('province_code');
-            $table->foreign('province_code')->references('code')->on('provinces');
+            $table->foreignId('administrative_region_id')->nullable()->constrained('administrative_regions');
             $table->foreignId('administrative_unit_id')->nullable()->constrained('administrative_units');
+
             $table->fullText(['name', 'full_name']);
             $table->timestamps();
         });
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('districts');
+        Schema::dropIfExists('provinces');
     }
 };

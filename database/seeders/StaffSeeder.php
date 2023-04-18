@@ -17,6 +17,8 @@ class StaffSeeder extends Seeder
     {
         $staff = Staff::create([
             'full_name' => 'Bùi Nhật Hào',
+            'address' => '78/17A Hồ Bá Phấn, Phước Long A, quận 9, Thành phố Hồ Chí Minh',
+            'phone_number' => '0931395321',
             'is_active' => '1',
             'role' => 'administrator',
             'store_id' => '1'
@@ -27,19 +29,10 @@ class StaffSeeder extends Seeder
             'password' => '123456',
         ]);
 
-        $staff->address()->create([
-            'house_number' => '78/17A',
-            'street' => 'Hồ Bá Phấn',
-            'ward' => 'Phước Long A',
-            'district' => 'Quận 9',
-            'city' => 'Thành phố Hồ Chí Minh',
-            'phone_number' => '0931395361',
-            'long' => '132',
-            'lat' => '213'
-        ]);
-
         $staff = Staff::create([
             'full_name' => 'Lê Chí Huy',
+            'address' => '161 Hồ Bá Phấn, Phước Long A, quận 9, Thành phố Hồ Chí Minh',
+            'phone_number' => '0931395322',
             'is_active' => '1',
             'role' => 'Manager',
             'store_id' => '2'
@@ -50,19 +43,11 @@ class StaffSeeder extends Seeder
             'password' => '123456',
         ]);
 
-        $staff->address()->create([
-            'house_number' => '201',
-            'street' => 'Nơ Trang Long',
-            'ward' => 'Phường 7',
-            'district' => 'Quận Bình Thạnh',
-            'city' => 'Thành phố Hồ Chí Minh',
-            'phone_number' => '0931395362',
-            'long' => '132',
-            'lat' => '213'
-        ]);
 
         $staff = Staff::create([
             'full_name' => 'Ánh Hằng',
+            'address' => '222 Hồ Bá Phấn, Phước Long A, quận 9, Thành phố Hồ Chí Minh',
+            'phone_number' => '0931395323',
             'is_active' => '1',
             'role' => 'employee',
             'store_id' => '3'
@@ -73,19 +58,11 @@ class StaffSeeder extends Seeder
             'password' => '123456',
         ]);
 
-        $staff->address()->create([
-            'house_number' => '201',
-            'street' => 'Đường 15',
-            'ward' => 'Phường Bình An',
-            'district' => 'Thị xã Dĩ An',
-            'city' => 'Bình Dương',
-            'phone_number' => '0931395363',
-            'long' => '132',
-            'lat' => '213'
-        ]);
 
         $staff = Staff::create([
             'full_name' => 'Nguyễn Hoàng Tấn',
+            'address' => '721 Hồ Bá Phấn, Phước Long A, quận 9, Thành phố Hồ Chí Minh',
+            'phone_number' => '0931395324',
             'is_active' => '0',
             'role' => 'administrator',
             'store_id' => '4'
@@ -94,17 +71,6 @@ class StaffSeeder extends Seeder
         $staff->user()->create([
             'email' => 'nguyenhoangtan0101@gmail.com',
             'password' => '123456',
-        ]);
-
-        $staff->address()->create([
-            'house_number' => '102',
-            'street' => 'Tân Kỳ Tân Quý',
-            'ward' => 'Phường Bình Hưng Hòa',
-            'district' => 'Tân Phú',
-            'city' => 'Thành phố Hồ Chí Minh',
-            'phone_number' => '0931395364',
-            'long' => '132',
-            'lat' => '213'
         ]);
     }
 }

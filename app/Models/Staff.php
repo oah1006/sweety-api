@@ -11,6 +11,8 @@ class Staff extends Model
 
     protected $fillable = [
         'full_name',
+        'address',
+        'phone_number',
         'is_active',
         'role',
         'store_id'
@@ -30,10 +32,6 @@ class Staff extends Model
 
     public function attachment() {
         return $this->morphOne(Attachment::class, 'attachmentable');
-    }
-
-    public function address() {
-        return $this->hasOne(Address::class);
     }
 
     protected static function booted() {

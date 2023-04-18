@@ -76,8 +76,6 @@ class StaffController extends Controller
 
         $staff->user()->create($data);
 
-        $staff->address()->create($data);
-
         if ($request->hasFile('avatar')) {
             UploadAttachmentAction::run([$request->file('avatar')], $staff, AttachmentTypes::AVATARS);
         }
@@ -113,8 +111,6 @@ class StaffController extends Controller
 
         $staff->load('store');
 
-        $staff->load('address');
-
         return response()->json($staff);
     }
 
@@ -147,11 +143,6 @@ class StaffController extends Controller
         $staff->user()->update($request->safe()->only(
             (new User)->getFillable()
         ));
-
-        $staff->address()->update($request->safe()->only(
-            (new Address)->getFillable()
-        ));
-
 
         $staff = $staff->fresh();
 

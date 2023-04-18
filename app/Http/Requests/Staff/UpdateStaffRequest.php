@@ -32,12 +32,7 @@ class UpdateStaffRequest extends FormRequest
             'role' => ['nullable'],
             'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png'],
             'store_id' => ['nullable', 'exists:stores,id'],
-            'house_number' => ['nullable', 'string'],
-            'street' => ['nullable', 'string'],
-            'ward' => ['nullable', 'string'],
-            'district' => ['nullable', 'string'],
-            'city' => ['nullable', 'string'],
-            'phone_number' => ['nullable', new PhoneNumber, Rule::unique('addresses', 'phone_number')->ignore($this->staff->address->getKey())],
+            'phone_number' => ['nullable', new PhoneNumber, Rule::unique('staff', 'phone_number')->ignore($this->staff)],
         ];
     }
 }

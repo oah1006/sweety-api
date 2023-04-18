@@ -17,21 +17,21 @@ return new class extends Migration
             $table->id();
             $table->string('street_number');
             $table->string('street');
-            $table->string('ward_code');
-            $table->string('district_code');
-            $table->string('province_code');
+            $table->unsignedBigInteger('ward_code');
+            $table->unsignedBigInteger('district_code');
+            $table->unsignedBigInteger('province_code');
+            $table->foreign('province_code')->references('code')->on('provinces');
+            $table->foreign('district_code')->references('code')->on('districts');
+            $table->foreign('ward_code')->references('code')->on('wards');
             $table->string('long');
             $table->string('lat');
             $table->string('name')->nullable();
             $table->string('phone_number')->nullable();
             $table->boolean('is_default')->default(1);
             $table->foreignId('customer_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('staff_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('store_id')->nullable()->constrained()->nullOnDelete();
             $table->fullText(['name']);
-            $table->foreign('province_code')->references('code')->on('provinces');
-            $table->foreign('district_code')->references('code')->on('districts');
-            $table->foreign('ward_code')->references('code')->on('wards');
+
             $table->timestamps();
         });
     }

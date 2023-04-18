@@ -15,6 +15,10 @@ class Store extends Model
         'close_store'
     ];
 
+    protected $with = [
+        'address'
+    ];
+
     public function staff() {
         return $this->hasMany(Staff::class);
     }

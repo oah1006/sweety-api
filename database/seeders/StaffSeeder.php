@@ -19,7 +19,7 @@ class StaffSeeder extends Seeder
             'full_name' => 'Bùi Nhật Hào',
             'is_active' => '1',
             'role' => 'administrator',
-            'store_id' => '3'
+            'store_id' => '1'
         ]);
 
         $staff->user()->create([
@@ -42,7 +42,7 @@ class StaffSeeder extends Seeder
             'full_name' => 'Lê Chí Huy',
             'is_active' => '1',
             'role' => 'Manager',
-            'store_id' => '4'
+            'store_id' => '2'
         ]);
 
         $staff->user()->create([
@@ -65,7 +65,7 @@ class StaffSeeder extends Seeder
             'full_name' => 'Ánh Hằng',
             'is_active' => '1',
             'role' => 'employee',
-            'store_id' => '5'
+            'store_id' => '3'
         ]);
 
         $staff->user()->create([
@@ -88,7 +88,7 @@ class StaffSeeder extends Seeder
             'full_name' => 'Nguyễn Hoàng Tấn',
             'is_active' => '0',
             'role' => 'administrator',
-            'store_id' => '6'
+            'store_id' => '4'
         ]);
 
         $staff->user()->create([

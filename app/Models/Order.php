@@ -71,9 +71,7 @@ class Order extends Model
         }
     }
 
-    public function calculateShippingFee() {
-        $store = Store::where('id', $this->store_id)->first();
-
+    public function calculationRoute() {
 
     }
 
@@ -84,5 +82,6 @@ class Order extends Model
             } while ($order->where('code', $order->code)->exists());
         });
     }
+
 
 }

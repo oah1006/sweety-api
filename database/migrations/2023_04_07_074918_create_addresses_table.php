@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->string('house_number');
+            $table->string('street_number');
             $table->string('street');
-            $table->string('ward');
-            $table->string('district');
-            $table->string('city');
+            $table->string('ward_code');
+            $table->string('district_code');
+            $table->string('province_code');
             $table->string('long');
             $table->string('lat');
             $table->string('name')->nullable();
@@ -29,6 +29,9 @@ return new class extends Migration
             $table->foreignId('staff_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('store_id')->nullable()->constrained()->nullOnDelete();
             $table->fullText(['name']);
+            $table->foreign('province_code')->references('code')->on('provinces');
+            $table->foreign('district_code')->references('code')->on('districts');
+            $table->foreign('ward_code')->references('code')->on('wards');
             $table->timestamps();
         });
     }

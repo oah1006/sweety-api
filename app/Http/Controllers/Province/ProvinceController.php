@@ -11,13 +11,7 @@ use Illuminate\Http\Request;
 class ProvinceController extends Controller
 {
     public function index(Request $request) {
-        $province = Province::query();
-
-        $keywords = $request->keywords;
-
-        $province = $province->when($keywords, fn (Builder $query)
-        => $query->whereFullText(['name', 'full_name'], $keywords))->get();
-
+        $province = Province::all();
 
         return response()->json([
             'data' => $province

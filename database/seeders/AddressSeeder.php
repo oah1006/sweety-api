@@ -17,7 +17,7 @@ class AddressSeeder extends Seeder
     {
         $customer->address()->create([
             'name' => 'Ánh Hằng',
-            'house_number' => '190',
+            'street_number' => '190',
             'street' => 'Phan Văn Trị',
             'ward' => 'Phường 11',
             'district' => 'Quận Bình Thạnh',
@@ -29,7 +29,7 @@ class AddressSeeder extends Seeder
 
         $customer->address()->create([
             'name' => 'Thanh Thảo',
-            'house_number' => '270',
+            'street_number' => '270',
             'street' => 'Bùi Hữu Nghĩa',
             'ward' => 'Phường 2',
             'district' => 'Quận Bình Thạnh',

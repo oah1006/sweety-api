@@ -32,7 +32,7 @@ return [
         'string' => 'The :attribute must be between :min and :max characters.',
     ],
     'boolean' => 'The :attribute field must be true or false.',
-    'confirmed' => 'The :attribute confirmation does not match.',
+    'confirmed' => ':attribute không trùng khớp.',
     'current_password' => 'The password is incorrect.',
     'date' => 'The :attribute is not a valid date.',
     'date_equals' => 'The :attribute must be a date equal to :date.',
@@ -50,7 +50,7 @@ return [
     'email' => 'Địa chỉ :attribute không đúng định dạng!',
     'ends_with' => 'The :attribute must end with one of the following: :values.',
     'enum' => 'The selected :attribute is invalid.',
-    'exists' => 'The selected :attribute is invalid.',
+    'exists' => ' :attribute của bạn chưa được đăng ký trong hệ thống.',
     'file' => 'The :attribute must be a file.',
     'filled' => 'The :attribute field must have a value.',
     'gt' => [
@@ -182,6 +182,9 @@ return [
     'attributes' => [
         'email' => 'Email',
         'password' => 'Password',
+        'gender' => 'Giới tính',
+        'full_name' => 'Họ và tên',
+        'new_password' => 'Mật khẩu mới',
     ],
 
 ];

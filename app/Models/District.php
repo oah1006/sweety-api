@@ -10,6 +10,7 @@ class District extends Model
     use HasFactory;
 
     protected $fillable = [
+        'code',
         'name',
         'name_en',
         'full_name',
@@ -18,6 +19,8 @@ class District extends Model
         'province_code',
         'administrative_unit_id'
     ];
+
+    protected $primaryKey = 'code';
 
     public function province() {
         $this->belongsTo(Province::class, 'code');

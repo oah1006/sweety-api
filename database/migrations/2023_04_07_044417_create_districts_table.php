@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('districts', function (Blueprint $table) {
-            $table->unsignedBigInteger('code')->unique();
+            $table->unsignedBigInteger('code')->unique()->primary();
             $table->string('name');
             $table->string('name_en')->nullable();
             $table->string('full_name')->nullable();

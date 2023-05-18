@@ -24,7 +24,9 @@ class Address extends Model
     ];
 
     protected $with = [
-        'province'
+        'province',
+        'district',
+        'ward'
     ];
 
     public function customer() {
@@ -45,5 +47,19 @@ class Address extends Model
 
     public function province() {
         return $this->belongsTo(Province::class);
+    }
+
+    public function district() {
+        return $this->belongsTo(District::class);
+    }
+
+    public function ward() {
+        return $this->belongsTo(Ward::class);
+    }
+
+    protected static function booted() {
+        static::creating(function (Address $address) {
+            $address->is_default = 1;
+        });
     }
 }

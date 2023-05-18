@@ -16,25 +16,29 @@ class CustomerSeeder extends Seeder
     public function run()
     {
         $customer = Customer::create([
-            'full_name' => 'Thiên Quỳnh'
+            'full_name' => 'Nhật Hào',
+            'gender' => '0',
         ]);
 
         $customer->user()->create([
-            'email' => 'thienquynh106@gmail.com',
+            'email' => 'bnhao10062001@gmail.com',
             'password' => '123456',
         ]);
 
         $customer->address()->create([
-            'house_number' => '156',
-            'street' => 'Phan Văn Trị',
-            'ward' => 'Phường 11',
-            'district' => 'Quận Bình Thạnh',
-            'city' => 'Thành phố Hồ Chí Minh',
-            'phone_number' => '0931395315'
+            'street_number' => '102',
+            'street' => 'Hồ Bá Phấn',
+            'ward_code' => 26851,
+            'district_code' => 769,
+            'province_code' => 79,
+            'phone_number' => '0931315369',
+            'long' => '132',
+            'lat' => '213',
         ]);
 
         $customer = Customer::create([
-            'full_name' => 'Ngọc Linh'
+            'full_name' => 'Ngọc Linh',
+            'gender' => '0',
         ]);
 
         $customer->user()->create([
@@ -43,16 +47,19 @@ class CustomerSeeder extends Seeder
         ]);
 
         $customer->address()->create([
-            'house_number' => '156',
-            'street' => 'Hồ Tùng Mậu',
-            'ward' => 'Phường Bến Nghé',
-            'district' => 'Quận 1',
-            'city' => 'Thành phố Hồ Chí Minh',
-            'phone_number' => '0931396325'
+            'street_number' => '102',
+            'street' => 'Hồ Bá Phấn',
+            'ward_code' => 26851,
+            'district_code' => 769,
+            'province_code' => 79,
+            'phone_number' => '0932395369',
+            'long' => '132',
+            'lat' => '213'
         ]);
 
         $customer = Customer::create([
-            'full_name' => 'Nhật An'
+            'full_name' => 'Nhật An',
+            'gender' => '0',
         ]);
 
         $customer->user()->create([
@@ -61,16 +68,19 @@ class CustomerSeeder extends Seeder
         ]);
 
         $customer->address()->create([
-            'house_number' => '156',
-            'street' => 'Hồ Tùng Mậu',
-            'ward' => 'Phường Bến Nghé',
-            'district' => 'Quận 1',
-            'city' => 'Thành phố Hồ Chí Minh',
-            'phone_number' => '0931395325'
+            'street_number' => '102',
+            'street' => 'Hồ Bá Phấn',
+            'ward_code' => 26851,
+            'district_code' => 769,
+            'province_code' => 79,
+            'phone_number' => '0931345369',
+            'long' => '132',
+            'lat' => '213'
         ]);
 
         $customer = Customer::create([
-            'full_name' => 'Phương Tú'
+            'full_name' => 'Phương Tú',
+            'gender' => '0',
         ]);
 
         $customer->user()->create([
@@ -79,12 +89,14 @@ class CustomerSeeder extends Seeder
         ]);
 
         $customer->address()->create([
-            'house_number' => '257',
-            'street' => 'Đồng Khởi',
-            'ward' => 'Phường Tân Hiệp',
-            'district' => 'Biên Hòa',
-            'city' => 'Đồng Nai',
-            'phone_number' => '0931395335'
+            'street_number' => '102',
+            'street' => 'Hồ Bá Phấn',
+            'ward_code' => 26851,
+            'district_code' => 769,
+            'province_code' => 79,
+            'phone_number' => '0931595369',
+            'long' => '132',
+            'lat' => '213'
         ]);
     }
 }

@@ -20,6 +20,8 @@ class Province extends Model
         'administrative_unit_id'
     ];
 
+    protected $primaryKey = 'code';
+
     public function district() {
         return $this->hasMany(District::class);
     }

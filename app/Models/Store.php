@@ -15,6 +15,11 @@ class Store extends Model
         'close_store'
     ];
 
+    protected $casts = [
+        'open_store' => 'datetime:H:i',
+        'close_store' => 'datetime:H:i',
+    ];
+
     protected $with = [
         'address'
     ];

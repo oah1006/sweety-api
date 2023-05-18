@@ -17,8 +17,8 @@ class OrderSeeder extends Seeder
     {
         $order = Order::create([
             "coupon_id" => 1,
-            "address_id" => 1,
-            "customer_id" => 1,
+            "address_id" => 6,
+            "customer_id" => 4,
             "status" => "pending",
         ]);
 
@@ -46,8 +46,8 @@ class OrderSeeder extends Seeder
 
         $order = $order->create([
             "coupon_id" => 1,
-            "address_id" => 1,
-            "customer_id" => 2,
+            "address_id" => 5,
+            "customer_id" => 4,
             "status" => "succeed",
         ]);
 

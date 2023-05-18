@@ -25,7 +25,7 @@ class StaffSeeder extends Seeder
         ]);
 
         $staff->user()->create([
-            'email' => 'bnhao10062001@gmail.com',
+            'email' => 'bnhao100620011  @gmail.com',
             'password' => '123456',
         ]);
 

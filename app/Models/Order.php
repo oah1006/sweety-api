@@ -24,12 +24,18 @@ class Order extends Model
     ];
 
     protected $casts = [
-        'created_at' => 'datetime:d-m-Y',
+        'created_at' => 'datetime:d-m-Y h:m',
         'updated_at' => 'datetime:d-m-Y',
     ];
 
+    protected $with = ['items'];
+
     public function items() {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function orderTrackings() {
+        return $this->hasMany(OrderTracking::class);
     }
 
     public function address() {
@@ -71,14 +77,10 @@ class Order extends Model
         }
     }
 
-    public function calculationRoute() {
-
-    }
-
     protected static function booted() {
         static::creating(function (Order $order) {
             do {
-                $order->code = 'OD' . fake()->randomNumber(5, false);
+                $order->code = 'ODR' . fake()->randomNumber(5, false);
             } while ($order->where('code', $order->code)->exists());
         });
     }

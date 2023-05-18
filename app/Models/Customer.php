@@ -11,14 +11,18 @@ class Customer extends Model
 
     protected $fillable = [
         'full_name',
+        'gender',
+        'points'
     ];
+
+    protected $with = ['address', 'order'];
 
     public function user() {
         return $this->morphOne(User::class, 'profile');
     }
 
     public function order() {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class, 'customer_id');
     }
 
 

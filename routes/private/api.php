@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\Order\OrderController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Staff\StaffController;
 use App\Http\Controllers\Admin\Store\StoreController;
+use App\Http\Controllers\Admin\Topping\ToppingController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -56,6 +57,7 @@ Route::prefix('private')->name('private.')->group(function() {
         Route::apiResource('products', ProductController::class);
         Route::apiResource('coupons', CouponController::class);
         Route::apiResource('orders', OrderController::class);
+        Route::apiResource('toppings', ToppingController::class);
         Route::apiResource('delivery-addresses', DeliveryAddressController::class);
 
         Route::put('/orders/update-status-accepted/{order}', [OrderController::class, 'updateStatusAccepted'])->name('update-accepted-status');

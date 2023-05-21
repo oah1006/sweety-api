@@ -64,7 +64,7 @@ class Order extends Model
 
     public function calculateSubTotal() {
         $this->sub_total = $this->items->sum(function ($items) {
-            return $items['unit_price'] * $items['quantity'];
+            return $items['unit_price'] * $items['qty'];
         });
     }
 

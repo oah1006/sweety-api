@@ -61,6 +61,7 @@ class ToppingController extends Controller
 
         $topping = Topping::create($data);
 
+
         return response()->json([
             'topping' => $topping
         ]);
@@ -72,9 +73,11 @@ class ToppingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Topping $topping)
     {
-        //
+        return response()->json([
+            'data' => $topping
+        ]);
     }
 
     /**

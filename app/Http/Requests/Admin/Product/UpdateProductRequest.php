@@ -31,6 +31,10 @@ class UpdateProductRequest extends FormRequest
             'price' => ['nullable', 'numeric'],
             'category_id' => ['nullable', 'exists:categories,id'],
             'published' => ['nullable', 'boolean'],
+            'toppings' => ['nullable', 'array'],
+            'topping.*' => ['array:product_id,topping_id'],
+            'variants' => ['nullable', 'array'],
+            'variant.*' => ['array:size,unit_price']
         ];
     }
 }

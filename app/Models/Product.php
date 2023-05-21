@@ -35,4 +35,12 @@ class Product extends Model
     public function attachment() {
         return $this->morphMany(Attachment::class, 'attachmentable');
     }
+
+    public function productToppings() {
+        return $this->hasMany(ProductTopping::class);
+    }
+
+    public function productVariants() {
+        return $this->hasMany(ProductVariant::class);
+    }
 }

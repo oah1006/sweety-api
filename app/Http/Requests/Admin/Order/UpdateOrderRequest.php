@@ -31,7 +31,7 @@ class UpdateOrderRequest extends FormRequest
             'sub_total' => ['nullable', 'numeric'],
             'status' => ['nullable', 'in:pending,succeed,delivering,canceled,failed'],
             'products' => ['nullable', 'array'],
-            'product.*' => ['array:product_id,quantity'],
+            'product.*' => ['array:product_id,qty'],
             'product.*.id' => ['required', 'exists:order_items,id']
         ];
     }

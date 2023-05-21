@@ -25,11 +25,11 @@ class OrderSeeder extends Seeder
         $dataOne = [
             [
                 "product_id" => 1,
-                "quantity" => 15,
+                "qty" => 15,
             ],
             [
                 "product_id" => 2,
-                "quantity" => 30,
+                "qty" => 30,
             ]
         ];
 
@@ -54,11 +54,11 @@ class OrderSeeder extends Seeder
         $dataTwo = [
             [
                 "product_id" => 1,
-                "quantity" => 25,
+                "qty" => 25,
             ],
             [
                 "product_id" => 2,
-                "quantity" => 30,
+                "qty" => 30,
             ]
         ];
 

@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Topping extends Model
+class CartItemOption extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'published',
-        'price',
+        'cart_item_id',
+        'topping_id',
+        'qty',
+        'unit_price'
     ];
-
-    public function productToppings() {
-        return $this->hasMany(ProductTopping::class);
-    }
 }

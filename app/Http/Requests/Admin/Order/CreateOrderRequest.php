@@ -32,7 +32,7 @@ class CreateOrderRequest extends FormRequest
             'sub_total' => ['required', 'numeric'],
             'status' => ['required', 'in:pending,canceled,accepted,preparing,prepared,delivering,succeed,failed'],
             'products' => [ 'required', 'array'],
-            'product.*' => ['array:product_id,quantity']
+            'product.*' => ['array:product_id,qty']
         ];
     }
 }

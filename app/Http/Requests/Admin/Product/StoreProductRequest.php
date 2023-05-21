@@ -32,7 +32,9 @@ class StoreProductRequest extends FormRequest
             'published' => ['required', 'boolean'],
             'thumbnail' => ['nullable', 'file', 'mimes:jpg,jpeg,png'],
             'detail_products' => ['nullable', 'array'],
-            'detail_products.*' => ['file', 'mimes:jpg,jpeg,png']
+            'detail_products.*' => ['file', 'mimes:jpg,jpeg,png'],
+            'toppings' => ['nullable', 'array'],
+            'topping.*' => ['array:product_id,topping_id']
         ];
     }
 }

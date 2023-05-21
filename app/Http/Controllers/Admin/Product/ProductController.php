@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Product\StoreProductRequest;
 use App\Http\Requests\Admin\Product\UpdateProductRequest;
 use App\Models\Product;
+use App\Models\Topping;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
@@ -71,6 +72,13 @@ class ProductController extends Controller
 
         $product = Product::create($data);
 
+        foreach($data['toppings'] as $item) {
+            $product->productToppings()->create([
+                'product_id' => $product->id,
+                'topping_id' => $item,
+            ]);
+        }
+
         if ($request->hasFile('thumbnail')) {
             UploadAttachmentAction::run([$request->file('thumbnail')], $product, AttachmentTypes::THUMBNAILS);
         }
@@ -95,9 +103,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product->load('attachment');
-
-        $product->load('category');
+        $product->load(['attachment', 'category', 'productToppings']);
 
         return response()->json([
             'data' => $product
@@ -129,6 +135,23 @@ class ProductController extends Controller
         $data = $request->validated();
 
         $product->update($data);
+
+        $product->productToppings()->delete();
+
+        foreach($data['toppings'] as $item) {
+            $product->productToppings()->create([
+                'product_id' => $product->id,
+                'topping_id' => $item,
+            ]);
+        }
+
+
+        foreach($data['variants'] as $item) {
+            $product->productVariants()->create([
+                'size' => $item['size'],
+                'unit_price' => $item['unit_price']
+            ]);
+        }
 
         return response()->json([
             'data' => $data

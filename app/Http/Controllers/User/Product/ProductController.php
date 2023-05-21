@@ -16,7 +16,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::where('is_deleted', 0)->with('category');
+        $products = Product::where('is_deleted', 0)->with(['category', 'productToppings']);
 
         $keywords = $request->keywords;
 

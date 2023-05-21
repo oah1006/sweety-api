@@ -15,10 +15,8 @@ return new class extends Migration
     {
         Schema::create('product_toppings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('product_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('topping_id')->nullable()->constrained()->nullOnDelete();
-            $table->unsignedBigInteger('unit_price');
             $table->timestamps();
         });
     }

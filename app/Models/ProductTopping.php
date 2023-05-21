@@ -10,8 +10,17 @@ class ProductTopping extends Model
     use HasFactory;
 
     protected $fillable = [
-        'order_id',
+        'topping_id',
         'product_id',
-        'unit_price'
     ];
+
+    protected $with = ['topping', 'product'];
+
+    public function topping() {
+        return $this->belongsTo(Topping::class);
+    }
+
+    public function product() {
+        return $this->belongsTo(Product::class);
+    }
 }

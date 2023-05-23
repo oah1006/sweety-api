@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\Customer\CustomerController;
 use App\Http\Controllers\Admin\DeliveryAddress\DeliveryAddressController;
 use App\Http\Controllers\Admin\Order\OrderController;
 use App\Http\Controllers\Admin\Product\ProductController;
+use App\Http\Controllers\Admin\ProductVariant\ProductVariantController;
 use App\Http\Controllers\Admin\Staff\StaffController;
 use App\Http\Controllers\Admin\Store\StoreController;
 use App\Http\Controllers\Admin\Topping\ToppingController;
@@ -58,6 +59,7 @@ Route::prefix('private')->name('private.')->group(function() {
         Route::apiResource('coupons', CouponController::class);
         Route::apiResource('orders', OrderController::class);
         Route::apiResource('toppings', ToppingController::class);
+        Route::apiResource('productVariants', ProductVariantController::class);
         Route::apiResource('delivery-addresses', DeliveryAddressController::class);
 
         Route::put('/orders/update-status-accepted/{order}', [OrderController::class, 'updateStatusAccepted'])->name('update-accepted-status');

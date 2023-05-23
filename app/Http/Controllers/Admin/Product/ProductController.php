@@ -103,7 +103,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product->load(['attachment', 'category', 'productToppings']);
+        $product->load(['attachment', 'category', 'productToppings', 'productVariants']);
 
         return response()->json([
             'data' => $product
@@ -145,6 +145,7 @@ class ProductController extends Controller
             ]);
         }
 
+        $product->productVariants()->delete();
 
         foreach($data['variants'] as $item) {
             $product->productVariants()->create([

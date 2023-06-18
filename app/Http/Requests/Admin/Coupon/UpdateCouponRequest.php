@@ -33,6 +33,7 @@ class UpdateCouponRequest extends FormRequest
             'status' => ['nullable', 'in:active,expired,deactivate'],
             'started_at' => ['nullable', 'date'],
             'expired_at' => ['nullable', 'date'],
+            'points' => ['nullable', 'integer'],
         ];
     }
 }

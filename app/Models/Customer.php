@@ -25,6 +25,13 @@ class Customer extends Model
         return $this->hasMany(Order::class, 'customer_id');
     }
 
+    public function cart() {
+        return $this->hasOne(Cart::class);
+    }
+
+    public function couponCustomers() {
+        return $this->hasMany(CouponCustomer::class);
+    }
 
     protected static function booted() {
         static::deleted(function (Customer $customer) {

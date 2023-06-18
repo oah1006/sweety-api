@@ -35,6 +35,8 @@ class CreateStoreRequest extends FormRequest
             'province_code' => ['required', 'exists:provinces,code'],
             'long' => ['required', 'numeric'],
             'lat' => ['required', 'numeric'],
+            'detail_stores' => ['nullable', 'array'],
+            'detail_stores.*' => ['file', 'mimes:jpg,jpeg,png'],
             'phone_number' => ['nullable', 'string', new PhoneNumber, 'unique:addresses,phone_number'],
         ];
     }

@@ -25,7 +25,7 @@ class StaffSeeder extends Seeder
         ]);
 
         $staff->user()->create([
-            'email' => 'bnhao100620011  @gmail.com',
+            'email' => 'bnhao100620011@gmail.com',
             'password' => '123456',
         ]);
 
@@ -34,7 +34,7 @@ class StaffSeeder extends Seeder
             'address' => '161 Hồ Bá Phấn, Phước Long A, quận 9, Thành phố Hồ Chí Minh',
             'phone_number' => '0931395322',
             'is_active' => '1',
-            'role' => 'Manager',
+            'role' => 'administrator',
             'store_id' => '2'
         ]);
 

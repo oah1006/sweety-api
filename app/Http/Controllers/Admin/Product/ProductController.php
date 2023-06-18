@@ -41,7 +41,7 @@ class ProductController extends Controller
 
         }
 
-        $products = $products->paginate(4);
+        $products = $products->paginate(5);
 
         return response()->json([
             'data' => $products
@@ -175,4 +175,6 @@ class ProductController extends Controller
 
         return response()->noContent();
     }
+
+
 }

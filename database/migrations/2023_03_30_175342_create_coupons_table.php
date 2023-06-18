@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('stock')->default(0)->index();
             $table->unsignedBigInteger('is_percent_value');
             $table->unsignedBigInteger('min_order_total');
+            $table->unsignedBigInteger('points')->default(0);
             $table->enum('status', ['active', 'expired', 'deactivate'])->default('active');
             $table->date('started_at');
             $table->date('expired_at');

@@ -10,6 +10,8 @@ enum AttachmentTypes : string
     case THUMBNAILS = 'thumbnails';
 
     case DETAILPRODUCTS = 'detail_products';
+
+    case DETAILSTORES = 'detail_stores';
 }
 
 ?>

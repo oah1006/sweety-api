@@ -13,6 +13,15 @@ class CartItemOption extends Model
         'cart_item_id',
         'topping_id',
         'qty',
-        'unit_price'
     ];
+
+    protected $with = ['topping'];
+
+    public function cartItem() {
+        return $this->belongsTo(CartItem::class);
+    }
+
+    public function topping() {
+        return $this->belongsTo(Topping::class);
+    }
 }

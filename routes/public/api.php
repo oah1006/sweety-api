@@ -4,6 +4,8 @@ use App\Http\Controllers\User\Auth\ChangePasswordController;
 use App\Http\Controllers\User\Auth\ForgotPasswordController;
 use App\Http\Controllers\User\Auth\Otp\SendOtpController;
 use App\Http\Controllers\User\Auth\Otp\VerifyOtpController;
+use App\Http\Controllers\User\Cart\CartController;
+use App\Http\Controllers\User\Cart\CartItemController;
 use App\Http\Controllers\User\Category\CategoryController;
 use App\Http\Controllers\User\Coupon\CouponController;
 use App\Http\Controllers\User\DeliveryAddress\DeliveryAddressController;
@@ -15,6 +17,8 @@ use App\Http\Controllers\User\Province\DistrictController;
 use App\Http\Controllers\User\Province\ProvinceController;
 use App\Http\Controllers\User\Province\WardController;
 
+use App\Http\Controllers\User\Store\StoreController;
+use App\Http\Controllers\User\Topping\ToppingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -56,17 +60,34 @@ Route::prefix('public')->name('public.')->group(function() {
             ->name('update-profile')->middleware(['auth:sanctum', 'ensureCustomerIsValid']);
     });
 
+    Route::get('/products/index-best-seller/', [ProductController::class, 'indexBestSeller'])->name('index-best-seller');
+    Route::get('/products/index-related-product/{category}/{product}', [ProductController::class, 'indexRelatedProduct'])->name('index-related-product');
+
+    Route::apiResource('coupons', CouponController::class);
+    Route::apiResource('products', ProductController::class);
+    Route::apiResource('categories', CategoryController::class);
+    Route::apiResource('toppings', ToppingController::class);
+
+
+
     Route::middleware(['auth:sanctum', 'ensureCustomerIsValid'])->group(function() {
         Route::apiResource('orders', OrderController::class);
         Route::apiResource('delivery-addresses', DeliveryAddressController::class);
-        Route::apiResource('coupons', CouponController::class);
-        Route::apiResource('products', ProductController::class);
-        Route::apiResource('categories', CategoryController::class);
+        Route::apiResource('carts', CartController::class);
+        Route::apiResource('stores', StoreController::class);
+
+        Route::delete('/cart-items/{cartItem}', [CartItemController::class, 'minusQty'])->name('minusQty');
+        Route::put('/cart-items/{cartItem}', [CartItemController::class, 'addQty'])->name('addQty');
 
         Route::put('/delivery-addresses/change-is-default/{address}', [DeliveryAddressController::class, 'changeIsDefault'])->name('change-is-default');
+        Route::post('/delivery-address/choose-my-delivery-address/{address}', [DeliveryAddressController::class, 'chooseMyDeliveryAddressOrder'])->name('choose-my-delivery-address');
+
+        Route::post('/coupons/apply-coupon/{coupon}', [CouponController::class, 'applyCoupon']);
+        Route::post('/coupons/remove-coupon', [CouponController::class, 'removeCoupon']);
 
         Route::put('/orders/update-status-canceled/{order}', [OrderController::class, 'updateStatusCanceled'])
             ->name('update-canceled-status');
+
 
         Route::get('/provinces', [ProvinceController::class, 'index'])->name('index');
         Route::get('/districts/{provinceCode}', [DistrictController::class, 'index'])->name('index');

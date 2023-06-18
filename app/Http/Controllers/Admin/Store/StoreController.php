@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Store;
 
+use App\Actions\UploadAttachmentAction;
+use App\Enums\AttachmentTypes;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Store\CreateStoreRequest;
 use App\Http\Requests\Admin\Store\UpdateStoreRequest;
@@ -26,7 +28,7 @@ class StoreController extends Controller
         $stores->when($keywords, fn (Builder $query)
             => $query->whereFullText(['store_name', 'address'], $keywords));
 
-        $stores = $stores->paginate(4);
+        $stores = $stores->paginate(5);
 
         return response()->json([
             'data' => $stores
@@ -57,7 +59,14 @@ class StoreController extends Controller
 
         $store = Store::create($data);
 
+        if ($request->hasFile('detail_stores')) {
+            UploadAttachmentAction::run($request->file('detail_stores'), $store, AttachmentTypes::DETAILSTORES);
+        }
+
         $store->address()->create($data);
+
+        $store = $store->fresh();
+
 
         return response()->json([
             'data' => $store
@@ -101,8 +110,6 @@ class StoreController extends Controller
     {
         $this->authorize('update', $store);
 
-        $data = $request->validated();
-
         $store->update($request->safe()->only(
             (new Store)->getFillable()
         ));
@@ -110,6 +117,8 @@ class StoreController extends Controller
         $store->address()->update($request->safe()->only(
             (new Address)->getFillable()
         ));
+
+        $store = $store->fresh();
 
         return response()->json([
             'data' => $store

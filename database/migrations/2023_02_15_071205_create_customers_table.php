@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('full_name')->index();
             $table->enum('gender', [0, 1, 2])->index()->default(0);
             $table->fullText('full_name');
-            $table->unsignedBigInteger('points')->default(0);
             $table->timestamps();
         });
     }

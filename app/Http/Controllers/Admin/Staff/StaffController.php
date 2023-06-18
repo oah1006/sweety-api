@@ -43,6 +43,12 @@ class StaffController extends Controller
             $staff->where('is_active', $status);
         }
 
+        if ($request->filled('store_id')) {
+            $storeId = $request->store_id;
+
+            $staff->where('store_id', $storeId);
+        }
+
         $staff = $staff->paginate(5);
 
         return response()->json([

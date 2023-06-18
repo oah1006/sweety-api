@@ -13,11 +13,14 @@ class OrderItem extends Model
         'order_id',
         'product_id',
         'qty',
-        'unit_price'
+        'unit_price',
+        'product_variant_id'
     ];
 
     protected $with = [
-        'product'
+        'product',
+        'productVariant',
+        'orderItemOptions'
     ];
 
     protected static function booted() {
@@ -32,7 +35,15 @@ class OrderItem extends Model
         return $this->belongsTo(Order::class);
     }
 
+    public function ProductVariant() {
+        return $this->belongsTo(ProductVariant::class);
+    }
+
     public function product() {
         return $this->belongsTo(Product::class);
+    }
+
+    public function orderItemOptions() {
+        return $this->hasMany(OrderItemOptions::class);
     }
 }

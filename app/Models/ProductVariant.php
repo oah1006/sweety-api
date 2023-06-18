@@ -14,4 +14,13 @@ class ProductVariant extends Model
         'unit_price',
         'size'
     ];
+
+    public function product() {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function CartItems() {
+        return $this->hasMany(CartItem::class);
+    }
+
 }

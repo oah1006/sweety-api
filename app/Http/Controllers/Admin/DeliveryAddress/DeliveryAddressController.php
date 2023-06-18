@@ -8,6 +8,8 @@ use App\Http\Requests\Admin\DeliveryAddress\CreateAddressRequest;
 use App\Http\Requests\Admin\DeliveryAddress\UpdateAddressRequest;
 use App\Models\Address;
 use App\Models\Customer;
+use App\Models\District;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -63,6 +65,7 @@ class DeliveryAddressController extends Controller
             ]);
 
             $address = $customer->address()->create($data);
+
         } else {
             return response()->json([
                 'message' => 'Vượt quá địa chỉ giao hàng quy định'
@@ -159,7 +162,10 @@ class DeliveryAddressController extends Controller
         $district = $request->query('district');
         $province = $request->query('province');
 
-        $response = Http::get("https://api.tomtom.com/search/2/structuredGeocode.json?key=8G20bE5y7PQbBlAbMlAU6q6IEuKUhI33&streetNumber={$streetNumber}&streetName={$street}&municipalitySubdivision={$district}&countrySubdivision={$province}&countryCode=VN");
+        $nameDistrict = District::where('code', $district)->first()->full_name;
+        $nameProvince = Province::where('code', $province)->first()->full_name;
+
+        $response = Http::get("https://api.tomtom.com/search/2/structuredGeocode.json?key=8G20bE5y7PQbBlAbMlAU6q6IEuKUhI33&streetNumber={$streetNumber}&streetName={$street}&municipalitySubdivision={$nameDistrict}&countrySubdivision={$nameProvince}&countryCode=VN");
 
         return response()->json($response->json());
     }

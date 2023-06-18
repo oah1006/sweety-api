@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\User\Product;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -44,7 +47,7 @@ class ProductController extends Controller
 
         }
 
-        $products = $products->paginate(12);
+        $products = $products->paginate(6);
 
         return response()->json([
             'data' => $products
@@ -78,9 +81,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        //
+        $product->load(['attachment', 'category', 'productToppings', 'productVariants']);
+
+        return response()->json([
+            'data' => $product
+        ]);
     }
 
     /**
@@ -115,5 +122,33 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function indexBestSeller(Request $request) {
+        $bestSellingProducts = DB::table('order_items')
+            ->select('product_id', DB::raw('SUM(qty) as total_quantity'))
+            ->join('orders', 'order_items.order_id', '=', 'orders.id')
+            ->where('orders.status', 'succeed')
+            ->groupBy('product_id')
+            ->orderByDesc('total_quantity')
+            ->take(10)
+            ->get();
+
+        $productIds = $bestSellingProducts->pluck('product_id');
+
+        $products = Product::whereIn('id', $productIds)->get();
+
+        return response()->json([
+            'data' => $products
+        ]);
+    }
+
+    public function indexRelatedProduct(Request $request, Category $category, Product $product) {
+        $product = Product::where('category_id', $category->id)->whereNot('id', $product->id)->get();
+
+        return response()->json([
+            'data' => $product
+        ]);
     }
 }

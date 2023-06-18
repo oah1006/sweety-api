@@ -4,7 +4,9 @@ namespace App\Http\Controllers\User\Order;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Order\UpdateStatusCanceledOrderRequest;
+use App\Http\Requests\User\Order\CreateOrderRequest;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -55,7 +57,47 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = $request->user();
+
+        $cart = $user->profile->cart;
+
+        $order = Order::create([
+            'coupon_id' => $cart->coupon_id,
+            'address_id' => $cart->address_id,
+            'customer_id' => $user->profile->id,
+            'sub_total' => $cart->sub_total,
+            'total' => $cart->total,
+            'shipping_fee' => $cart->shipping_fee
+        ]);
+
+        $order->orderTrackings()->create([
+            'status' => 'pending'
+        ]);
+
+        foreach ($cart->cartItems as $itemCart) {
+            $orderItem = $order->items()->create([
+                'product_id' => $itemCart->product_id,
+                'product_variant_id' => $itemCart->product_variant_id,
+                'qty' => $itemCart->qty,
+                'unit_price' => $itemCart->productVariant->unit_price
+            ]);
+
+            foreach ($itemCart->cartItemOptions as $itemCartOption) {
+                $orderItem->orderItemOptions()->create([
+                    'topping_id' => $itemCartOption->topping_id,
+                    'qty' => $itemCartOption->qty,
+                    'price' => $itemCartOption->topping->price
+                ]);
+            }
+        }
+
+        $cart->delete();
+
+        return response()->json([
+            'data' => $order,
+            'order_items' => $orderItem,
+            'order_item_options' => $orderItem->orderItemOptions
+        ]);
     }
 
     /**
@@ -77,6 +119,8 @@ class OrderController extends Controller
         $order->load('items');
 
         $order->load('coupon');
+
+        $order->load('orderTrackings');
 
         return response()->json([
             'data' => $order

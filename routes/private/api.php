@@ -10,10 +10,14 @@ use App\Http\Controllers\admin\Auth\ProfileController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Coupon\CouponController;
 use App\Http\Controllers\Admin\Customer\CustomerController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DeliveryAddress\DeliveryAddressController;
 use App\Http\Controllers\Admin\Order\OrderController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\ProductVariant\ProductVariantController;
+use App\Http\Controllers\Admin\Province\DistrictController;
+use App\Http\Controllers\Admin\Province\ProvinceController;
+use App\Http\Controllers\Admin\Province\WardController;
 use App\Http\Controllers\Admin\Staff\StaffController;
 use App\Http\Controllers\Admin\Store\StoreController;
 use App\Http\Controllers\Admin\Topping\ToppingController;
@@ -62,6 +66,11 @@ Route::prefix('private')->name('private.')->group(function() {
         Route::apiResource('productVariants', ProductVariantController::class);
         Route::apiResource('delivery-addresses', DeliveryAddressController::class);
 
+        Route::get('/dashboard/best-seller-product', [DashboardController::class, 'indexBestSeller'])->name('index-best-seller');
+        Route::get('/dashboard/compare-revenue', [DashboardController::class, 'compareRevenue'])->name('compare-revenue');
+        Route::get('/dashboard/total-product', [DashboardController::class, 'totalProduct'])->name('total-product');
+        Route::get('/dashboard/total-order', [DashboardController::class, 'totalOrder'])->name('total-order');
+
         Route::put('/orders/update-status-accepted/{order}', [OrderController::class, 'updateStatusAccepted'])->name('update-accepted-status');
         Route::put('/orders/update-status-preparing/{order}', [OrderController::class, 'updateStatusPreparing'])->name('update-preparing-status');
         Route::put('/orders/update-status-prepared/{order}', [OrderController::class, 'updateStatusPrepared'])->name('update-prepared-status');
@@ -69,8 +78,12 @@ Route::prefix('private')->name('private.')->group(function() {
         Route::put('/orders/update-status-succeed/{order}', [OrderController::class, 'updateStatusSucceed'])->name('update-succeed-status');
         Route::put('/orders/update-status-failed/{order}', [OrderController::class, 'updateStatusFailed'])->name('update-failed-status');
 
+        Route::get('/provinces', [ProvinceController::class, 'index'])->name('index');
+        Route::get('/districts/{provinceCode}', [DistrictController::class, 'index'])->name('index');
+        Route::get('/wards/{districtCode}', [WardController::class, 'index'])->name('index');
 
         Route::get('/calculation-routes', [DeliveryAddressController::class, 'calculationRoute'])->name('calculation-routes');
+        Route::get('/get-coordinates/', [DeliveryAddressController::class, 'getCoordinates'])->name('get-coordinates');
 
         Route::post('/attachments/{attachmentable}/{attachmentableId}', [AttachmentController::class, 'store'])->name('store');
         Route::delete('/attachments/{attachment}', [AttachmentController::class, 'detach'])->name('detach');

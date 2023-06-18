@@ -10,6 +10,11 @@ class OrderTracking extends Model
     use HasFactory;
 
     protected $fillable = [
-        'status'
+        'status',
+        'order_id'
     ];
+
+    public function order() {
+        return $this->belongsTo(Order::class);
+    }
 }

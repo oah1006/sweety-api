@@ -28,8 +28,8 @@ class StoreSeeder extends Seeder
             'district_code' => 769,
             'province_code' => 79,
             'phone_number' => '0931395365',
-            'long' => '132',
-            'lat' => '213'
+            'long' => '106.64833',
+            'lat' => '103.85004'
         ]);
 
         $store = Store::create([
@@ -45,8 +45,8 @@ class StoreSeeder extends Seeder
             'district_code' => 769,
             'province_code' => 79,
             'phone_number' => '0931395366',
-            'long' => '132',
-            'lat' => '213'
+            'long' => '106.64833',
+            'lat' => '103.85004'
         ]);
 
 
@@ -63,8 +63,8 @@ class StoreSeeder extends Seeder
             'district_code' => 769,
             'province_code' => 79,
             'phone_number' => '0931395367',
-            'long' => '132',
-            'lat' => '213'
+            'long' => '106.64833',
+            'lat' => '103.85004'
         ]);
 
         $store = Store::create([
@@ -80,8 +80,8 @@ class StoreSeeder extends Seeder
             'district_code' => 769,
             'province_code' => 79,
             'phone_number' => '0931395369',
-            'long' => '132',
-            'lat' => '213'
+            'long' => '106.64833',
+            'lat' => '103.85004'
         ]);
     }
 }

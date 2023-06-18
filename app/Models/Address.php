@@ -19,8 +19,10 @@ class Address extends Model
         'phone_number',
         'is_default',
         'customer_id',
+        'store_id',
         'long',
-        'lat'
+        'lat',
+        'meta'
     ];
 
     protected $with = [

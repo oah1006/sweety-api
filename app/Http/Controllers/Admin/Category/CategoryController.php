@@ -27,7 +27,7 @@ class CategoryController extends Controller
                     => $query->whereFullText(['name', 'description'], $keywords));
 
 
-        $category = $category->paginate(4);
+        $category = $category->paginate(5);
 
         return response()->json([
             'data' => $category

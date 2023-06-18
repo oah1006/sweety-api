@@ -19,7 +19,8 @@ class Coupon extends Model
         'status',
         'started_at',
         'expired_at',
-        'is_deleted'
+        'is_deleted',
+        'points'
     ];
 
     protected $casts = [

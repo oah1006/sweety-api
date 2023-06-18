@@ -25,4 +25,8 @@ class District extends Model
     public function province() {
         $this->belongsTo(Province::class, 'code');
     }
+
+    public function address() {
+        return $this->hasMany(Address::class);
+    }
 }

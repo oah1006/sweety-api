@@ -186,6 +186,10 @@ class OrderController extends Controller
 
             $order->save();
 
+            $order->orderTrackings()->create([
+                'status' => 'accepted',
+            ]);
+
             return response()->json([
                 'data' => $order->status
             ]);
@@ -202,6 +206,10 @@ class OrderController extends Controller
 
             $order->save();
 
+            $order->orderTrackings()->create([
+                'status' => 'preparing',
+            ]);
+
             return response()->json([
                 'data' => $order->status
             ]);
@@ -215,8 +223,11 @@ class OrderController extends Controller
                 || auth()->user()->profile->role === 'manager')) {
 
             $order->status = 'prepared';
-
             $order->save();
+
+            $order->orderTrackings()->create([
+                'status' => 'prepared',
+            ]);
 
             return response()->json([
                 'data' => $order->status
@@ -229,11 +240,14 @@ class OrderController extends Controller
             && (auth()->user()->profile->role === 'shipper'
                 || auth()->user()->profile->role === 'administrator'
                 || auth()->user()->profile->role === 'manager')) {
+
             $order->status = 'delivering';
-
             $order->delivery_staff_id = auth()->user()->profile->id;
-
             $order->save();
+
+            $order->orderTrackings()->create([
+                'status' => 'delivering',
+            ]);
 
             return response()->json([
                 'data' => $order->status,
@@ -249,8 +263,11 @@ class OrderController extends Controller
                 || auth()->user()->profile->role === 'manager')) {
 
             $order->status = 'succeed';
-
             $order->save();
+
+            $order->orderTrackings()->create([
+                'status' => 'succeed',
+            ]);
 
             return response()->json([
                 'data' => $order->status
@@ -265,8 +282,12 @@ class OrderController extends Controller
                 || auth()->user()->profile->role === 'manager')) {
 
             $order->status = 'failed';
-
             $order->save();
+
+            $order->orderTrackings()->create([
+                'status' => 'failed',
+            ]);
+
 
             return response()->json([
                 'data' => $order->status

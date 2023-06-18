@@ -12,7 +12,8 @@ class Store extends Model
     protected $fillable = [
         'store_name',
         'open_store',
-        'close_store'
+        'close_store',
+        'address_id'
     ];
 
     protected $casts = [
@@ -21,7 +22,8 @@ class Store extends Model
     ];
 
     protected $with = [
-        'address'
+        'address',
+        'attachment'
     ];
 
     public function staff() {
@@ -30,6 +32,10 @@ class Store extends Model
 
     public function address() {
         return $this->hasOne(Address::class);
+    }
+
+    public function attachment() {
+        return $this->morphMany(Attachment::class, 'attachmentable');
     }
 
 }

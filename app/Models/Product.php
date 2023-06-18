@@ -21,7 +21,8 @@ class Product extends Model
     ];
 
     protected $with = [
-        'attachment'
+        'attachment',
+        'productVariants'
     ];
 
     public function items() {

@@ -31,7 +31,7 @@ class CouponController extends Controller
             $coupons->where('status', $status);
         }
 
-        $coupons = $coupons->paginate(4);
+        $coupons = $coupons->paginate(5);
 
         return response()->json([
             'data' => $coupons

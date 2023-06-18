@@ -30,7 +30,7 @@ class CustomerController extends Controller
                  ->orWhereHas('user', fn (Builder $query)
                     => $query->whereFullText(['address', 'phone_number', 'email'], $keyword)));
 
-        $customer = $customer->paginate(4);
+        $customer = $customer->paginate(5);
 
         return response()->json([
             'data' => $customer

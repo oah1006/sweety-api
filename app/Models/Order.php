@@ -28,7 +28,7 @@ class Order extends Model
         'updated_at' => 'datetime:d-m-Y',
     ];
 
-    protected $with = ['items'];
+    protected $with = ['items', 'orderTrackings'];
 
     public function items() {
         return $this->hasMany(OrderItem::class);

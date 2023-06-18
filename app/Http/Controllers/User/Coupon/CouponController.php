@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User\Coupon;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Coupon;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class CouponController extends Controller
      */
     public function index(Request $request)
     {
-        $coupon = Coupon::where('is_deleted', 0)->get();
+        $coupon = Coupon::where('is_deleted', 0)->where('status', 'active')->get();
 
         return response()->json([
             'data' => $coupon
@@ -86,5 +87,42 @@ class CouponController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function applyCoupon(Request $request, Coupon $coupon) {
+        $user = $request->user();
+
+        if ($coupon->stock == 0) {
+            return response()->json(['error' => 'Coupon out of stock'], 400);
+        }
+
+        $user->profile->cart()->update([
+            'customer_id' => $user->profile->id,
+            'coupon_id' => $coupon->id
+        ]);
+
+        $user->profile->cart->coupon()->update([
+            'stock' => $coupon->stock - 1
+        ]);
+
+        $user->profile->cart->calculateSubTotal();
+        $user->profile->cart->calculateTotal();
+        $user->profile->cart->calculateShippingFee();
+
+        $user->profile->cart->save();
+    }
+
+    public function removeCoupon(Request $request, Cart $cart) {
+        $user = $request->user();
+
+        $user->profile->cart()->update([
+            'coupon_id' => null
+        ]);
+
+        $user->profile->cart->calculateSubTotal();
+        $user->profile->cart->calculateTotal();
+        $user->profile->cart->calculateShippingFee();
+
+        $user->profile->cart->save();
     }
 }

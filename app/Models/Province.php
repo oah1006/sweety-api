@@ -25,4 +25,8 @@ class Province extends Model
     public function district() {
         return $this->hasMany(District::class);
     }
+
+    public function address() {
+        return $this->hasMany(Address::class);
+    }
 }

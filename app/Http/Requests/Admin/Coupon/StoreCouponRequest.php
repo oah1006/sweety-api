@@ -33,6 +33,7 @@ class StoreCouponRequest extends FormRequest
             'status' => ['required', 'in:active,expired,deactivate'],
             'started_at' => ['required', 'date'],
             'expired_at' => ['required', 'date'],
+            'points' => ['required', 'integer'],
         ];
     }
 }

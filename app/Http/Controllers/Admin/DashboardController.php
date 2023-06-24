@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -116,6 +117,34 @@ class DashboardController extends Controller
 
         return response()->json([
             'data' => $products
+        ]);
+    }
+
+    public function calculateRevenueByLastSevenDays() {
+        $revenuesOfTheLastSevenDays = DB::table('orders')
+            ->select(DB::raw('DATE(created_at) as date'), DB::raw('SUM(total) as revenue'))
+            ->where('status', 'succeed')
+            ->where('created_at', '>=', Carbon::now()->subDays(7))
+            ->groupBy(DB::raw('DATE(created_at)'))
+            ->orderBy(DB::raw('DATE(created_at)'))
+            ->get();
+
+        return response()->json([
+            'data' => $revenuesOfTheLastSevenDays,
+        ]);
+    }
+
+    public function calculateRevenueByLastSevenMonths() {
+        $revenuesOfTheLastSevenMonth = DB::table('orders')
+            ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('SUM(total) as revenue'))
+            ->where('status', 'succeed')
+            ->where('created_at', '>=', Carbon::now()->subMonths(7))
+            ->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m")'))
+            ->orderBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m")'))
+            ->get();
+
+        return response()->json([
+            'data' => $revenuesOfTheLastSevenMonth
         ]);
     }
 

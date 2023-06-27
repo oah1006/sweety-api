@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\admin\Attachment\AttachmentController;
-use App\Http\Controllers\admin\Auth\AuthenticationController;
-use App\Http\Controllers\admin\Auth\ChangePasswordController;
-use App\Http\Controllers\admin\Auth\ForgotPasswordController;
-use App\Http\Controllers\admin\Auth\Otp\SendOtpController;
-use App\Http\Controllers\admin\Auth\Otp\VerifyOtpController;
-use App\Http\Controllers\admin\Auth\ProfileController;
+use App\Http\Controllers\Admin\Attachment\AttachmentController;
+use App\Http\Controllers\Admin\Auth\AuthenticationController;
+use App\Http\Controllers\Admin\Auth\ChangePasswordController;
+use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
+use App\Http\Controllers\Admin\Auth\Otp\SendOtpController;
+use App\Http\Controllers\Admin\Auth\Otp\VerifyOtpController;
+use App\Http\Controllers\Admin\Auth\ProfileController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Coupon\CouponController;
 use App\Http\Controllers\Admin\Customer\CustomerController;

@@ -22,8 +22,8 @@ class CouponSeeder extends Seeder
             'is_percent_value' => 50,
             'min_order_total' => 500000,
             'status' => 'active',
-            'started_at' => '2023-27-06',
-            'expired_at' => '2023-01-07',
+            'started_at' => '2023-04-08',
+            'expired_at' => '2023-04-09',
         ]);
 
         Coupon::create([
@@ -33,8 +33,8 @@ class CouponSeeder extends Seeder
             'is_percent_value' => 30,
             'min_order_total' => 500000,
             'status' => 'active',
-            'started_at' => '2023-27-06',
-            'expired_at' => '2023-01-07',
+            'started_at' => '2023-04-08',
+            'expired_at' => '2023-04-09',
         ]);
 
         Coupon::create([
@@ -44,8 +44,8 @@ class CouponSeeder extends Seeder
             'is_percent_value' => 100,
             'min_order_total' => 1000000,
             'status' => 'active',
-            'started_at' => '2023-27-06',
-            'expired_at' => '2023-01-07',
+            'started_at' => '2023-04-08',
+            'expired_at' => '2023-04-09',
         ]);
     }
 }

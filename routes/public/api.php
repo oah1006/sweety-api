@@ -67,14 +67,12 @@ Route::prefix('public')->name('public.')->group(function() {
     Route::apiResource('products', ProductController::class);
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('toppings', ToppingController::class);
-
-
+    Route::apiResource('stores', StoreController::class);
 
     Route::middleware(['auth:sanctum', 'ensureCustomerIsValid'])->group(function() {
         Route::apiResource('orders', OrderController::class);
         Route::apiResource('delivery-addresses', DeliveryAddressController::class);
         Route::apiResource('carts', CartController::class);
-        Route::apiResource('stores', StoreController::class);
 
         Route::delete('/cart-items/{cartItem}', [CartItemController::class, 'minusQty'])->name('minusQty');
         Route::put('/cart-items/{cartItem}', [CartItemController::class, 'addQty'])->name('addQty');

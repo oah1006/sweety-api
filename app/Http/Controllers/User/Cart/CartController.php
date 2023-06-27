@@ -19,19 +19,26 @@ class CartController extends Controller
     {
         $user = $request->user();
 
-        $cart = $user->profile->cart->load(['cartItems.cartItemOptions', 'coupon', 'store']);
+        if($user->profile->cart) {
+            $cart = $user->profile->cart->load(['cartItems.cartItemOptions', 'coupon', 'store']);
+            $cart->fresh();
 
-        $cart->fresh();
+            $cart->calculateSubTotal();
+            $cart->calculateTotal();
+            $cart->calculateShippingFee();
 
-        $cart->calculateSubTotal();
-        $cart->calculateTotal();
-        $cart->calculateShippingFee();
+            $cart->save();
 
-        $cart->save();
+            return response()->json([
+                'data' => $cart
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'no cart'
+            ]);
+        }
 
-        return response()->json([
-           'data' => $cart
-        ]);
+
     }
 
     /**

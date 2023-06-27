@@ -70,8 +70,9 @@ Route::prefix('private')->name('private.')->group(function() {
         Route::get('/dashboard/compare-revenue', [DashboardController::class, 'compareRevenue'])->name('compare-revenue');
         Route::get('/dashboard/total-product', [DashboardController::class, 'totalProduct'])->name('total-product');
         Route::get('/dashboard/total-order', [DashboardController::class, 'totalOrder'])->name('total-order');
-        Route::get('/dashboard/calculate-revenue-by-last-seven-days', [DashboardController::class, 'calculateRevenueByLastSevenDays'])->name('calculate-revenue-by-last-seven-days');
-        Route::get('/dashboard/calculate-revenue-by-last-seven-months', [DashboardController::class, 'calculateRevenueByLastSevenMonths'])->name('calculate-revenue-by-last-seven-months');
+        Route::get('/dashboard/calculate-revenue-by-dates', [DashboardController::class, 'calculateRevenueByDates'])->name('calculate-revenue-by-dates');
+        Route::get('/dashboard/get-product-by-dates', [DashboardController::class, 'getProductByDates'])->name('get-product-by-dates');
+
 
         Route::put('/orders/update-status-accepted/{order}', [OrderController::class, 'updateStatusAccepted'])->name('update-accepted-status');
         Route::put('/orders/update-status-preparing/{order}', [OrderController::class, 'updateStatusPreparing'])->name('update-preparing-status');

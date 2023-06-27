@@ -120,34 +120,119 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function calculateRevenueByLastSevenDays() {
-        $revenuesOfTheLastSevenDays = DB::table('orders')
-            ->select(DB::raw('DATE(created_at) as date'), DB::raw('SUM(total) as revenue'))
-            ->where('status', 'succeed')
-            ->where('created_at', '>=', Carbon::now()->subDays(7))
-            ->groupBy(DB::raw('DATE(created_at)'))
-            ->orderBy(DB::raw('DATE(created_at)'))
-            ->get();
+    public function calculateRevenueByDates(Request $request) {
+        if ($request->filled('store_id')) {
+            $storeId = $request->store_id;
+            $revenuesOfTheLastSevenDays = DB::table('orders')
+                ->select(DB::raw('DATE(created_at) as date'), DB::raw('SUM(total) as revenue'))
+                ->where('status', 'succeed')
+                ->where('created_at', '>=', Carbon::now()->subDays(7))
+                ->where('store_id', '=', $storeId)
+                ->groupBy(DB::raw('DATE(created_at)'))
+                ->orderBy(DB::raw('DATE(created_at)'))
+                ->get();
+        } else {
+            $revenuesOfTheLastSevenDays = DB::table('orders')
+                ->select(DB::raw('DATE(created_at) as date'), DB::raw('SUM(total) as revenue'))
+                ->where('status', 'succeed')
+                ->where('created_at', '>=', Carbon::now()->subDays(7))
+                ->groupBy(DB::raw('DATE(created_at)'))
+                ->orderBy(DB::raw('DATE(created_at)'))
+                ->get();
+        }
+
+        if ($request->filled('store_id')) {
+            $storeId = $request->store_id;
+            $revenuesOfTheLastSevenMonth = DB::table('orders')
+                ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('SUM(total) as revenue'))
+                ->where('status', 'succeed')
+                ->where('store_id', '=', $storeId)
+                ->where('created_at', '>=', Carbon::now()->subMonths(7))
+                ->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m")'))
+                ->orderBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m")'))
+                ->get();
+        } else {
+            $revenuesOfTheLastSevenMonth = DB::table('orders')
+                ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('SUM(total) as revenue'))
+                ->where('status', 'succeed')
+                ->where('created_at', '>=', Carbon::now()->subMonths(7))
+                ->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m")'))
+                ->orderBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m")'))
+                ->get();
+        }
+
 
         return response()->json([
-            'data' => $revenuesOfTheLastSevenDays,
+            '7 days' => $revenuesOfTheLastSevenDays,
+            '7 months' => $revenuesOfTheLastSevenMonth
         ]);
     }
 
-    public function calculateRevenueByLastSevenMonths() {
-        $revenuesOfTheLastSevenMonth = DB::table('orders')
-            ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('SUM(total) as revenue'))
-            ->where('status', 'succeed')
-            ->where('created_at', '>=', Carbon::now()->subMonths(7))
-            ->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m")'))
-            ->orderBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m")'))
-            ->get();
+    public function getProductByDates(Request $request) {
+        $startDate = Carbon::today()->subDays(7);
+        $startMonth = Carbon::now()->subMonths(7);
+
+        if ($request->filled('store_id')) {
+            $storeId = $request->store_id;
+            $productTotalByDates = DB::table('orders')
+                ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+                ->join('products', 'order_items.product_id', '=', 'products.id')
+                ->where('orders.status', '=', 'succeed')
+                ->where('orders.created_at', '>=', $startDate)
+                ->where('orders.store_id', '=', $storeId)
+                ->groupBy('order_items.product_id')
+                ->groupBy('products.id')
+                ->groupBy('products.name')
+                ->groupBy('products.price')
+                ->select('order_items.product_id', \DB::raw('SUM(order_items.qty) as qty'), 'products.id', 'products.name', 'products.price')
+                ->get();
+        } else {
+            $productTotalByDates = DB::table('orders')
+                ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+                ->join('products', 'order_items.product_id', '=', 'products.id')
+                ->where('orders.status', '=', 'succeed')
+                ->where('orders.created_at', '>=', $startDate)
+                ->groupBy('order_items.product_id')
+                ->groupBy('products.id')
+                ->groupBy('products.name')
+                ->groupBy('products.price')
+                ->select('order_items.product_id', \DB::raw('SUM(order_items.qty) as qty'), 'products.id', 'products.name', 'products.price')
+                ->get();
+        }
+
+        if ($request->filled('store_id')) {
+            $storeId = $request->store_id;
+            $productTotalByMonths = DB::table('orders')
+                ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+                ->join('products', 'order_items.product_id', '=', 'products.id')
+                ->where('orders.status', '=', 'succeed')
+                ->where('orders.created_at', '>=', $startMonth)
+                ->where('orders.store_id', '=', $storeId)
+                ->groupBy('order_items.product_id')
+                ->groupBy('products.id')
+                ->groupBy('products.name')
+                ->groupBy('products.price')
+                ->select('order_items.product_id', \DB::raw('SUM(order_items.qty) as qty'), 'products.id', 'products.name', 'products.price')
+                ->get();
+        } else {
+            $productTotalByMonths = DB::table('orders')
+                ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+                ->join('products', 'order_items.product_id', '=', 'products.id')
+                ->where('orders.status', '=', 'succeed')
+                ->where('orders.created_at', '>=', $startMonth)
+                ->groupBy('order_items.product_id')
+                ->groupBy('products.id')
+                ->groupBy('products.name')
+                ->groupBy('products.price')
+                ->select('order_items.product_id', \DB::raw('SUM(order_items.qty) as qty'), 'products.id', 'products.name', 'products.price')
+                ->get();
+        }
 
         return response()->json([
-            'data' => $revenuesOfTheLastSevenMonth
+            '7 days' => $productTotalByDates,
+            '7 months' => $productTotalByMonths
         ]);
     }
-
 
 
 

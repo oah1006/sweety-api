@@ -63,13 +63,13 @@ class StaffSeeder extends Seeder
             'full_name' => 'Nguyễn Hoàng Tấn',
             'address' => '721 Hồ Bá Phấn, Phước Long A, quận 9, Thành phố Hồ Chí Minh',
             'phone_number' => '0931395324',
-            'is_active' => '0',
-            'role' => 'administrator',
+            'is_active' => '1',
+            'role' => 'shipper',
             'store_id' => '4'
         ]);
 
         $staff->user()->create([
-            'email' => 'nguyenhoangtan0101@gmail.com',
+            'email' => 'nguyenhoangtan@gmail.com',
             'password' => '123456',
         ]);
     }

@@ -22,14 +22,14 @@ class StoreSeeder extends Seeder
         ]);
 
         $store->address()->create([
-            'street_number' => '101',
-            'street' => 'Tôn Dật Tiên',
-            'ward_code' => 26851,
-            'district_code' => 769,
+            'street_number' => '71',
+            'street' => 'Hoàng Văn Thái',
+            'ward_code' => 27487,
+            'district_code' => 778,
             'province_code' => 79,
             'phone_number' => '0931395365',
-            'long' => '106.64833',
-            'lat' => '103.85004'
+            'long' => '106.72073',
+            'lat' => '10.72942'
         ]);
 
         $store = Store::create([
@@ -39,14 +39,14 @@ class StoreSeeder extends Seeder
         ]);
 
         $store->address()->create([
-            'street_number' => '159',
-            'street' => 'Nguyễn Đức Cảnh',
-            'ward_code' => 26848,
-            'district_code' => 769,
+            'street_number' => '64',
+            'street' => 'Lữ Gia',
+            'ward_code' => 27208,
+            'district_code' => 772,
             'province_code' => 79,
             'phone_number' => '0931395366',
-            'long' => '106.64833',
-            'lat' => '103.85004'
+            'long' => '106.65367',
+            'lat' => '10.77109'
         ]);
 
 
@@ -57,14 +57,14 @@ class StoreSeeder extends Seeder
         ]);
 
         $store->address()->create([
-            'street_number' => '17',
-            'street' => 'Út tịch',
-            'ward_code' => 26845,
-            'district_code' => 769,
+            'street_number' => '190',
+            'street' => 'Phan Văn Trị',
+            'ward_code' => 26908,
+            'district_code' => 765,
             'province_code' => 79,
             'phone_number' => '0931395367',
-            'long' => '106.64833',
-            'lat' => '103.85004'
+            'long' => '106.69543',
+            'lat' => '10.81347'
         ]);
 
         $store = Store::create([
@@ -74,14 +74,14 @@ class StoreSeeder extends Seeder
         ]);
 
         $store->address()->create([
-            'street_number' => '102',
-            'street' => 'Hồ Bá Phấn',
-            'ward_code' => 26851,
+            'street_number' => '359',
+            'street' => 'Đỗ Xuân Hợp',
+            'ward_code' => 26848,
             'district_code' => 769,
             'province_code' => 79,
             'phone_number' => '0931395369',
-            'long' => '106.64833',
-            'lat' => '103.85004'
+            'long' => '106.77232',
+            'lat' => '10.82092'
         ]);
     }
 }

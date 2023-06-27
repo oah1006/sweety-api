@@ -34,5 +34,10 @@ class CategorySeeder extends Seeder
             'name' => 'Bánh',
             'description' => 'Ngoài các loại nước ngon thì Sweety còn có các loại bánh ngon phù hợp với tất cả mọi người!'
         ]);
+
+        Category::create([
+            'name' => 'Cà phê',
+            'description' => 'Đây là nơi có nhiều loại cà phê với các vị khác nhau phù hợp với mọi độ tuổi. Bạn có thể thử từng món và cảm nhận, nó sẽ rất ngon nếu kết hợp với các loại topping!'
+        ]);
     }
 }

@@ -9,6 +9,7 @@ use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DashboardController extends Controller
 {
@@ -236,7 +237,10 @@ class DashboardController extends Controller
     }
 
     public function exportRevenueByInputDate(Request $request) {
-        return (new RevenueByDates($request->query('start_date'), $request->query('start_date'), $request->query('store_id')))->download('revenue.xlsx');
+        return Excel::download(
+            new RevenueByDates($request->query('start_date'), $request->query('start_date'), $request->query('store_id')),
+            'revenue.xlsx'
+        );
     }
 
 }

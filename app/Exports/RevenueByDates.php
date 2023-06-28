@@ -31,6 +31,8 @@ class RevenueByDates implements FromQuery
             ->orderBy(DB::raw('DATE(created_at)'));
 
 
+        logger($revenuesByDate->get());
+
         return $revenuesByDate;
     }
 }

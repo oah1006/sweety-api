@@ -236,7 +236,6 @@ class DashboardController extends Controller
     }
 
     public function exportRevenueByInputDate(Request $request) {
-        logger((new RevenueByDates($request->query('start_date'), $request->query('start_date'), $request->query('store_id')))->download('revenue.xlsx'));
         return (new RevenueByDates($request->query('start_date'), $request->query('start_date'), $request->query('store_id')))->download('revenue.xlsx');
     }
 

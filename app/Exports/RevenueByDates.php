@@ -2,7 +2,6 @@
 
 namespace App\Exports;
 
-use App\Models\Order;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
@@ -29,8 +28,8 @@ class RevenueByDates implements FromQuery
             ->whereBetween('created_at', [$this->start_date, $this->end_date])
             ->where('store_id', $this->store_id)
             ->groupBy(DB::raw('DATE(created_at)'))
-            ->orderBy(DB::raw('DATE(created_at)'))
-            ->get();
+            ->orderBy(DB::raw('DATE(created_at)'));
+
 
         return $revenuesByDate;
     }

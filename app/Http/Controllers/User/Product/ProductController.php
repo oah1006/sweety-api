@@ -24,7 +24,7 @@ class ProductController extends Controller
         $keywords = $request->keywords;
 
         $products->when($keywords, fn (Builder $query)
-        => $query->whereFullText(['name', 'description'], $keywords));
+            => $query->whereFullText(['name', 'description'], $keywords));
 
         if ($request->filled('price_low_to_high')) {
             $products->orderBy('price', 'asc');

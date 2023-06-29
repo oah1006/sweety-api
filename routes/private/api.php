@@ -72,8 +72,8 @@ Route::prefix('private')->name('private.')->group(function() {
         Route::get('/dashboard/total-order', [DashboardController::class, 'totalOrder'])->name('total-order');
         Route::get('/dashboard/calculate-revenue-by-dates', [DashboardController::class, 'calculateRevenueByDates'])->name('calculate-revenue-by-dates');
         Route::get('/dashboard/get-product-by-dates', [DashboardController::class, 'getProductByDates'])->name('get-product-by-dates');
-        // route export ở đây
         Route::post('/dashboard/export-revenue-by-input-date', [DashboardController::class, 'exportRevenueByInputDate'])->name('export-revenue-by-input-date');
+        Route::post('/dashboard/export-product-by-input-date', [DashboardController::class, 'exportProductByInputDate'])->name('export-product-by-input-date');
 
         Route::put('/orders/update-status-accepted/{order}', [OrderController::class, 'updateStatusAccepted'])->name('update-accepted-status');
         Route::put('/orders/update-status-preparing/{order}', [OrderController::class, 'updateStatusPreparing'])->name('update-preparing-status');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ProductByDates;
 use App\Exports\RevenueByDates;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
@@ -238,8 +239,15 @@ class DashboardController extends Controller
 
     public function exportRevenueByInputDate(Request $request) {
         return Excel::download(
-            new RevenueByDates($request->query('start_date'), $request->query('start_date'), $request->query('store_id')),
+            new RevenueByDates($request->query('start_date'), $request->query('end_date'), $request->query('store_id')),
             'revenue.xlsx'
+        );
+    }
+
+    public function exportProductByInputDate(Request$request) {
+        return Excel::download(
+            new ProductByDates($request->query('start_date'), $request->query('end_date'), $request->query('store_id')),
+            'product.xlsx'
         );
     }
 

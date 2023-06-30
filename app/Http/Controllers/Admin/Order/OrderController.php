@@ -32,9 +32,7 @@ class OrderController extends Controller
         $keywords = $request->keywords;
 
         $orders->when($keywords, fn (Builder $query)
-                    => $query->whereFullText(['code'], $keywords)
-                ->orWhereHas('address', fn (Builder $query)
-                    => $query->whereFullText(['name', 'address'], $keywords)));
+                    => $query->whereFullText(['code'], $keywords));
 
         $orders->orderBy('created_at', 'desc');
 

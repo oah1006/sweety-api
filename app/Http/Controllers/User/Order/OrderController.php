@@ -174,8 +174,13 @@ class OrderController extends Controller
     public function updateStatusCanceled(UpdateStatusCanceledOrderRequest $request, Order $order) {
         if ($order->status === 'pending') {
             $order->status = 'canceled';
-
             $order->save();
+
+            $order->orderTrackings()->create([
+                'status' => 'canceled',
+            ]);
+
+
 
             return response()->json([
                 'data' => $order->status

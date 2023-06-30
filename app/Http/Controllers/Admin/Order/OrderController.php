@@ -282,11 +282,11 @@ class OrderController extends Controller
                 || auth()->user()->profile->role === 'administrator'
                 || auth()->user()->profile->role === 'manager')) {
 
-            $order->status = 'failed';
+            $order->status = 'canceled';
             $order->save();
 
             $order->orderTrackings()->create([
-                'status' => 'failed',
+                'status' => 'canceled',
             ]);
 
 

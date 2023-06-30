@@ -92,8 +92,10 @@ class CouponController extends Controller
     public function applyCoupon(Request $request, Coupon $coupon) {
         $user = $request->user();
 
-        if ($coupon->stock == 0) {
-            return response()->json(['error' => 'Coupon out of stock'], 400);
+        if ($coupon->stock === 0) {
+            $user->profile->cart->coupon()->update([
+                'status' => 'expired'
+            ]);
         }
 
         $user->profile->cart()->update([
@@ -104,6 +106,8 @@ class CouponController extends Controller
         $user->profile->cart->coupon()->update([
             'stock' => $coupon->stock - 1
         ]);
+
+
 
         $user->profile->cart->calculateSubTotal();
         $user->profile->cart->calculateTotal();

@@ -4,12 +4,9 @@ namespace App\Http\Controllers\User\DeliveryAddress;
 
 use App\Actions\CalculationRoute;
 use App\Http\Controllers\Controller;
-
-use App\Http\Requests\User\DeliveryAddress\ChangeIsDefaultDeliveryAddressRequest;
 use App\Http\Requests\User\DeliveryAddress\CreateAddressRequest;
 use App\Http\Requests\User\DeliveryAddress\UpdateAddressRequest;
 use App\Models\Address;
-use App\Models\Customer;
 use App\Models\District;
 use App\Models\Province;
 use App\Models\Store;
@@ -26,15 +23,7 @@ class DeliveryAddressController extends Controller
      */
     public function index()
     {
-        $old_delivery_addresses = auth()->user()->profile->address;
-
-        $delivery_addresses = [$old_delivery_addresses->where('is_default', 1)->first()];
-
-        $un_default_delivery_addresses = $old_delivery_addresses->where('is_default', 0)->values();
-
-        foreach($un_default_delivery_addresses as $un_default_delivery_address) {
-            array_push($delivery_addresses, $un_default_delivery_address);
-        }
+        $delivery_addresses = auth()->user()->profile->address->all();
 
         return response()->json([
             'data' => $delivery_addresses
@@ -67,10 +56,6 @@ class DeliveryAddressController extends Controller
 
 
         if (count($delivery_address) < 5) {
-            $delivery_addresses = auth()->user()->profile->address()->update([
-                'is_default' => 0
-            ]);
-
             $address = auth()->user()->profile->address()->create($data);
 
             $meta = [];
@@ -150,26 +135,7 @@ class DeliveryAddressController extends Controller
      */
     public function destroy(Address $delivery_address)
     {
-        if ($delivery_address->is_default == 1) {
-            $delivery_address->delete();
-
-            auth()->user()->profile->address()->first()->update([
-                'is_default' => '1'
-            ]);
-        } else {
-            $delivery_address->delete();
-        }
-        return response()->noContent();
-    }
-
-    public function changeIsDefault(ChangeIsDefaultDeliveryAddressRequest $request, Address $address) {
-        $delivery_addresses = auth()->user()->profile->address()->update([
-            'is_default' => 0
-        ]);
-
-        $address->is_default = 1;
-
-        $address->save();
+        $delivery_address->delete();
 
         return response()->noContent();
     }

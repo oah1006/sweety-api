@@ -17,7 +17,6 @@ class Address extends Model
         'province_code',
         'name',
         'phone_number',
-        'is_default',
         'customer_id',
         'store_id',
         'long',
@@ -57,11 +56,5 @@ class Address extends Model
 
     public function ward() {
         return $this->belongsTo(Ward::class);
-    }
-
-    protected static function booted() {
-        static::creating(function (Address $address) {
-            $address->is_default = 1;
-        });
     }
 }

@@ -77,7 +77,6 @@ Route::prefix('public')->name('public.')->group(function() {
         Route::delete('/cart-items/{cartItem}', [CartItemController::class, 'minusQty'])->name('minusQty');
         Route::put('/cart-items/{cartItem}', [CartItemController::class, 'addQty'])->name('addQty');
 
-        Route::put('/delivery-addresses/change-is-default/{address}', [DeliveryAddressController::class, 'changeIsDefault'])->name('change-is-default');
         Route::post('/delivery-address/choose-my-delivery-address/{address}', [DeliveryAddressController::class, 'chooseMyDeliveryAddressOrder'])->name('choose-my-delivery-address');
 
         Route::post('/coupons/apply-coupon/{coupon}', [CouponController::class, 'applyCoupon']);

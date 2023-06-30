@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin\DeliveryAddress;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\DeliveryAddress\ChangeIsDefaultDeliveryAddressRequest;
 use App\Http\Requests\Admin\DeliveryAddress\CreateAddressRequest;
 use App\Http\Requests\Admin\DeliveryAddress\UpdateAddressRequest;
 use App\Models\Address;
@@ -22,15 +21,7 @@ class DeliveryAddressController extends Controller
      */
     public function index()
     {
-        $old_delivery_addresses = auth()->user()->profile->address;
-
-        $delivery_addresses = [$old_delivery_addresses->where('is_default', 1)->first()];
-
-        $un_default_delivery_addresses = $old_delivery_addresses->where('is_default', 0)->values();
-
-        foreach($un_default_delivery_addresses as $un_default_delivery_address) {
-            array_push($delivery_addresses, $un_default_delivery_address);
-        }
+        $delivery_addresses = auth()->user()->profile->address->get();
 
         return response()->json([
             'data' => $delivery_addresses
@@ -60,12 +51,7 @@ class DeliveryAddressController extends Controller
         $delivery_address = auth()->user()->profile->address;
 
         if (count($delivery_address) < 5) {
-            $delivery_addresses = auth()->user()->profile->address()->update([
-                'is_default' => 0
-            ]);
-
             $address = $customer->address()->create($data);
-
         } else {
             return response()->json([
                 'message' => 'Vượt quá địa chỉ giao hàng quy định'
@@ -132,17 +118,6 @@ class DeliveryAddressController extends Controller
         return response()->noContent();
     }
 
-    public function changeIsDefault(ChangeIsDefaultDeliveryAddressRequest $request, Address $address) {
-        $delivery_addresses = auth()->user()->profile->address()->update([
-            'is_default' => 0
-        ]);
-
-        $address->is_default = 1;
-
-        $address->save();
-
-        return response()->noContent();
-    }
 
     public function calculationRoute(Request $request) {
         $latBegin = $request->query('latBegin');

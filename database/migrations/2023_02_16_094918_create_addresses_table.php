@@ -28,7 +28,6 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->json('meta')->nullable();
             $table->string('phone_number')->nullable();
-            $table->boolean('is_default')->default(1);
             $table->foreignId('store_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('customer_id')->nullable()->constrained()->nullOnDelete();
             $table->fullText(['street_number', 'street']);

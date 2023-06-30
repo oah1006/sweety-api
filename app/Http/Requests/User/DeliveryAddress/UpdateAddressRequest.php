@@ -35,7 +35,6 @@ class UpdateAddressRequest extends FormRequest
             'long' => ['nullable', 'numeric'],
             'lat' => ['nullable', 'numeric'],
             'phone_number' => ['string', 'nullable', new PhoneNumber, Rule::unique('addresses', 'phone_number')->ignore($this->delivery_address)],
-            'is_default' => ['nullable', 'boolean'],
         ];
     }
 }

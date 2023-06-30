@@ -193,7 +193,17 @@ return [
         'phone_number' => 'Số điện thoại',
         'name' => 'Tên',
         'meta' => 'Kinh độ, vĩ độ',
-        'address_id' => 'Địa chỉ'
+        'address_id' => 'Địa chỉ',
+        'role' => 'Vai trò',
+        'is_active' => 'Trạng thái',
+        'store_id' => 'Cửa hàng chi nhánh',
+        'store_name' => 'Tên cửa hàng',
+        'open_store' => 'Giờ mở cửa',
+        'close_store' => 'Giờ đóng cửa',
+        'description' => 'Mô tả sản phẩm',
+        'price' => 'Giá tiền',
+        'category_id' => 'Loại sản phẩm',
+        'published' => 'Xuất bản'
     ],
 
 ];

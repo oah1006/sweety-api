@@ -25,19 +25,19 @@ class CreateStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'store_name' => ['required', 'string', 'unique:stores,store_name'],
-            'open_store' => ['required', 'date_format:H:i'],
-            'close_store' => ['required', 'date_format:H:i'],
-            'street_number' => ['required', 'string'],
-            'street' => ['required', 'string'],
-            'ward_code' => ['required', 'exists:wards,code'],
-            'district_code' => ['required', 'exists:districts,code'],
-            'province_code' => ['required', 'exists:provinces,code'],
-            'long' => ['required', 'numeric'],
-            'lat' => ['required', 'numeric'],
+            'store_name' => ['bail', 'required', 'string', 'unique:stores,store_name'],
+            'open_store' => ['bail', 'required', 'date_format:H:i'],
+            'close_store' => ['bail', 'required', 'date_format:H:i'],
+            'street_number' => ['bail', 'required', 'string'],
+            'street' => ['bail', 'required', 'string'],
+            'ward_code' => ['bail', 'required', 'exists:wards,code'],
+            'district_code' => ['bail', 'required', 'exists:districts,code'],
+            'province_code' => ['bail', 'required', 'exists:provinces,code'],
+            'long' => ['bail', 'required', 'numeric'],
+            'lat' => ['bail', 'required', 'numeric'],
             'detail_stores' => ['nullable', 'array'],
             'detail_stores.*' => ['file', 'mimes:jpg,jpeg,png'],
-            'phone_number' => ['nullable', 'string', new PhoneNumber, 'unique:addresses,phone_number'],
+            'phone_number' => ['bail', 'nullable', 'string', new PhoneNumber, 'unique:addresses,phone_number'],
         ];
     }
 }

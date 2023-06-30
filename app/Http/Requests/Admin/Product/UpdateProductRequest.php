@@ -25,13 +25,13 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['nullable', 'string', Rule::unique('categories')->ignore($this->category)],
-            'description' => ['nullable', 'string'],
-            'stock' => ['nullable', 'integer'],
-            'price' => ['nullable', 'numeric'],
-            'category_id' => ['nullable', 'exists:categories,id'],
-            'published' => ['nullable', 'boolean'],
-            'toppings' => ['nullable', 'array'],
+            'name' => ['nullable', 'string', Rule::unique('products')->ignore($this->product)],
+            'description' => ['bail', 'nullable', 'string'],
+            'stock' => ['bail', 'nullable', 'integer'],
+            'price' => ['bail', 'nullable', 'numeric'],
+            'category_id' => ['bail', 'nullable', 'exists:categories,id'],
+            'published' => ['bail', 'nullable', 'boolean'],
+            'toppings' => ['bail', 'nullable', 'array'],
             'topping.*' => ['array:product_id,topping_id'],
             'variants' => ['nullable', 'array'],
             'variant.*' => ['array:size,unit_price']

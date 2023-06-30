@@ -25,15 +25,15 @@ class CreateStaffRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'email:rfc,dns', 'string', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:6'],
-            'full_name' => ['required', 'string'],
-            'address' => ['required', 'string'],
-            'phone_number' => ['required', 'string', new PhoneNumber, 'unique:staff,phone_number'],
-            'is_active' => ['nullable', 'boolean'],
-            'role' => ['required', 'in:administrator,manager,employee,shipper'],
-            'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png'],
-            'store_id' => ['required', 'exists:stores,id'],
+            'email' => ['bail', 'required', 'email:rfc,dns', 'string', 'unique:users,email'],
+            'password' => ['bail','required', 'string', 'min:6'],
+            'full_name' => ['bail','required', 'string'],
+            'address' => ['bail','required', 'string'],
+            'phone_number' => ['bail','bail', 'required', 'string', new PhoneNumber, 'unique:staff,phone_number'],
+            'is_active' => ['bail','required', 'boolean'],
+            'role' => ['bail','required', 'in:administrator,manager,employee,shipper'],
+            'avatar' => ['bail','nullable', 'file', 'mimes:jpg,jpeg,png'],
+            'store_id' => ['bail','required', 'exists:stores,id'],
         ];
     }
 }

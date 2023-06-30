@@ -66,6 +66,7 @@ class OrderController extends Controller
         if ($cart->address_id) {
             $order = Order::create([
                 'coupon_id' => $cart->coupon_id,
+                'store_id' => $cart->store_id,
                 'address_id' => $cart->address_id,
                 'customer_id' => $user->profile->id,
                 'sub_total' => $cart->sub_total,

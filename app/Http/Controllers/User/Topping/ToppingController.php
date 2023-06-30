@@ -15,7 +15,7 @@ class ToppingController extends Controller
      */
     public function index()
     {
-        $toppings = Topping::all();
+        $toppings = Topping::where('published', 1)->get();
 
         return response()->json([
             'data' => $toppings

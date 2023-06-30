@@ -19,32 +19,25 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::where('is_deleted', 0)->with(['category', 'productToppings']);
+        $products = Product::where('is_deleted', 0)->where('published', 1)->with(['category', 'productToppings']);
 
         $keywords = $request->keywords;
 
         $products->when($keywords, fn (Builder $query)
             => $query->whereFullText(['name', 'description'], $keywords));
 
-        if ($request->filled('price_low_to_high')) {
+        if ($request->price_low_to_high) {
             $products->orderBy('price', 'asc');
         }
 
-        if ($request->filled('price_high_to_low')) {
+        if ($request->price_high_to_low) {
             $products->orderBy('price', 'desc');
         }
 
-        if ($request->filled('category_id')) {
+        if ($request->category_id) {
             $categoryId = $request->category_id;
 
             $products->where('category_id', $categoryId);
-        }
-
-        if ($request->filled('published')) {
-            $published = $request->published;
-
-            $products->where('published', $published);
-
         }
 
         $products = $products->paginate(6);
@@ -137,7 +130,7 @@ class ProductController extends Controller
 
         $productIds = $bestSellingProducts->pluck('product_id');
 
-        $products = Product::whereIn('id', $productIds)->get();
+        $products = Product::whereIn('id', $productIds)->where('published', 1)->get();
 
         return response()->json([
             'data' => $products
@@ -145,7 +138,7 @@ class ProductController extends Controller
     }
 
     public function indexRelatedProduct(Request $request, Category $category, Product $product) {
-        $product = Product::where('category_id', $category->id)->whereNot('id', $product->id)->get();
+        $product = Product::where('category_id', $category->id)->where('published', 1)->whereNot('id', $product->id)->get();
 
         return response()->json([
             'data' => $product

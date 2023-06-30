@@ -32,6 +32,8 @@ class OrderController extends Controller
             }
         }
 
+        $orders->orderBy('created_at', 'desc');
+
         $orders = $orders->paginate(4);
 
         return response()->json([
@@ -61,14 +63,22 @@ class OrderController extends Controller
 
         $cart = $user->profile->cart;
 
-        $order = Order::create([
-            'coupon_id' => $cart->coupon_id,
-            'address_id' => $cart->address_id,
-            'customer_id' => $user->profile->id,
-            'sub_total' => $cart->sub_total,
-            'total' => $cart->total,
-            'shipping_fee' => $cart->shipping_fee
-        ]);
+        if ($cart->address_id) {
+            $order = Order::create([
+                'coupon_id' => $cart->coupon_id,
+                'address_id' => $cart->address_id,
+                'customer_id' => $user->profile->id,
+                'sub_total' => $cart->sub_total,
+                'total' => $cart->total,
+                'shipping_fee' => $cart->shipping_fee
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Địa chỉ chưa được chọn!'
+            ], 401);
+        }
+
+
 
         $order->orderTrackings()->create([
             'status' => 'pending'

@@ -36,6 +36,7 @@ class OrderController extends Controller
                 ->orWhereHas('address', fn (Builder $query)
                     => $query->whereFullText(['name', 'address'], $keywords)));
 
+        $orders->orderBy('created_at', 'desc');
 
         $orders = $orders->paginate(5);
 

@@ -55,7 +55,7 @@ class DeliveryAddressController extends Controller
         $stores = Store::with('address')->get();
 
 
-        if (count($delivery_address) < 5) {
+        if ($delivery_address->count() < 5) {
             $address = auth()->user()->profile->address()->create($data);
 
             $meta = [];
@@ -76,7 +76,7 @@ class DeliveryAddressController extends Controller
 
         } else {
             return response()->json([
-                'message' => 'Vượt quá địa chỉ giao hàng quy định'
+                'message' => 'Hệ thống chỉ cho phép tạo 5 địa chỉ. Vui lòng cập nhật hoặc xóa địa chỉ!'
             ], 401);
         }
 

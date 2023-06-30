@@ -144,7 +144,7 @@ return [
     'starts_with' => 'The :attribute must start with one of the following: :values.',
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid timezone.',
-    'unique' => 'The :attribute has already been taken.',
+    'unique' => ':attribute đã tồn tại trong hệ thống.',
     'uploaded' => 'The :attribute failed to upload.',
     'uppercase' => 'The :attribute must be uppercase.',
     'url' => 'The :attribute must be a valid URL.',
@@ -185,6 +185,15 @@ return [
         'gender' => 'Giới tính',
         'full_name' => 'Họ và tên',
         'new_password' => 'Mật khẩu mới',
+        'ward_code' => 'Phường',
+        'district_code' => 'Quận',
+        'province_code' => 'Thành phố',
+        'street' => 'Đường',
+        'street_number' => 'Số nhà',
+        'phone_number' => 'Số điện thoại',
+        'name' => 'Tên',
+        'meta' => 'Kinh độ, vĩ độ',
+        'address_id' => 'Địa chỉ'
     ],
 
 ];

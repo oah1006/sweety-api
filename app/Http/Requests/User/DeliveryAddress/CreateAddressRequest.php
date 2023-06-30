@@ -12,11 +12,10 @@ class CreateAddressRequest extends FormRequest
      *
      * @return bool
      */
+
     public function authorize()
     {
-        $delivery_address = auth()->user()->profile->address;
-
-        return count($delivery_address) < 5;
+        return true;
     }
 
     /**
@@ -27,7 +26,7 @@ class CreateAddressRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['nullable', 'string'],
+            'name' => ['required', 'string'],
             'street_number' => ['required', 'string'],
             'street' => ['required', 'string'],
             'ward_code' => ['required', 'exists:wards,code'],
@@ -35,7 +34,7 @@ class CreateAddressRequest extends FormRequest
             'province_code' => ['required', 'exists:provinces,code'],
             'long' => ['nullable', 'numeric'],
             'lat' => ['nullable', 'numeric'],
-            'phone_number' => ['string', new PhoneNumber, 'unique:addresses,phone_number', 'required'],
+            'phone_number' => ['bail', new PhoneNumber, 'unique:addresses,phone_number', 'required'],
             'customer_id' => ['nullable', 'exists:customer,id'],
             'meta' => ['nullable', 'array']
         ];

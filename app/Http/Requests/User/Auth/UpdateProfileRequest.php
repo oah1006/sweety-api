@@ -12,6 +12,8 @@ class UpdateProfileRequest extends FormRequest
      *
      * @return bool
      */
+
+    protected $stopOnFirstFailure = true;
     public function authorize()
     {
         return true;
@@ -25,7 +27,7 @@ class UpdateProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'full_name' => ['string', 'nullable'],
+            'full_name' => ['bail', 'required', 'string', 'min:6'],
             'gender' => ['nullable', 'in:0,1,2']
         ];
     }

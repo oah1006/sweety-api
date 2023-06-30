@@ -26,16 +26,6 @@ class CategorySeeder extends Seeder
         ]);
 
         Category::create([
-            'name' => 'Topping',
-            'description' => 'Đa dạng các loại topping bao gồm trân châu đen, trân châu trắng, machiato, thạch ... giúp bạn có thể tận hưởng ly nước của mình ngon nhất có thể'
-        ]);
-
-        Category::create([
-            'name' => 'Bánh',
-            'description' => 'Ngoài các loại nước ngon thì Sweety còn có các loại bánh ngon phù hợp với tất cả mọi người!'
-        ]);
-
-        Category::create([
             'name' => 'Cà phê',
             'description' => 'Đây là nơi có nhiều loại cà phê với các vị khác nhau phù hợp với mọi độ tuổi. Bạn có thể thử từng món và cảm nhận, nó sẽ rất ngon nếu kết hợp với các loại topping!'
         ]);

@@ -26,7 +26,6 @@ class StoreProductRequest extends FormRequest
         return [
             'name' => ['bail', 'required', 'string', 'unique:products,name'],
             'description' => ['bail', 'required', 'string'],
-            'stock' => ['bail', 'required', 'integer'],
             'price' => ['bail', 'required', 'numeric'],
             'category_id' => ['bail', 'required', 'exists:categories,id'],
             'published' => ['bail', 'required', 'boolean'],

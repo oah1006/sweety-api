@@ -17,7 +17,7 @@ class CouponSeeder extends Seeder
     {
         Coupon::create([
             'name' => 'Mã khuyến mãi 50%',
-            'description' => 'Đơn hàng của bạn tích lũy đạt giá trị từ 500.000 đồng trở lên sẽ đạt được điều kiện này',
+            'description' => 'Cửa hàng Sweety trân trọng tặng mã khuyến mãi với giá trị hơn 50%',
             'stock' => 20,
             'is_percent_value' => 50,
             'min_order_total' => 500000,
@@ -28,7 +28,7 @@ class CouponSeeder extends Seeder
 
         Coupon::create([
             'name' => 'Mã khuyến mãi 30%',
-            'description' => 'Đơn hàng của bạn tích lũy đạt giá trị từ 300.000 đồng trở lên sẽ đạt được điều kiện này',
+            'description' => 'Cửa hàng Sweety trân trọng tặng mã khuyến mãi với giá trị hơn 30%',
             'stock' => 40,
             'is_percent_value' => 30,
             'min_order_total' => 500000,
@@ -39,7 +39,7 @@ class CouponSeeder extends Seeder
 
         Coupon::create([
             'name' => 'Mã khuyến mãi 100%',
-            'description' => 'Đơn hàng của bạn tích lũy đạt giá trị từ 1.000.000 đồng trở lên sẽ đạt được điều kiện này',
+            'description' => 'Cửa hàng Sweety trân trọng tặng mã khuyến mãi với giá trị hơn 100%',
             'stock' => 10,
             'is_percent_value' => 100,
             'min_order_total' => 1000000,

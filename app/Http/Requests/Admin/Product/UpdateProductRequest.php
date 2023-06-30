@@ -27,7 +27,6 @@ class UpdateProductRequest extends FormRequest
         return [
             'name' => ['nullable', 'string', Rule::unique('products')->ignore($this->product)],
             'description' => ['bail', 'nullable', 'string'],
-            'stock' => ['bail', 'nullable', 'integer'],
             'price' => ['bail', 'nullable', 'numeric'],
             'category_id' => ['bail', 'nullable', 'exists:categories,id'],
             'published' => ['bail', 'nullable', 'boolean'],

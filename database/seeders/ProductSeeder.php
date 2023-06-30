@@ -46,7 +46,7 @@ class ProductSeeder extends Seeder
             "name" => "Cà Phê Đen Đá",
             "description" => "Không ngọt ngào như Bạc sỉu hay Cà phê sữa, Cà phê đen mang trong mình phong vị trầm lắng, thi vị hơn. Người ta thường phải ngồi rất lâu mới cảm nhận được hết hương thơm ngào ngạt, phảng phất mùi cacao và cái đắng mượt mà trôi tuột xuống vòm họng.",
             "price" => "30000",
-            "category_id" => 5,
+            "category_id" => 3,
             "published" => 1,
             "is_deleted" => 0
         ]);
@@ -55,7 +55,7 @@ class ProductSeeder extends Seeder
             "name" => "Bạc Sỉu",
             "description" => "Bạc sỉu chính là Ly sữa trắng kèm một chút cà phê. Thức uống này rất phù hợp những ai vừa muốn trải nghiệm chút vị đắng của cà phê vừa muốn thưởng thức vị ngọt béo ngậy từ sữa.",
             "price" => "29000",
-            "category_id" => 5,
+            "category_id" => 3,
             "published" => 1,
             "is_deleted" => 0
         ]);
